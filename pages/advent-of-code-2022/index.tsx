@@ -1,12 +1,12 @@
 import Head from "next/head";
 import Link from "next/link";
 // import Layout, { SITE_TITLE } from "../../components/layout";
-import Layout, { SITE_TITLE } from "../../components/aocpage";
+import Layout, { SITE_TITLE } from "../../components/aoc_page_layout";
 import utilStyles from "../../styles/utils.module.sass";
 
 const AdventOfCode2022Index = () => {
   return (
-    <Layout>
+    <Layout home>
       <Head>
         <title>{SITE_TITLE} | Advent of Code Solutions</title>
       </Head>

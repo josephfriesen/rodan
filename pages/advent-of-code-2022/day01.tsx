@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo, useCallback } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { GetStaticProps } from "next";
-import Layout, { SITE_TITLE } from "../../components/aocpage";
+import Layout, { SITE_TITLE } from "../../components/aoc_page_layout";
 import utilStyles from "../../styles/utils.module.sass";
 import { getAOCInput } from "../../lib/advent-of-code-2022/getAOCInput";
 
@@ -88,12 +88,14 @@ const AOC2022Day1 = ({ input, pathToInput }: AOC2022Day1Props) => {
   }, [elvesCalorieTotals]);
 
   return (
-    <Layout>
+    <Layout day={DAY}>
       <Head>
-        <title>{SITE_TITLE} | Day 1</title>
+        <title>
+          {SITE_TITLE} | Day {DAY}
+        </title>
       </Head>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        {SITE_TITLE} | Day 1
+        {SITE_TITLE} | Day {DAY}
       </section>
       <section>
         <h2 className={utilStyles.headingSm}>Part 1 Solution</h2>
@@ -202,9 +204,6 @@ const AOC2022Day1 = ({ input, pathToInput }: AOC2022Day1Props) => {
           )}
         </ul>
       </section>
-      <footer>
-        <Link href="/advent-of-code-2022/day02">Day 2</Link>
-      </footer>
     </Layout>
   );
 };

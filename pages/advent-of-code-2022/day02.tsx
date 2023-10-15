@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo, useCallback } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { GetStaticProps } from "next";
-import Layout, { SITE_TITLE } from "../../components/aocpage";
+import Layout, { SITE_TITLE } from "../../components/aoc_page_layout";
 import styles from "../../components/aoc.module.scss";
 import utilStyles from "../../styles/utils.module.sass";
 import { getAOCInput } from "../../lib/advent-of-code-2022/getAOCInput";
@@ -68,12 +68,14 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-interface AOC2022Day1Props {
+interface AOC2022Day2Props {
   input: string;
   pathToInput: string;
 }
 
-const AOC2022Day1 = ({ input, pathToInput }: AOC2022Day1Props) => {
+const DAY = 2;
+
+const AOC2022Day2 = ({ input, pathToInput }: AOC2022Day2Props) => {
   interface Trial {
     ours: string;
     theirs: string;
@@ -154,12 +156,14 @@ const AOC2022Day1 = ({ input, pathToInput }: AOC2022Day1Props) => {
   }, [trialsFromOutcomes]);
 
   return (
-    <Layout>
+    <Layout day={DAY}>
       <Head>
-        <title>{SITE_TITLE} | Day 2</title>
+        <title>
+          {SITE_TITLE} | Day {DAY}
+        </title>
       </Head>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        {SITE_TITLE} | Day 2
+        {SITE_TITLE} | Day {DAY}
       </section>
       <section>
         <h2 className={utilStyles.headingSm}>Part 1 Solution</h2>
@@ -417,4 +421,4 @@ const AOC2022Day1 = ({ input, pathToInput }: AOC2022Day1Props) => {
   );
 };
 
-export default AOC2022Day1;
+export default AOC2022Day2;
