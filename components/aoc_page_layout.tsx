@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import utilStyles from "../styles/utils.module.sass";
-import styles from "./aoc.module.scss";
+import styles from "../styles/aoc.module.scss";
 
 export const SITE_TITLE = "Advent of Code 2022";
 export const BASE_PATH = "/advent-of-code-2022/";
@@ -41,7 +41,7 @@ export default function AdventOfCode2022PageLayout({
               return null;
             }
             return (
-              <React.Fragment key={`solution-links-day-${day}`}>
+              <React.Fragment key={`solution-links-day-${d}`}>
                 {d !== DAYS_FILTERED[0] && (
                   <span className={styles.separator}>|</span>
                 )}

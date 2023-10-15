@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Link from "next/link";
-// import Layout, { SITE_TITLE } from "../../components/layout";
 import Layout, { SITE_TITLE } from "../../components/aoc_page_layout";
 import utilStyles from "../../styles/utils.module.sass";
 
