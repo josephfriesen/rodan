@@ -3,7 +3,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { GetStaticProps } from "next";
 import Layout, { SITE_TITLE } from "../../components/aoc_page_layout";
-import styles from "../../components/aoc.module.scss";
+import Block from "../../components/block";
+import styles from "../../styles/aoc.module.scss";
 import utilStyles from "../../styles/utils.module.sass";
 import _ from "lodash";
 import { getAOCInput } from "../../lib/advent-of-code-2022/getAOCInput";
@@ -163,13 +164,17 @@ const AOC2022Day3 = ({ input, pathToInput }: AOC2022Day3Props) => {
     );
   }, [groups]);
 
+  const DAY = 3;
+
   return (
-    <Layout>
+    <Layout day={DAY}>
       <Head>
-        <title>{SITE_TITLE} | Day 3</title>
+        <title>
+          {SITE_TITLE} | Day {DAY}
+        </title>
       </Head>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        {SITE_TITLE} | Day 3
+        {SITE_TITLE} | Day {DAY}
       </section>
       <section>
         <h2 className={utilStyles.headingSm}>Part 1 Solution</h2>
@@ -224,18 +229,26 @@ const AOC2022Day3 = ({ input, pathToInput }: AOC2022Day3Props) => {
               capture the <span className={styles.code}>i</span>th lower case
               letter and its priority, we set
             </p>
-            <div className={styles.codeblock}>
-              <div>char := String.fromCharCode(96 + i)</div>
-              <div>priority := i</div>
-            </div>
+            <Block>
+              {`
+char := String.fromCharCode(96 + i)
+priority := i
+              `}
+            </Block>
             <p>
               and capture the <span className={styles.code}>i</span>th upper
               case letter by
             </p>
-            <div className={styles.codeblock}>
+            <Block>
+              {`
+char = String.fromCharCode(64 + i)
+priority = 26 + i
+              `}
+            </Block>
+            {/* <div className={styles.codeblock}>
               <div>char = String.fromCharCode(64 + i)</div>
               <div>priority = 26 + i</div>
-            </div>
+            </div> */}
             <p>
               For each, set{" "}
               <span className={styles.code}>characterMap[char] = priority</span>

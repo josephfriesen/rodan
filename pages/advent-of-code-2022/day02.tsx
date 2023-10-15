@@ -3,9 +3,10 @@ import Head from "next/head";
 import Link from "next/link";
 import { GetStaticProps } from "next";
 import Layout, { SITE_TITLE } from "../../components/aoc_page_layout";
-import styles from "../../components/aoc.module.scss";
+import styles from "../../styles/aoc.module.scss";
 import utilStyles from "../../styles/utils.module.sass";
 import { getAOCInput } from "../../lib/advent-of-code-2022/getAOCInput";
+import Block, { Inline } from "../../components/block";
 
 /* translate X, Y, Z into indices for use in PAYOFF_MATRIX and SHAPE_SCORE */
 
@@ -135,18 +136,6 @@ const AOC2022Day2 = ({ input, pathToInput }: AOC2022Day2Props) => {
     }, 0);
   }, [trialsIndices]);
 
-  const TEST = useCallback(() => {
-    const trial = { ours: "Y", theirs: "A" };
-    const mapOutput =
-      MAP_OUTCOME_TO_THROW[OURS_DICT[trial["ours"]]][
-        THEIRS_DICT[trial["theirs"]]
-      ];
-    return {
-      trial,
-      mapOutput,
-    };
-  }, []);
-
   const sumOutcomeExpectedScores = useCallback<(() => number) | null>(() => {
     if (!trialsFromOutcomes) return null;
 
@@ -174,12 +163,14 @@ const AOC2022Day2 = ({ input, pathToInput }: AOC2022Day2Props) => {
                 The input is the strategy guide given to us by the elf, it is a
                 string that looks like:
               </p>
-              <span className={styles.monospace}>A Y</span>
-              <br />
-              <span className={styles.monospace}>A X</span>
-              <br />
-              <span className={styles.monospace}>B Y ...</span>
-              <br />
+              <Block>
+                {`
+A Y
+A X
+B Y
+...
+                `}
+              </Block>
               <p>
                 <Link href={pathToInput}>Input</Link>
               </p>
@@ -187,19 +178,21 @@ const AOC2022Day2 = ({ input, pathToInput }: AOC2022Day2Props) => {
                 This gives us what our opponent will throw, encrypted with
                 values corresponding to:
               </p>
-              <span className={styles.monospace}>A: Rock</span>
-              <br />
-              <span className={styles.monospace}>B: Paper</span>
-              <br />
-              <span className={styles.monospace}>C: Scissors</span>
-              <br />
+              <Block>
+                {`
+A: Rock
+B: Paper
+C: Scissors
+                `}
+              </Block>
               <p>As well as how we should respond, encrypted with values:</p>
-              <span className={styles.monospace}>X: Rock</span>
-              <br />
-              <span className={styles.monospace}>Y: Paper</span>
-              <br />
-              <span className={styles.monospace}>Z: Scissors</span>
-              <br />
+              <Block>
+                {`
+X: Rock
+Y: Paper
+Z: Scissors
+                `}
+              </Block>
             </li>
           )}
           {trials && (
@@ -213,93 +206,100 @@ const AOC2022Day2 = ({ input, pathToInput }: AOC2022Day2Props) => {
                 This gives us the inputs for each trial of rock paper scissor,
                 still encrypted, as a series of hashes that look like:
               </p>
-              <span className={styles.monospace}>
-                {JSON.stringify(trials[0])}
-              </span>
+              <Block>{JSON.stringify(trials[0])}</Block>
             </li>
           )}
           {trialsIndices && (
             <>
               <li>
                 <p>
-                  Next, we can define a{" "}
-                  <span className={styles.monospace}>PAYOFF_MATRIX</span> with
-                  indices <span className={styles.monospace}>i, j</span>, where
-                  the
-                  <span className={styles.monospace}>i</span>th row and
-                  corresponds to our throwing one of rock, paper or scissors,
-                  and the <span className={styles.monospace}>j</span>th column
-                  corresponds to our opponent throwing one of rock, paper or
-                  scissors. If we fix indices 0 to 2 to correspond to rock,
-                  paper and scissors, then we can define the matrix as:
+                  Next, we can define a <Inline>PAYOFF_MATRIX</Inline> with
+                  indices <Inline>i, j</Inline>, where the <Inline>i</Inline>th
+                  row and corresponds to our throwing one of rock, paper or
+                  scissors, and the <Inline>j</Inline>th column corresponds to
+                  our opponent throwing one of rock, paper or scissors. If we
+                  fix indices 0 to 2 to correspond to rock, paper and scissors,
+                  then we can define the matrix as:
                 </p>
-                <p className={utilStyles.centered}>
-                  <span className={styles.monospace}>
-                    PAYOFF_MATRIX := {JSON.stringify(PAYOFF_MATRIX)}
-                  </span>
-                </p>
+                <Block>
+                  {`
+PAYOFF_MATRIX := [ ${JSON.stringify(PAYOFF_MATRIX[0])}, 
+                   ${JSON.stringify(PAYOFF_MATRIX[1])}, 
+                   ${JSON.stringify(PAYOFF_MATRIX[2])} ]
+                  `}
+                </Block>
                 <p>
-                  We can also define a{" "}
-                  <span className={styles.monospace}>SHAPE_SCORE</span> array,
+                  To translate <Inline>(X, Y, Z), (A, B, C)</Inline> encrypted
+                  values into indices to feed to <Inline>PAYOFF_MATRIX</Inline>,
+                  we can define <Inline>OURS_DICT</Inline> and{" "}
+                  <Inline>THEIRS_DICT</Inline>
+                  hash maps.
+                </p>
+                <Block>
+                  {`
+OURS_DICT   := ${JSON.stringify(OURS_DICT)}
+THEIRS_DICT := ${JSON.stringify(THEIRS_DICT)}
+                  `}
+                </Block>
+                <p>
+                  We can also define a <Inline>SHAPE_SCORE</Inline> array,
                   where, with indices 0 to 2 still fixed as above, we get the
                   corresponding payoff for throwing each of the three values,
                   as:
                 </p>
-                <p className={utilStyles.centered}>
-                  <span className={styles.monospace}>
-                    SHAPE_SCORE := {JSON.stringify(SHAPE_SCORE)}
-                  </span>
-                </p>
+                <Block>
+                  {`
+SHAPE_SCORE := ${JSON.stringify(SHAPE_SCORE)}
+                  `}
+                </Block>
               </li>
               <li>
                 <p>
                   Then, we defined a function{" "}
-                  <span className={styles.monospace}>trialExpectedScore</span>{" "}
-                  that takes in a hash as built above with keys{" "}
-                  <span className={styles.monospace}>ours</span> and{" "}
-                  <span className={styles.monospace}>theirs</span>, finds the
-                  points we should expect to score for a win/draw/loss, and the
-                  bonus points we would score for the shape we threw, and sums
-                  them together for our expected score for that individual
-                  trial.
+                  <Inline>trialExpectedScore</Inline> that takes in a hash as
+                  built above with keys <Inline>ours</Inline> and{" "}
+                  <Inline>theirs</Inline>, finds the points we should expect to
+                  score for a win/draw/loss, and the bonus points we would score
+                  for the shape we threw, and sums them together for our
+                  expected score for that individual trial.
                 </p>
                 <p>
-                  Example: Suppose we get input{" "}
-                  <span className={styles.monospace}>B Z</span>, suggesting our
-                  opponent will throw paper (B), and that we should throw
+                  Example: Suppose we get input <Inline>B Z</Inline>, suggesting
+                  our opponent will throw paper (B), and that we should throw
                   scissors (Z). This would decrypt to a hash{" "}
-                  <span className={styles.monospace}>
-                    trial := {JSON.stringify({ ours: "Z", theirs: "B" })}
-                  </span>
+                  <Inline>{`trial := ${JSON.stringify({
+                    ours: "Z",
+                    theirs: "B",
+                  })}`}</Inline>
                   . With our index map{" "}
-                  <span className={styles.monospace}>
-                    (rock, paper, scissors) |-&gt; (0, 1, 2)
-                  </span>{" "}
-                  as defined above, we get
+                  <Inline>(rock, paper, scissors) |-&gt; (0, 1, 2)</Inline> as
+                  defined above, we get
                 </p>
-                <div className={styles.codeblock}>
-                  <div>PAYOFF_MATRIX[trial["ours"]][trial["theirs"]]</div>
-                  <div>PAYOFF_MATRIX["Z"]["B"]</div>
-                  <div>PAYOFF_MATRIX[2][1]</div>
-                  <div>[0, 6, 3][1]</div>
-                  <div>6</div>
-                </div>
+                <Block>
+                  {`
+PAYOFF_MATRIX[OURS_MAP[trial["ours"]]][THEIRS_MAP[trial["theirs"]]] 
+    = PAYOFF_MATRIX[[OURS_MAP["Z"]][THEIRS_MAP["B"]] 
+    = PAYOFF_MATRIX[2][1] 
+    = [0, 6, 3][1] 
+    = 6
+                  `}
+                </Block>
                 <p>and</p>
-                <div className={styles.codeblock}>
-                  <div>SHAPE_SCORE[trial["ours"]]</div>
-                  <div>SHAPE_SCORE["Z"]</div>
-                  <div>SHAPE_SCORE[2]</div>
-                  <div>3</div>
-                </div>
+                <Block>
+                  {`
+SHAPE_SCORE[OURS_MAP[trial["ours"]]] 
+    = SHAPE_SCORE[OURS_MAP["Z"]] 
+    = SHAPE_SCORE[2] 
+    = 3
+                  `}
+                </Block>
                 <p>for an expected value of 9.</p>
               </li>
               <li>
                 <p>
-                  Then, if we sum our expected score over all trials, we get
+                  Then, if we sum our expected score over all trials, we get{" "}
+                  {sumExpectedScores()}
                 </p>
-                <div className={styles.codeblock}>
-                  <div>{sumExpectedScores()}</div>
-                </div>
               </li>
             </>
           )}
@@ -311,99 +311,67 @@ const AOC2022Day2 = ({ input, pathToInput }: AOC2022Day2Props) => {
           {trialsIndices && (
             <>
               <li>
-                <p>TEST</p>
                 <p>
-                  The first trial is <span className={styles.code}>A Y</span>.
-                  This suggests that the opponent threw rock (A), and we want to
-                  draw (Y). The throw that we should then expect to get from{" "}
-                  <span className={styles.code}>
-                    MAP_OUTCOME_TO_THROW[outcome][theirs] = 0
-                  </span>
-                  , a throw of rock (0). Is that true?
-                </p>
-                <div className={styles.codeblock}>
-                  <div>{JSON.stringify(TEST())}</div>
-                </div>
-              </li>
-              <li>
-                <p>
-                  To translate{" "}
-                  <span className={styles.code}>
-                    (X, Y, Z)=(lose, draw, win)
-                  </span>{" "}
-                  and opponent throw{" "}
-                  <span className={styles.code}>
-                    (A, B, C)=(rock, paper, scissors)
-                  </span>
-                  , we can define a 3x3 matrix{" "}
-                  <span className={styles.code}>MAP_OUTCOME_TO_THROW</span> such
+                  To translate <Inline>(X, Y, Z)=(lose, draw, win)</Inline> and
+                  opponent throw{" "}
+                  <Inline>(A, B, C)=(rock, paper, scissors)</Inline>, we can
+                  define a 3x3 matrix <Inline>MAP_OUTCOME_TO_THROW</Inline> such
                   the entry
-                  <span className={styles.code}>(i,j)</span> gives the throw{" "}
-                  <span className={styles.code}>
-                    (A, B, C)=(rock, paper, scissors)
-                  </span>{" "}
-                  that we should select, where{" "}
-                  <span className={styles.code}>i=0,1,2=(lose, draw, win)</span>{" "}
-                  and{" "}
-                  <span className={styles.code}>
-                    j=0,1,2=(rock, paper, scissors)
-                  </span>
-                  . Let <span className={styles.code}>trial</span> be an ordered
-                  pair as above,
+                  <Inline>(i,j)</Inline> gives the throw{" "}
+                  <Inline>(A, B, C)=(rock, paper, scissors)</Inline> that we
+                  should select, where{" "}
+                  <Inline>i = 0,1,2 = (lose, draw, win)</Inline> and{" "}
+                  <Inline>j=0,1,2=(rock, paper, scissors)</Inline>. Let{" "}
+                  <Inline>trial</Inline> be an ordered pair as above,
                 </p>
-                <div className={styles.codeblock}>
-                  <div>
-                    MAP_OUTCOME_TO_THROW := [ [2, 0, 1], [0, 1, 2], [1, 2, 0] ]
-                  </div>
-                </div>
-                <p>. Then the throw we want should be given by</p>
-                <div className={styles.codeblock}>
-                  <div>
-                    MAP_OUTCOME_TO_THROW[OURS_DICT[trial[0]]][THEIRS_DICT[trial[1]]]
-                  </div>
-                </div>
-                .
+                <Block>
+                  {`
+MAP_OUTCOME_TO_THROW := [ ${JSON.stringify(MAP_OUTCOME_TO_THROW[0])},
+                          ${JSON.stringify(MAP_OUTCOME_TO_THROW[1])},
+                          ${JSON.stringify(MAP_OUTCOME_TO_THROW[2])} ]
+                  `}
+                </Block>
+                <p>Then the throw we want should be given by</p>
+                <Block>
+                  {`
+MAP_OUTCOME_TO_THROW[OURS_DICT[trial[1]]][THEIRS_DICT[trial[0]]]
+                  `}
+                </Block>
               </li>
               <li>
                 <p>
-                  Example: suppose we have{" "}
-                  <span className={styles.code}>trial = ["A", "Y"]</span>. This
-                  tells us that our opponent will throw rock ("A"), and we want
-                  to draw ("Y"). Then we want to throw rock as well, and expect
-                  to earn 3 points for the draw and 1 point for throwing rock,
-                  for an expected value on this trial of 4. Check:
+                  Example: suppose we have <Inline>trial = ["A", "Y"]</Inline>.
+                  This tells us that our opponent will throw rock ("A"), and we
+                  want to draw ("Y"). Then we want to throw rock as well, and
+                  expect to earn 3 points for the draw and 1 point for throwing
+                  rock, for an expected value on this trial of 4. Check:
                 </p>
-                <div className={styles.codeblock}>
-                  <div>
-                    ours :=
-                    MAP_OUTCOME_TO_THROW[OURS_DICT[trial[1]]][THEIRS_DICT[trial[0]]
-                  </div>
-                  <div>
-                    {" "}
-                    = MAP_OUTCOME_TO_THROW[OURS_DICT["Y"]][THEIRS_DICT["A"]]
-                  </div>
-                  <div> = MAP_OUTCOME_TO_THROW[1][0]</div>
-                  <div> = [0, 1, 2][0]</div>
-                  <div> = 0</div>
-                </div>
+                <Block>
+                  {`
+ours := MAP_OUTCOME_TO_THROW[OURS_DICT[trial[1]]][THEIRS_DICT[trial[0]]]
+      = MAP_OUTCOME_TO_THROW[OURS_DICT["Y"]][THEIRS_DICT["A"]]
+      = MAP_OUTCOME_TO_THROW[1][0]
+      = [0, 1, 2][0]
+      = 0
+                  `}
+                </Block>
                 <p>
                   This gives us a suggested throw of rock (0). Plugging this
-                  back into{" "}
-                  <span className={styles.code}>
-                    PAYOFF_MATRIX + SHAPE_SCORE
-                  </span>{" "}
-                  and we get
+                  back into <Inline>PAYOFF_MATRIX + SHAPE_SCORE</Inline> and we
+                  get
                 </p>
-                <div className={styles.codeblock}>
-                  <div>payoff := PAYOFF_MATRIX[ours][THEIRS_DICT[trial[0]]</div>
-                  <div> = PAYOFF_MATRIX[0][0]</div>
-                  <div> = [3, 0, 6][0]</div>
-                  <div> = 3</div>
-                  <div>shape_score := SHAPE_SCORE[ours]</div>
-                  <div> = SHAPE_SCORE[0]</div>
-                  <div> = 1</div>
-                  <div>payoff + shape_score = 3 + 1 = 4</div>
-                </div>
+                <Block>
+                  {`
+payoff := PAYOFF_MATRIX[ours][THEIRS_DICT[trial[0]]]
+        = PAYOFF_MATRIX[0][0]
+        = [3, 0, 6][0]
+        = 3
+shape_score := SHAPE_SCORE[ours]
+            = SHAPE_SCORE[0]
+            = 1
+payoff + shape_score = 3 + 1 = 4
+                  `}
+                </Block>
                 <p>as expected.</p>
               </li>
               <li>

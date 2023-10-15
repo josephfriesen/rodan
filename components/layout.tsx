@@ -2,11 +2,17 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import utilStyles from "../styles/utils.module.sass";
-import styles from "./layout.module.sass";
+import styles from "../styles/layout.module.sass";
 
 export const SITE_TITLE = "RODAN";
 
-export default function Layout({ children, home }: { children: React.ReactNode, home?: boolean }) {
+export default function Layout({
+  children,
+  home,
+}: {
+  children: React.ReactNode;
+  home?: boolean;
+}) {
   return (
     <div className={styles.container}>
       <Head>
