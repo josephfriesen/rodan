@@ -25,3 +25,9 @@ img {
   max-width: 100%;
   display: block;
 }
+
+span.code {
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+  font-size: 0.9rem;
+}
