@@ -1,0 +1,141 @@
+import { SolutionBuilder } from "./SolutionBuilder";
+
+export interface Elf extends Map<string, number> {
+  get(key: "start"): number | undefined;
+  get(key: "end"): number | undefined;
+}
+
+export class Day4Solution extends SolutionBuilder {
+  elfPairs: Array<Array<Elf>>;
+  redundancyCount: number;
+  overlapCount: number;
+  disjointCount: number;
+
+  constructor(input: string) {
+    super(4, input);
+    this.elfPairs = this.inputToElfPairs(this.input);
+    this.redundancyCount = this.sumRedundancies();
+
+    const { disjoint, overlap } = this.sumOverlaps();
+    this.overlapCount = overlap;
+    this.disjointCount = disjoint;
+  }
+
+  private inputToElfPairs(input: string) {
+    const lines: Array<string> = input.split("\n").map((line) => line.trim());
+    const pairs = lines.map((l: string) => {
+      const stringPairs: Array<string> = l.split(",");
+      const elves = stringPairs.map((elf: string): Elf => {
+        const coordinates = elf.split("-");
+        return new Map([
+          ["start", parseInt(coordinates[0])],
+          ["end", parseInt(coordinates[1])],
+        ]);
+      });
+      return elves;
+    });
+    return this.sortPairsList(pairs);
+  }
+
+  private sortPair(pair: Array<Elf>): Array<Elf> {
+    return pair.sort((elf1: Elf, elf2: Elf) => {
+      // must ensure pairs are sorted first by start.
+      // then, if starts are equal, must sort the elf with the larger end first
+      // to ensure comparison methods work correctly, otherwise will undercount redundancies
+      if (elf1.get("start") === elf2.get("start")) {
+        return elf2.get("end") - elf1.get("end");
+      }
+
+      return elf1.get("start") - elf2.get("start");
+    });
+  }
+
+  private sortPairsList(list: Array<Array<Elf>>): Array<Array<Elf>> {
+    return list
+      .map((pair) => this.sortPair(pair))
+      .sort(
+        (a: Array<Elf>, b: Array<Elf>) => a[0].get("start") - b[0].get("start")
+      );
+  }
+
+  compareElfPairForRedundancy(elfPair: Array<Elf>): boolean {
+    // first attempt 736 too high
+    // second attempt 356 too low
+    const [e, f] = elfPair;
+
+    // the elves are sorted such that e.start is <= f.start. therefore, they are redundant if and only if e.end >= f.end
+    return e.get("end") >= f.get("end");
+  }
+
+  compareElfPairForOverlap(elfPair: Array<Elf>): boolean {
+    // first attempt 498 too low
+    // let E1 = (x1, y1), E2 = (x2, y2) be elves with start = x and end = y.
+    // because the pairs are sorted first by start then by end, we know that
+    //   (1) x1 <= x2
+    //   (2) if (x1 = x2)  then y2 <= y1
+    // case 1: x1 < x2
+    //   E1 and E2 overlap iff y1 >= x2
+    // case 2: x1 = x2
+    //   E1 and E2 always overlap because they both cover section x1
+    //   therefore can reduce to just case 1
+    const [E1, E2] = elfPair;
+    const x1 = E1.get("start");
+    const y1 = E1.get("end");
+    const x2 = E2.get("start");
+    const y2 = E2.get("end");
+    return x1 === x2 || y1 >= x2;
+  }
+
+  sumRedundancies(): number {
+    let count = 0;
+    for (const pair of this.elfPairs) {
+      if (this.compareElfPairForRedundancy(pair)) {
+        count++;
+      }
+    }
+
+    return count;
+  }
+
+  sumOverlaps() {
+    let count = 0;
+    let disjoint = 0;
+    for (const pair of this.elfPairs) {
+      if (this.compareElfPairForOverlap(pair)) {
+        count++;
+      } else {
+        disjoint++;
+      }
+    }
+
+    return { overlap: count, disjoint };
+  }
+
+  test(): void {
+    const first = new Map([
+      ["start", 55],
+      ["end", 55],
+    ]);
+
+    const second = new Map([
+      ["start", 55],
+      ["end", 54],
+    ]);
+
+    console.log(first);
+    console.log(second);
+    console.log(
+      this.compareElfPairForRedundancy(this.sortPair([first, second]))
+    );
+    console.log(this.compareElfPairForOverlap(this.sortPair([first, second])));
+    console.log(this.overlapCount);
+  }
+
+  printElfPairs(): void {
+    for (const pair of this.elfPairs) {
+      console.log(pair);
+    }
+  }
+}
+
+export default Day4Solution;

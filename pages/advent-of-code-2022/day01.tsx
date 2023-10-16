@@ -4,7 +4,7 @@ import Link from "next/link";
 import { GetStaticProps } from "next";
 import Layout, { SITE_TITLE } from "../../components/aoc_page_layout";
 import utilStyles from "../../styles/utils.module.sass";
-import { getAOCInput } from "../../lib/advent-of-code-2022/getAOCInput";
+import { getAOCInput } from "../../lib/aoc2022/getAOCInput";
 
 const DAY = 1;
 
@@ -89,16 +89,8 @@ const AOC2022Day1 = ({ input, pathToInput }: AOC2022Day1Props) => {
 
   return (
     <Layout day={DAY}>
-      <Head>
-        <title>
-          {SITE_TITLE} | Day {DAY}
-        </title>
-      </Head>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        {SITE_TITLE} | Day {DAY}
-      </section>
       <section>
-        <h2 className={utilStyles.headingSm}>Part 1 Solution</h2>
+        <h3 className={utilStyles.headingSm}>Part 1 Solution</h3>
         <ul>
           {input && typeof input === "string" && (
             <li>
@@ -186,7 +178,7 @@ const AOC2022Day1 = ({ input, pathToInput }: AOC2022Day1Props) => {
             </li>
           )}
         </ul>
-        <h2 className={utilStyles.headingSm}>Solution Part 2</h2>
+        <h3 className={utilStyles.headingSm}>Solution Part 2</h3>
         <ul>
           {topThreeCalorieCounts && (
             <>

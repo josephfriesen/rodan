@@ -3,6 +3,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "dev_win": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "tsx": "tsx",
     "start": "next start"
   },
   "dependencies": {
@@ -26,8 +28,11 @@
     "@types/node": "20.8.2",
     "@types/react": "18.2.24",
     "autoprefixer": "^10.4.16",
+    "cross-env": "^7.0.3",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.3",
+    "ts-node": "^10.9.1",
+    "tsx": "^3.13.0",
     "typescript": "5.2.2"
   }
 }

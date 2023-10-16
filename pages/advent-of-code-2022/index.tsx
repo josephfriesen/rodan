@@ -6,9 +6,6 @@ import utilStyles from "../../styles/utils.module.sass";
 const AdventOfCode2022Index = () => {
   return (
     <Layout home>
-      <Head>
-        <title>{SITE_TITLE} | Advent of Code Solutions</title>
-      </Head>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         Advent of Code solutions
         <ul className={utilStyles.list}>

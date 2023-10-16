@@ -5,7 +5,7 @@ import { GetStaticProps } from "next";
 import Layout, { SITE_TITLE } from "../../components/aoc_page_layout";
 import styles from "../../styles/aoc.module.scss";
 import utilStyles from "../../styles/utils.module.sass";
-import { getAOCInput } from "../../lib/advent-of-code-2022/getAOCInput";
+import { getAOCInput } from "../../lib/aoc2022/getAOCInput";
 import Block, { Inline } from "../../components/block";
 
 /* translate X, Y, Z into indices for use in PAYOFF_MATRIX and SHAPE_SCORE */
@@ -146,16 +146,8 @@ const AOC2022Day2 = ({ input, pathToInput }: AOC2022Day2Props) => {
 
   return (
     <Layout day={DAY}>
-      <Head>
-        <title>
-          {SITE_TITLE} | Day {DAY}
-        </title>
-      </Head>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        {SITE_TITLE} | Day {DAY}
-      </section>
       <section>
-        <h2 className={utilStyles.headingSm}>Part 1 Solution</h2>
+        <h3 className={utilStyles.headingSm}>Part 1 Solution</h3>
         <ul>
           {input && (
             <li>
@@ -306,7 +298,7 @@ SHAPE_SCORE[OURS_MAP[trial["ours"]]]
         </ul>
       </section>
       <section>
-        <h2 className={utilStyles.headingSm}>Part 2 Solution</h2>
+        <h3 className={utilStyles.headingSm}>Part 2 Solution</h3>
         <ul>
           {trialsIndices && (
             <>
@@ -316,12 +308,12 @@ SHAPE_SCORE[OURS_MAP[trial["ours"]]]
                   opponent throw{" "}
                   <Inline>(A, B, C)=(rock, paper, scissors)</Inline>, we can
                   define a 3x3 matrix <Inline>MAP_OUTCOME_TO_THROW</Inline> such
-                  the entry
+                  that the entry
                   <Inline>(i,j)</Inline> gives the throw{" "}
                   <Inline>(A, B, C)=(rock, paper, scissors)</Inline> that we
                   should select, where{" "}
                   <Inline>i = 0,1,2 = (lose, draw, win)</Inline> and{" "}
-                  <Inline>j=0,1,2=(rock, paper, scissors)</Inline>. Let{" "}
+                  <Inline>j = 0,1,2 = (rock, paper, scissors)</Inline>. Let{" "}
                   <Inline>trial</Inline> be an ordered pair as above,
                 </p>
                 <Block>
@@ -366,9 +358,11 @@ payoff := PAYOFF_MATRIX[ours][THEIRS_DICT[trial[0]]]
         = PAYOFF_MATRIX[0][0]
         = [3, 0, 6][0]
         = 3
+
 shape_score := SHAPE_SCORE[ours]
-            = SHAPE_SCORE[0]
-            = 1
+             = SHAPE_SCORE[0]
+             = 1
+
 payoff + shape_score = 3 + 1 = 4
                   `}
                 </Block>
