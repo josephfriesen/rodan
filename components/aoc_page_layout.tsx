@@ -7,7 +7,7 @@ import styles from "../styles/aoc.module.scss";
 
 export const SITE_TITLE = "Advent of Code 2022";
 export const BASE_PATH = "/advent-of-code-2022/";
-export const DAYS = Array.from({ length: 3 }, (_, i) => i + 1);
+export const DAYS = Array.from({ length: 4 }, (_, i) => i + 1);
 
 export default function AdventOfCode2022PageLayout({
   children,
@@ -29,9 +29,23 @@ export default function AdventOfCode2022PageLayout({
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="RODAN" />
         <meta name="og:title" content={SITE_TITLE} />
+        <title>{`${SITE_TITLE} | ${home && "Advent of Code 2022 Solutions"}${
+          day && `Day ${day}`
+        }`}</title>
       </Head>
       <header className={styles.header}>
         <h1 className={utilStyles.heading2Xl}>{SITE_TITLE}</h1>
+        {!home && !!day && (
+          <h2 className={utilStyles.headingMd}>
+            <a
+              target="_blank"
+              href={`https://adventofcode.com/2022/day/${day}`}
+              rel="noopener noreferrer"
+            >
+              Day {day}
+            </a>
+          </h2>
+        )}
       </header>
       <main>{children}</main>
       <footer className={styles.linksFooter}>

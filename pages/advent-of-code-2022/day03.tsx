@@ -3,11 +3,11 @@ import Head from "next/head";
 import Link from "next/link";
 import { GetStaticProps } from "next";
 import Layout, { SITE_TITLE } from "../../components/aoc_page_layout";
-import Block from "../../components/block";
+import Block, { Inline } from "../../components/block";
 import styles from "../../styles/aoc.module.scss";
 import utilStyles from "../../styles/utils.module.sass";
 import _ from "lodash";
-import { getAOCInput } from "../../lib/advent-of-code-2022/getAOCInput";
+import { getAOCInput } from "../../lib/aoc2022/getAOCInput";
 
 export const getStaticProps: GetStaticProps = async () => {
   const { fileContents, publicPath } = await getAOCInput(3);
@@ -168,16 +168,8 @@ const AOC2022Day3 = ({ input, pathToInput }: AOC2022Day3Props) => {
 
   return (
     <Layout day={DAY}>
-      <Head>
-        <title>
-          {SITE_TITLE} | Day {DAY}
-        </title>
-      </Head>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        {SITE_TITLE} | Day {DAY}
-      </section>
       <section>
-        <h2 className={utilStyles.headingSm}>Part 1 Solution</h2>
+        <h3 className={utilStyles.headingSm}>Part 1 Solution</h3>
         <ul>
           <li>
             <p>
@@ -195,20 +187,18 @@ const AOC2022Day3 = ({ input, pathToInput }: AOC2022Day3Props) => {
             <p>
               Next, for each pair of compartments, we need to find the single
               character common to both. To do this, we first create a{" "}
-              <span className={styles.code}>compartmentMap</span> of key-value
-              pairs, where the key is an individual character in the first
-              compartment and the value is True. We split the first compartment
-              into an array of individual characters and set the key-value
-              pairs. (We could slightly optimize this by first filtering
-              duplicate characters).
+              <Inline>compartmentMap</Inline> of key-value pairs, where the key
+              is an individual character in the first compartment and the value
+              is True. We split the first compartment into an array of
+              individual characters and set the key-value pairs. (We could
+              slightly optimize this by first filtering duplicate characters).
             </p>
             <p>
               Then, split the second compartment into individual characters,
               iterate through this array, then for any character{" "}
-              <span className={styles.code}>c</span> in the array, if{" "}
-              <span className={styles.code}>compartmentMap[c] == true</span>, we
-              know <span className={styles.code}>c</span> is common to both
-              compartments.
+              <Inline>c</Inline> in the array, if{" "}
+              <Inline>compartmentMap[c] == true</Inline>, we know{" "}
+              <Inline>c</Inline> is common to both compartments.
             </p>
           </li>
           <li>
@@ -216,18 +206,15 @@ const AOC2022Day3 = ({ input, pathToInput }: AOC2022Day3Props) => {
               Finally, we need to be able to convert a common character to an
               integer value, called a priority, so we can sum the priorities of
               all the rucksacks. To do this, in javascript, we use the built-in
-              <span className={styles.code}>String.fromCharCode</span> method.
-              In unicode, capital letters have a unicode integer value between
-              65 and 90, and lowercase letters have a unicode integer value
-              between 97 and 122.
+              <Inline>String.fromCharCode</Inline> method. In unicode, capital
+              letters have a unicode integer value between 65 and 90, and
+              lowercase letters have a unicode integer value between 97 and 122.
             </p>
             <p>
-              To build a <span className={styles.code}>characterMap</span> of
-              key-value pairs, with key being a character and value its
-              priority, we loop through{" "}
-              <span className={styles.code}>i = 1, 2, ... , 26</span>. To
-              capture the <span className={styles.code}>i</span>th lower case
-              letter and its priority, we set
+              To build a <Inline>characterMap</Inline> of key-value pairs, with
+              key being a character and value its priority, we loop through{" "}
+              <Inline>i = 1, 2, ... , 26</Inline>. To capture the{" "}
+              <Inline>i</Inline>th lower case letter and its priority, we set
             </p>
             <Block>
               {`
@@ -236,8 +223,7 @@ priority := i
               `}
             </Block>
             <p>
-              and capture the <span className={styles.code}>i</span>th upper
-              case letter by
+              and capture the <Inline>i</Inline>th upper case letter by
             </p>
             <Block>
               {`
@@ -245,14 +231,8 @@ char = String.fromCharCode(64 + i)
 priority = 26 + i
               `}
             </Block>
-            {/* <div className={styles.codeblock}>
-              <div>char = String.fromCharCode(64 + i)</div>
-              <div>priority = 26 + i</div>
-            </div> */}
             <p>
-              For each, set{" "}
-              <span className={styles.code}>characterMap[char] = priority</span>
-              .
+              For each, set <Inline>characterMap[char] := priority</Inline>.
             </p>
           </li>
           <li>
@@ -265,7 +245,7 @@ priority = 26 + i
         </ul>
       </section>
       <section>
-        <h2 className={utilStyles.headingSm}>Part 2 Solution</h2>
+        <h3 className={utilStyles.headingSm}>Part 2 Solution</h3>
         <ul>
           <li>
             <p>
@@ -279,24 +259,21 @@ priority = 26 + i
             <p>
               To find the single character common to all three rucksacks in a
               group, we first find all common characters in the first two
-              rucksacks. Let <span className="code">common_map</span> be a map
-              of key-value pairs with keys individual characters common to the
-              first two rucksacks, and value true. First, we divide the string
-              from the first rucksack into an array of individual characters. We
-              iterate through this array, and for each character{" "}
-              <span className="code">c</span>, if the second rucksack string
-              contains <span className="code">c</span>
+              rucksacks. Let <Inline>common_map</Inline> be a map of key-value
+              pairs with keys individual characters common to the first two
+              rucksacks, and value true. First, we divide the string from the
+              first rucksack into an array of individual characters. We iterate
+              through this array, and for each character <Inline>c</Inline>, if
+              the second rucksack string contains <Inline>c</Inline>
               as a substring, then we set{" "}
-              <span className="code">common_map.set(c, true)</span>.
+              <Inline>common_map.set(c, true)</Inline>.
             </p>
             <p>
               Now that we have a map of character common to the first two
               rucksacks, we iterate through the individual characters of the
-              third, and for each character <span className="code">c</span> in
-              the third rucksack, if{" "}
-              <span className="code">common_map.get(c) === true</span>, we know
-              that <span className="code">c</span> is common to all three
-              rucksacks.
+              third, and for each character <Inline>c</Inline> in the third
+              rucksack, if <Inline>common_map.get(c) == true</Inline>, we know
+              that <Inline>c</Inline> is common to all three rucksacks.
             </p>
           </li>
           <li>
