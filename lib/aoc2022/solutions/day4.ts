@@ -5,6 +5,11 @@ export interface Elf extends Map<string, number> {
   get(key: "end"): number | undefined;
 }
 
+interface OverlapResult {
+  overlap: number;
+  disjoint: number;
+}
+
 export class Day4Solution extends SolutionBuilder {
   elfPairs: Array<Array<Elf>>;
   redundancyCount: number;
@@ -68,7 +73,6 @@ export class Day4Solution extends SolutionBuilder {
   }
 
   compareElfPairForOverlap(elfPair: Array<Elf>): boolean {
-    // first attempt 498 too low
     // let E1 = (x1, y1), E2 = (x2, y2) be elves with start = x and end = y.
     // because the pairs are sorted first by start then by end, we know that
     //   (1) x1 <= x2
@@ -76,13 +80,12 @@ export class Day4Solution extends SolutionBuilder {
     // case 1: x1 < x2
     //   E1 and E2 overlap iff y1 >= x2
     // case 2: x1 = x2
-    //   E1 and E2 always overlap because they both cover section x1
-    //   therefore can reduce to just case 1
+    //   E1 and E2 always overlap at minimum in section x1.
     const [E1, E2] = elfPair;
     const x1 = E1.get("start");
     const y1 = E1.get("end");
     const x2 = E2.get("start");
-    const y2 = E2.get("end");
+    // const y2 = E2.get("end");
     return x1 === x2 || y1 >= x2;
   }
 
@@ -97,7 +100,7 @@ export class Day4Solution extends SolutionBuilder {
     return count;
   }
 
-  sumOverlaps() {
+  sumOverlaps(): OverlapResult {
     let count = 0;
     let disjoint = 0;
     for (const pair of this.elfPairs) {
