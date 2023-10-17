@@ -7,7 +7,7 @@ import styles from "../styles/aoc.module.scss";
 
 export const SITE_TITLE = "Advent of Code 2022";
 export const BASE_PATH = "/advent-of-code-2022/";
-export const DAYS = Array.from({ length: 4 }, (_, i) => i + 1);
+export const DAYS = Array.from({ length: 5 }, (_, i) => i + 1);
 
 export default function AdventOfCode2022PageLayout({
   children,
