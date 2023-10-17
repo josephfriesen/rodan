@@ -12,6 +12,7 @@ interface OverlapResult {
 
 export class Day4Solution extends SolutionBuilder {
   elfPairs: Array<Array<Elf>>;
+  sortedElfPairs: Array<Array<Elf>>;
   redundancyCount: number;
   overlapCount: number;
   disjointCount: number;
@@ -19,6 +20,7 @@ export class Day4Solution extends SolutionBuilder {
   constructor(input: string) {
     super(4, input);
     this.elfPairs = this.inputToElfPairs(this.input);
+    this.sortedElfPairs = this.elfPairsToSortedElfPairs(this.elfPairs);
     this.redundancyCount = this.sumRedundancies();
 
     const { disjoint, overlap } = this.sumOverlaps();
@@ -26,19 +28,29 @@ export class Day4Solution extends SolutionBuilder {
     this.disjointCount = disjoint;
   }
 
+  private stringToElfPair(s: string): Array<Elf> {
+    // s: string of format "(number)-(number),(number)-(number)"
+    const stringPairs: Array<string> = s.split(",");
+    const elves = stringPairs.map((elf: string): Elf => {
+      const coordinates = elf.split("-");
+      return new Map([
+        ["start", parseInt(coordinates[0])],
+        ["end", parseInt(coordinates[1])],
+      ]);
+    });
+    return elves;
+  }
+
   private inputToElfPairs(input: string) {
     const lines: Array<string> = input.split("\n").map((line) => line.trim());
-    const pairs = lines.map((l: string) => {
-      const stringPairs: Array<string> = l.split(",");
-      const elves = stringPairs.map((elf: string): Elf => {
-        const coordinates = elf.split("-");
-        return new Map([
-          ["start", parseInt(coordinates[0])],
-          ["end", parseInt(coordinates[1])],
-        ]);
-      });
-      return elves;
+    return lines.map((l: string) => {
+      return this.stringToElfPair(l);
     });
+  }
+
+  private elfPairsToSortedElfPairs(
+    pairs: Array<Array<Elf>>
+  ): Array<Array<Elf>> {
     return this.sortPairsList(pairs);
   }
 
@@ -91,7 +103,7 @@ export class Day4Solution extends SolutionBuilder {
 
   sumRedundancies(): number {
     let count = 0;
-    for (const pair of this.elfPairs) {
+    for (const pair of this.sortedElfPairs) {
       if (this.compareElfPairForRedundancy(pair)) {
         count++;
       }
@@ -103,7 +115,7 @@ export class Day4Solution extends SolutionBuilder {
   sumOverlaps(): OverlapResult {
     let count = 0;
     let disjoint = 0;
-    for (const pair of this.elfPairs) {
+    for (const pair of this.sortedElfPairs) {
       if (this.compareElfPairForOverlap(pair)) {
         count++;
       } else {
@@ -112,6 +124,27 @@ export class Day4Solution extends SolutionBuilder {
     }
 
     return { overlap: count, disjoint };
+  }
+
+  elfPairsDemo(elfPairs: Array<Array<Elf>>): string {
+    let stringRepresentation = "";
+    for (const pair of elfPairs) {
+      stringRepresentation += "[ ";
+      stringRepresentation += this.mapToString(pair[0]);
+      stringRepresentation += ", ";
+      stringRepresentation += this.mapToString(pair[1]);
+      stringRepresentation += ` ],
+`;
+    }
+    return stringRepresentation;
+  }
+
+  get firstThreeElfPairs(): Array<Array<Elf>> {
+    return this.elfPairs.slice(0, 3);
+  }
+
+  get firstThreeSortedElfPairs(): Array<Array<Elf>> {
+    return this.sortedElfPairs.slice(0, 3);
   }
 
   test(): void {
