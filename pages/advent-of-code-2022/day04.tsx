@@ -79,20 +79,20 @@ ${solution.elfPairsDemo(solution.firstThreeElfPairs)}...
               <Inline>pair</Inline> be a pair of elves in our list of{" "}
               <Inline>ElfPairs</Inline>, and let <Inline>a, b</Inline> be two
               distinct elves in the pair. We map <Inline>a, b</Inline> to the
-              ordered pair <Inline>(x, y)</Inline>(in the following way:
-              <ul>
-                <li>
-                  <Inline>
-                    a["start"] &lt; b["start"] =&gt; a := x, b := y
-                  </Inline>
-                </li>
-                <li>
-                  <Inline>
-                    a["start"] = b["start"] &amp; a["end"] &ge; b["end"] =&gt; a
-                    := x, b := y
-                  </Inline>
-                </li>
-              </ul>
+              ordered pair <Inline>(x, y)</Inline>in the following way:
+            </p>
+            <ul>
+              <li>
+                <Inline>a["start"] &lt; b["start"] =&gt; a := x, b := y</Inline>
+              </li>
+              <li>
+                <Inline>
+                  a["start"] = b["start"] &amp; a["end"] &ge; b["end"] =&gt; a
+                  := x, b := y
+                </Inline>
+              </li>
+            </ul>
+            <p>
               In other words, we first sort by start in ascending order. If two
               elves have the same start, we place the elf with the larger end
               first.
