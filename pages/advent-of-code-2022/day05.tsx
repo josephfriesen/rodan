@@ -6,7 +6,7 @@ import Layout, { SITE_TITLE } from "../../components/aoc_page_layout";
 import Block, { Inline } from "../../components/block";
 import styles from "../../styles/aoc.module.scss";
 import utilStyles from "../../styles/utils.module.sass";
-import Day5Solution from "../../lib/aoc2022/solutions/day5";
+import Day5Solution, { Instruction } from "../../lib/aoc2022/solutions/day5";
 import { getAOCInput } from "../../lib/aoc2022/getAOCInput";
 
 const DAY = 5;
@@ -29,8 +29,7 @@ interface AOC2022Day5Props {
 
 const AOC2022Day5 = ({ input, pathToInput }: AOC2022Day5Props) => {
   const solution = new Day5Solution(input);
-  // console.log(solution);
-  solution.test();
+  debugger;
 
   return (
     <Layout day={DAY}>
