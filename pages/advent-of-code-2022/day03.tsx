@@ -2,12 +2,12 @@ import { useEffect, useState, useMemo, useCallback } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { GetStaticProps } from "next";
-import Layout, { SITE_TITLE } from "../../components/aoc_page_layout";
+import Layout, { SITE_TITLE } from "../../components/aoc2022_page_layout";
 import Block, { Inline } from "../../components/block";
 import styles from "../../styles/aoc.module.scss";
 import utilStyles from "../../styles/utils.module.sass";
 import _ from "lodash";
-import { getAOCInput } from "../../lib/aoc2022/getAOCInput";
+import { getAOCInput } from "../../lib/aoc/getAOCInput";
 
 export const getStaticProps: GetStaticProps = async () => {
   const { fileContents, publicPath } = await getAOCInput(3);
