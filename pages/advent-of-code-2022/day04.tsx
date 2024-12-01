@@ -2,12 +2,12 @@ import { useEffect, useState, useMemo, useCallback } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { GetStaticProps, GetServerSideProps } from "next";
-import Layout, { SITE_TITLE } from "../../components/aoc_page_layout";
+import Layout, { SITE_TITLE } from "../../components/aoc2022_page_layout";
 import Block, { Inline } from "../../components/block";
 import styles from "../../styles/aoc.module.scss";
 import utilStyles from "../../styles/utils.module.sass";
-import Day4Solution from "../../lib/aoc2022/solutions/day4";
-import { getAOCInput } from "../../lib/aoc2022/getAOCInput";
+import Day4Solution from "../../lib/aoc/2022/day4";
+import { getAOCInput } from "../../lib/aoc/getAOCInput";
 
 const DAY = 4;
 

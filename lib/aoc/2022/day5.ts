@@ -1,4 +1,4 @@
-import { SolutionBuilder } from "./SolutionBuilder";
+import { SolutionBuilder } from "../SolutionBuilder";
 
 interface SplitInput {
   stackLines: Array<string>;

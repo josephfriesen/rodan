@@ -1,4 +1,4 @@
-import { SolutionBuilder } from "./SolutionBuilder";
+import { SolutionBuilder } from "../SolutionBuilder";
 
 export interface Elf extends Map<string, number> {
   get(key: "start"): number | undefined;
@@ -19,7 +19,7 @@ export class Day4Solution extends SolutionBuilder {
 
   constructor(input: string) {
     super(4, input);
-    this.elfPairs = this.inputToElfPairs(this.input);
+    this.elfPairs = this.inputToElfPairs(input);
     this.sortedElfPairs = this.elfPairsToSortedElfPairs(this.elfPairs);
     this.redundancyCount = this.sumRedundancies();
 
@@ -41,8 +41,8 @@ export class Day4Solution extends SolutionBuilder {
     return elves;
   }
 
-  private inputToElfPairs(input: string) {
-    const lines: Array<string> = input.split("\n").map((line) => line.trim());
+  private inputToElfPairs(): Array<Array<Elf>> {
+    const lines: Array<string> = this.input.split("\n").map((line) => line.trim());
     return lines.map((l: string) => {
       return this.stringToElfPair(l);
     });
