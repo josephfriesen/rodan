@@ -1,6 +1,8 @@
 #### Advent of Code solution presentation
 
-This app is a Next.js single-page application in which I work through Advent of Code problems.
+This app is a Next.js single-page application in which I work through Advent of Code problems. No one here claims these are
+by any means the best solutions, they are almost intentionally over-engineered and verbose, mainly trying to practice problem
+solving with object-oriented programming, Node.js and Typescript, with vaguely mathy/rigorous plain language documentation/explanations.
 
 ###### Installation
 

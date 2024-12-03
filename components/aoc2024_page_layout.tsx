@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import utilStyles from "../styles/utils.module.sass";
 import styles from "../styles/aoc.module.scss";
+import 'katex/dist/katex.min.css';
 
 export const SITE_TITLE = "Advent of Code 2024";
 export const BASE_PATH = "/advent-of-code-2024/";
