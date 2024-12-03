@@ -1,4 +1,3 @@
-import next from "next";
 import { SolutionBuilder } from "../SolutionBuilder";
 
 export class Day1Solution extends SolutionBuilder {
