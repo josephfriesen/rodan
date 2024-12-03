@@ -2,14 +2,12 @@ import { GetServerSideProps } from "next";
 import Layout from "../../components/aoc2024_page_layout";
 import { getAOCInput } from "../../lib/aoc/getAOCInput";
 import Day2Solution from "../../lib/aoc/2024/Day2Solution";
-import Markdown from "react-markdown";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex"
+import FormattedSolution from "../../components/formatted_solution";
 
 const DAY = 2;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { fileContents, } = await getAOCInput(DAY, "2024");
+  const { fileContents } = await getAOCInput(DAY, "2024");
 
   return {
     props: {
@@ -23,7 +21,7 @@ interface AOC2024Day2Props {
 }
 
 
-const AOC2024Day2 = ({ input }: AOC2024Day2Props) => {
+const AOC2024Day2 = ({ input }: AOC2024Day2Props): JSX.Element => {
   const solution = new Day2Solution(input);
 
   const markdown = `
@@ -58,11 +56,7 @@ const AOC2024Day2 = ({ input }: AOC2024Day2Props) => {
   return (
     <Layout day={DAY}>
       <section>
-        <Markdown
-          remarkPlugins={[remarkMath]}
-          rehypePlugins={[rehypeKatex]}
-          children={markdown}
-        />
+        <FormattedSolution markdown={markdown} />
       </section>
     </Layout>
   )

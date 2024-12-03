@@ -38,7 +38,7 @@ export default function AdventOfCode2022PageLayout({
           <h2 className={utilStyles.headingMd}>
             <a
               target="_blank"
-              href={`https://adventofcode.com/2022/day/${day}`}
+              href={`https://adventofcode.com/2024/day/${day}`}
               rel="noopener noreferrer"
             >
               Day {day}

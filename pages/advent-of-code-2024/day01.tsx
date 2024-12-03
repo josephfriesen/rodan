@@ -20,7 +20,7 @@ interface AOC2024Day1Props {
   input: string
 }
 
-const AOC2024Day1 = ({ input }: AOC2024Day1Props) => {
+const AOC2024Day1 = ({ input }: AOC2024Day1Props): JSX.Element => {
   const solution = new Day1Solution(input);
 
   solution.test();
