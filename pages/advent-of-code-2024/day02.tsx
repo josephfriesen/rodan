@@ -28,10 +28,6 @@ interface AOC2024Day2Props {
 const AOC2024Day2 = ({ input, pathToInput }: AOC2024Day2Props) => {
   const solution = new Day2Solution(input);
 
-  // console.log(solution);
-  // console.log(solution.safetyReports);
-  solution.test();
-
   return (
     <Layout day={DAY}>
       <section>
