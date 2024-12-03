@@ -37,12 +37,23 @@ export class Day1Solution extends SolutionBuilder {
     }
   }
 
+  private calculateSimilarity(i: number, list: Array<number>): number {
+    // count the number of times i appears in list, and return i * count
+    
+    return i * list.filter((num) => num === i).length;
+  }
+
   get totalDistance(): number {
     return this.distances.reduce((acc, curr) => acc + curr, 0);
   }
 
+  get totalSimilarity(): number {
+    return this.sortedListLeft.reduce((acc, curr) => acc + this.calculateSimilarity(curr, this.sortedListRight), 0);
+  }
+
   test(): void {
-    console.log(`== [this.totalDistance] ==: ${this.totalDistance}`)
+    console.log(`== [this.totalDistance] ==: ${this.totalDistance}`);
+    console.log(`== [this.totelSimilarity] ==: ${this.totalSimilarity}`);
   }
 }
 
