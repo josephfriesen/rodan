@@ -1,4 +1,5 @@
 import Day3Solution from "@lib/aoc/2024/Day3Solution";
+import { SolutionBuilder } from "@lib/aoc/SolutionBuilder";
 
 const input = `mul(2,3)m*ul(2,3)how(2,3)mul(4,1s2),almul(2,3)mul(2,,3)asdfbaksmul(1,5)db0892`;
 const conditionalInput = `xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))`;
@@ -51,7 +52,6 @@ describe("Day 3 Solution", () => {
   });
 
   it("should parse its list of instructions to a filtered list of instructedProducts", () => {
-    console.log(conditionalSolution.instructedProducts);
     expect(conditionalSolution.instructedProducts.length).toBe(2);
     expect(conditionalSolution.instructedProducts[0]).toEqual([2, 4]);
     expect(conditionalSolution.instructedProducts[1]).toEqual([8, 5]);

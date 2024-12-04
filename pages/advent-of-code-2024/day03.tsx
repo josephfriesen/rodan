@@ -22,7 +22,6 @@ interface AOC2024Day3Props {
 
 const AOC2024Day3 = ({ input }: AOC2024Day3Props) => {
   const solution = new Day3Solution(input);
-  console.log(solution);
 
   const markdown = `
   ### Solution (Part 1)
