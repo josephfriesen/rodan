@@ -20,7 +20,6 @@ interface AOC2024Day2Props {
   input: string
 }
 
-
 const AOC2024Day2 = ({ input }: AOC2024Day2Props): JSX.Element => {
   const solution = new Day2Solution(input);
 
