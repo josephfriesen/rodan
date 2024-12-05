@@ -32,7 +32,7 @@ export default class Day4Solution extends SolutionBuilder {
       throw new TypeError("invalid coordinates");
     }
 
-    if (!Matrix.KEYS[direction]) {
+    if (!Matrix.DIRECTIONS[direction]) {
       throw new TypeError("invalid direction");
     }
 
@@ -56,7 +56,7 @@ export default class Day4Solution extends SolutionBuilder {
     let count = 0;
     for (let i = 0; i < this.matrix.height; i++) {
       for (let j = 0; j < this.matrix.width; j++) {
-        for (const direction in Matrix.KEYS) {
+        for (const direction in Matrix.DIRECTIONS) {
           const word = this.entryToWord([i, j], direction);
           if (word === "XMAS") count++;
         }

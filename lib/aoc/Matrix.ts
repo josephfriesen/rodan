@@ -120,7 +120,7 @@ export default class Matrix {
     return [i + 1, j + 1];
   }
 
-  static KEYS: { [key: string]: string } = {
+  static DIRECTIONS: { [key: string]: string } = {
     W: "W",
     E: "E",
     N: "N",
@@ -132,11 +132,11 @@ export default class Matrix {
   };
 
   traversal(coordinates: CoordinatesType, direction: string): CoordinatesType {
-    if (!coordinates || !Matrix.KEYS[direction]) {
+    if (!coordinates || !Matrix.DIRECTIONS[direction]) {
       throw new TypeError("invalid entry or direction");
     }
 
-    const { W, E, N, S, NW, NE, SW, SE } = Matrix.KEYS;
+    const { W, E, N, S, NW, NE, SW, SE } = Matrix.DIRECTIONS;
     const [i, j] = coordinates;
     const coordinateMap = new Map([
       [W, (i: number, j: number) => this.coordinatesW(i, j)],

@@ -31,12 +31,14 @@ const AOC2024Day4 = ({ input }: AOC2024Day4Props) => {
   and split that string into single characters.
   - Then, we traverse each entry of the matrix. Let \`count <- 0\`. For each entry \`m(i, j)\` of \`M\`:
     - If \`m(i, j) != "X"\`, continue.
-    - For each possible of the 8 possible directions, we check if the entry \`m(i, j)\` is the first letter of 4-letter string \`"XMAS"\`,
+    - For each of the 8 possible directions, we check if the entry \`m(i, j)\` is the first letter of 4-letter string \`"XMAS"\`,
     and if so, increment \`count\`.
     - Directions: N, NE, E, SE, S, SW, W, NW.
       - For each direction, build the 4-letter string starting from \`m(i, j)\` and going in that direction.
       - Example: if direction is E, we build the string \ 
-        \`m(i, j) + m(i, j+1) + m(i, j+2) + m(i, j+3)\`.
+        \`
+          m(i, j) + m(i, j+1) + m(i, j+2) + m(i, j+3)
+        \`.
       - If the direction would go beyond the edge of the matrix, break. For example, for \`m(0, 0)\`, if direction is N, the second
       character in the string would be \`m(-1, 0)\`, which is undefined, break.
   - Return \`count\`. Given our input, we end up with a count of ${solution.countXmases}.
