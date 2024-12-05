@@ -51,14 +51,14 @@ describe("Day 5 Solution", () => {
     expect(solution.updates[1]).toEqual(["97", "61", "53", "29", "13"]);
   });
 
-  it("should have a validateUpdate method that checks if an update is valid", () => {
-    expect(solution.validateUpdate).toBeDefined();
-    expect(solution.validateUpdate(["75", "47", "61", "53", "29"])).toBe(true);
-    expect(solution.validateUpdate(["97", "61", "53", "29", "13"])).toBe(true);
-    expect(solution.validateUpdate(["75", "29", "13"])).toBe(true);
-    expect(solution.validateUpdate(["75", "97", "47", "61", "53"])).toBe(false);
-    expect(solution.validateUpdate(["61", "13", "29"])).toBe(false);
-    expect(solution.validateUpdate(["97", "13", "75", "29", "47"])).toBe(false);
+  it("should have a isValidUpdate method that checks if an update is valid", () => {
+    expect(solution.isValidUpdate).toBeDefined();
+    expect(solution.isValidUpdate(["75", "47", "61", "53", "29"])).toBe(true);
+    expect(solution.isValidUpdate(["97", "61", "53", "29", "13"])).toBe(true);
+    expect(solution.isValidUpdate(["75", "29", "13"])).toBe(true);
+    expect(solution.isValidUpdate(["75", "97", "47", "61", "53"])).toBe(false);
+    expect(solution.isValidUpdate(["61", "13", "29"])).toBe(false);
+    expect(solution.isValidUpdate(["97", "13", "75", "29", "47"])).toBe(false);
   });
 
   it("should have a getMiddlePage method that returns the middle entry of an update", () => {
@@ -73,5 +73,32 @@ describe("Day 5 Solution", () => {
 
   it("should sum the middle entries of all valid pages", () => {
     expect(solution.sumOfValidUpdatesPages).toBe(143);
+  });
+
+  it("should have a method correctUpdate that takes an invalid update and returns an update with a single transposition that makes it valid", () => {
+    expect(solution.correctUpdate).toBeDefined();
+    expect(solution.correctUpdate(["75", "97", "47", "61", "53"])).toEqual([
+      "97",
+      "75",
+      "47",
+      "61",
+      "53",
+    ]);
+    expect(solution.correctUpdate(["61", "13", "29"])).toEqual([
+      "61",
+      "29",
+      "13",
+    ]);
+    expect(solution.correctUpdate(["97", "13", "75", "29", "47"])).toEqual([
+      "97",
+      "75",
+      "47",
+      "29",
+      "13",
+    ]);
+  });
+
+  it("should sum the middle entries of corrected updates", () => {
+    expect(solution.sumOfCorrectedUpdatesPages).toBe(123);
   });
 });

@@ -29,14 +29,7 @@ export default class Day5Solution extends SolutionBuilder {
     }
   }
 
-  validateUpdate(update: Array<string | number>): boolean {
-    for (let i = 0; i < update.length - 2; i++) {
-      for (let j = i + 1; j < update.length - 1; j++) {
-        if (!this.graph.edgeExists(update[i], update[j])) {
-          return false;
-        }
-      }
-    }
+  isValidUpdate(update: Array<string | number>): boolean {
     for (let j = update.length - 1; j > 0; j--) {
       for (let i = j - 1; i >= 0; i--) {
         if (this.graph.edgeExists(update[j], update[i])) {
@@ -48,6 +41,20 @@ export default class Day5Solution extends SolutionBuilder {
     return true;
   }
 
+  correctUpdate(update: Array<string | number>): Array<string | number> {
+    let corrected = [...update];
+    while (!this.isValidUpdate(corrected)) {
+      for (let i = 0; i < corrected.length; i++) {
+        for (let j = i + 1; j < corrected.length; j++) {
+          if (this.graph.edgeExists(corrected[j], corrected[i])) {
+            [corrected[i], corrected[j]] = [corrected[j], corrected[i]];
+          }
+        }
+      }
+    }
+    return corrected;
+  }
+
   getMiddlePage(update: Array<string | number>): string | number {
     const middle = Math.floor(update.length / 2);
     return update[middle];
@@ -55,10 +62,20 @@ export default class Day5Solution extends SolutionBuilder {
 
   get sumOfValidUpdatesPages(): number {
     return this.updates.reduce((sum, update) => {
-      if (this.validateUpdate(update)) {
+      if (this.isValidUpdate(update)) {
         return sum + Number(this.getMiddlePage(update));
       } else {
         return sum;
+      }
+    }, 0);
+  }
+
+  get sumOfCorrectedUpdatesPages(): number {
+    return this.updates.reduce((sum, update) => {
+      if (this.isValidUpdate(update)) {
+        return sum;
+      } else {
+        return sum + Number(this.getMiddlePage(this.correctUpdate(update)));
       }
     }, 0);
   }

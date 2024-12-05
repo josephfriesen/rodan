@@ -52,7 +52,7 @@ export default class DirectedGraph {
   }
 
   pathExists(from: string | number, to: string | number): boolean {
-    // BFS search from to find if there is a path from from to to
+    // BFS search from to find if there is a path starting at node from ending at node to.
     const queue = [from];
     while (queue.length > 0) {
       const node = queue.shift();
