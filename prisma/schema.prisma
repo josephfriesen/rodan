@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model AOCSolution {
+  id                Int      @id @default(autoincrement())
+  day               Int
+  year              Int
+  created_at        DateTime @default(now())
+  updated_at        DateTime @default(now())
+  input             String
+  solution_data     String
+  is_solution_valid Boolean
+  solved_at         DateTime
+  is_test_data      Boolean
+  is_aoc_data       Boolean
+}
