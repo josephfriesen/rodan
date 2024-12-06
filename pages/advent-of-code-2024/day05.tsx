@@ -22,9 +22,9 @@ interface AOC2024Day5Props {
 
 const AOC2024Day5 = ({ input }: AOC2024Day5Props): JSX.Element => {
 
-  const solution = new Day5Solution(input);
+  const solution: Day5Solution = new Day5Solution(input);
 
-  const markdown = `
+  const markdown: string = `
   ### Solution (part 1)
 
   - To solve this, we can model our problem as a directed acyclic graph. Let $G = (V, E)$ be a directed acyclic graph, where $V$ 
@@ -68,9 +68,9 @@ const AOC2024Day5 = ({ input }: AOC2024Day5Props): JSX.Element => {
           to find an pair of pages that make \`V_i\` invalid, and swap them. Repeat until \`V_i\` is valid and return \`V_i\`.
     - Let \`sum <- sum + V_i[\`$\\lfloor \\frac{n}{2} \\rfloor$\`]\`.
     - Return \`sum\`.
-  - Given our input, our sum of the middle entries of corrected invalid updates is ${solution.sumOfCorrectedUpdatesPages}.
-        
+  - Given our input, our sum of the middle entries of corrected invalid updates is ${solution.sumOfCorrectedUpdatesPages}. 
   `
+
 
   return (
     <Layout day={DAY}>

@@ -1,8 +1,8 @@
 import { SolutionBuilder } from "../SolutionBuilder";
-import DirectedGraph from "../DirectedGraph";
+import DirectedAcyclicGraph from "../DirectedAcyclicGraph";
 
 export default class Day5Solution extends SolutionBuilder {
-  graph: DirectedGraph = new DirectedGraph();
+  graph: DirectedAcyclicGraph = new DirectedAcyclicGraph();
   updates: Array<Array<string | number>> = [];
 
   constructor(input: string) {
@@ -12,9 +12,11 @@ export default class Day5Solution extends SolutionBuilder {
   }
 
   initializeGraph(): void {
-    const edges = Array.from(this.input.matchAll(/\d+\|\d+/g));
+    const edges: Array<RegExpMatchArray> = Array.from(
+      this.input.matchAll(/\d+\|\d+/g)
+    );
     for (const edge of edges) {
-      const [from, to] = edge[0].split("|");
+      const [from, to]: Array<string> = edge[0].split("|");
       this.graph.addEdge(from, to);
     }
   }
@@ -42,7 +44,7 @@ export default class Day5Solution extends SolutionBuilder {
   }
 
   correctUpdate(update: Array<string | number>): Array<string | number> {
-    let corrected = [...update];
+    let corrected: Array<string | number> = [...update];
     while (!this.isValidUpdate(corrected)) {
       for (let i = 0; i < corrected.length; i++) {
         for (let j = i + 1; j < corrected.length; j++) {
@@ -56,7 +58,7 @@ export default class Day5Solution extends SolutionBuilder {
   }
 
   getMiddlePage(update: Array<string | number>): string | number {
-    const middle = Math.floor(update.length / 2);
+    const middle: number = Math.floor(update.length / 2);
     return update[middle];
   }
 

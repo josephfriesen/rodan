@@ -8,8 +8,8 @@ export default class Matrix {
 
   constructor(input: Array<Array<EntryType>>) {
     this.matrix = input;
-    this.width = input[0].length;
-    this.height = input.length;
+    this.width = input[0]?.length ?? 0;
+    this.height = input.length ?? 0;
   }
 
   row(index: number): Array<EntryType> {
@@ -18,6 +18,11 @@ export default class Matrix {
 
   column(index: number): Array<EntryType> {
     return this.matrix.map((row) => row[index]);
+  }
+
+  insertEntry(coordinates: CoordinatesType, entry: EntryType): void {
+    const [i, j] = coordinates;
+    this.matrix[i][j] = entry;
   }
 
   entry(i: number, j: number): EntryType {
@@ -133,7 +138,9 @@ export default class Matrix {
 
   traversal(coordinates: CoordinatesType, direction: string): CoordinatesType {
     if (!coordinates || !Matrix.DIRECTIONS[direction]) {
-      throw new TypeError("invalid entry or direction");
+      throw new TypeError(
+        `invalid entry or direction. coordinates: ${coordinates}, direction: ${direction}, Matrix.DIRECTIONS[direction]: ${Matrix.DIRECTIONS[direction]}`
+      );
     }
 
     const { W, E, N, S, NW, NE, SW, SE } = Matrix.DIRECTIONS;
@@ -150,5 +157,24 @@ export default class Matrix {
     ]);
 
     return coordinateMap.get(direction)(i, j);
+  }
+
+  countOccurences(value: EntryType): number {
+    return this.matrix.flat().filter((entry) => entry === value).length;
+  }
+
+  allOccurencePositions(value: EntryType): Array<CoordinatesType> {
+    return this.matrix
+      .map((row, i) => row.map((entry, j) => [i, j] as CoordinatesType))
+      .flat()
+      .filter((coordinates) => this.entry(...coordinates) === value);
+  }
+
+  clone(): Matrix {
+    return new Matrix(this.matrix.map((row) => [...row]));
+  }
+
+  toString(): string {
+    return this.matrix.map((row) => row.join("")).join("\n");
   }
 }

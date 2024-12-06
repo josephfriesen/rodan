@@ -4,14 +4,16 @@ import rehypeKatex from "rehype-katex";
 
 interface FormattedSolutionProps {
   markdown: string;
+  markdownProps?: object;
 }
 
-export default function FormattedSolution({ markdown }: FormattedSolutionProps) {
+export default function FormattedSolution({ markdown, ...rest }: FormattedSolutionProps) {
   return (
     <Markdown
       remarkPlugins={[remarkMath]}
       rehypePlugins={[rehypeKatex]}
       children={markdown}
+      {...rest}
     />
   );
 }
