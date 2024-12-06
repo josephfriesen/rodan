@@ -10,7 +10,7 @@ export const SITE_TITLE = "Advent of Code 2024";
 export const BASE_PATH = "/advent-of-code-2024/";
 export const DAYS = Array.from({ length: 5 }, (_, i) => i + 1);
 
-export default function AdventOfCode2022PageLayout({
+export default function AdventOfCode2024PageLayout({
   children,
   home,
   day,

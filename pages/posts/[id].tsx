@@ -1,9 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import Layout from "../../components/layout";
+import Layout from "../../app/layout";
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import Date from "../../components/date";
-import { SITE_TITLE } from "../../components/layout";
+import { SITE_TITLE } from "../../app/layout";
 import utilStyles from "../../styles/utils.module.sass";
 
 export const getStaticPaths: GetStaticPaths = async () => {
