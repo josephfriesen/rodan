@@ -9,10 +9,8 @@ export const SITE_TITLE = "RODAN";
 
 export default function RootLayout({
   children,
-  home,
 }: {
   children: React.ReactNode;
-  home?: boolean;
 }) {
 
   return (
@@ -25,20 +23,13 @@ export default function RootLayout({
             <meta name="og:title" content={SITE_TITLE} />
           </Head>
           <header className={styles.header}>
-
-                mh1 className={utilStyles.headingLg}>
-                  <Link href="/" className={utilStyles.colorInherit}>
-                    {SITE_TITLE}
-                  </Link>
-                </h1>
-
+            <h1 className={utilStyles.headingLg}>
+              <Link href="/" className={utilStyles.colorInherit}>
+                {SITE_TITLE}
+              </Link>
+            </h1>
           </header>
           <main>{children}</main>
-          {!home && (
-            <div className={styles.backToHome}>
-              <Link href="/">Back to Home</Link>
-            </div>
-          )}
         </div>
       </body>
     </html>
