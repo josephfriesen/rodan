@@ -6,20 +6,52 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider     = "sqlite"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
-model AOCSolution {
-  id                Int      @id @default(autoincrement())
-  day               Int
-  year              Int
-  created_at        DateTime @default(now())
-  updated_at        DateTime @default(now())
-  input             String
-  solution_data     String
-  is_solution_valid Boolean
-  solved_at         DateTime
-  is_test_data      Boolean
-  is_aoc_data       Boolean
+model AocYear {
+  id          Int           @id @default(autoincrement())
+  year        Int           @unique
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  puzzles     AocPuzzle[]
+  externalUrl String        @default("https://www.adventofcode.com/")
+  url         String        @default("/advent-of-code/")
+  AocSolution AocSolution[]
+}
+
+model AocPuzzle {
+  id          Int           @id @default(autoincrement())
+  day         Int
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+  externalUrl String        @default("https://www.adventofcode.com/")
+  url         String        @default("/advent-of-code/")
+  year        AocYear       @relation(fields: [aocYearId], references: [id])
+  aocYearId   Int
+  solutions   AocSolution[]
+
+  @@index([aocYearId])
+}
+
+model AocSolution {
+  id              Int       @id @default(autoincrement())
+  year            AocYear   @relation(fields: [aocYearId], references: [id])
+  aocYearId       Int
+  puzzle          AocPuzzle @relation(fields: [aocPuzzleId], references: [id])
+  aocPuzzleId     Int
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @default(now())
+  input           String    @default("")
+  solutionData    String    @default("{}")
+  isSolutionValid Boolean   @default(false)
+  solvedAt        DateTime?
+  isTestData      Boolean   @default(false)
+  isAocData       Boolean   @default(false)
+  explanation     String    @default("")
+
+  @@index([aocYearId])
+  @@index([aocPuzzleId])
 }

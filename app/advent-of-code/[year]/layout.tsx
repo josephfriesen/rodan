@@ -21,15 +21,6 @@ export default async function AOCPageLayout(props) {
     <div className={styles.container}>
       <header className={styles.header}>
         <h1 className={utilStyles.heading2Xl}>{SITE_TITLE}</h1>
-        {/* <h2 className={utilStyles.headingMd}>
-          <a
-            target="_blank"
-            href={`https://adventofcode.com/2024/day/${day}`}
-            rel="noopener noreferrer"
-          >
-            Day {day}
-          </a>
-        </h2> */}
       </header>
       <main>{children}</main>
       <footer className={styles.linksFooter}>

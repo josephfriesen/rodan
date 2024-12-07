@@ -36,3 +36,5 @@ yarn-error.log*
 /inputs/*
 
 /.swc
+
+*/dev.db
