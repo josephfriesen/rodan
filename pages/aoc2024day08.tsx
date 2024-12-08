@@ -2,9 +2,9 @@ import * as React from "react";
 import { GetServerSideProps } from "next";
 import FormattedSolution from "@components/formatted_solution";
 import { getAOCInput } from "@lib/aoc/getAOCInput";
-import Day7Solution from "@lib/aoc/2024/Day7Solution";
+import Day8Solution from "@lib/aoc/2024/Day8Solution";
 
-const DAY = 7;
+const DAY = 8;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { fileContents } = await getAOCInput(DAY, "2024");
@@ -16,15 +16,15 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-interface AOC2024Day7Props {
+interface AOC2024Day8Props {
   input: string
 }
 
-const AOC2024Day7 = ({ input }: AOC2024Day7Props): JSX.Element => {
+const AOC2024Day8 = ({ input }: AOC2024Day8Props): JSX.Element => {
 
-  const solution: Day7Solution = new Day7Solution(input);
+  const solution: Day8Solution = new Day8Solution(input);
 
-  const markdown = `solution part 1: ${solution.validCalibrationsSum} part 2: ${solution.validCalibrationsWithConcatSum}`; // 975671981569
+  const markdown = `solution part 1: ${solution.numUniqueAntinodes} part 2: ${solution.numExtendedUniqueAntinodes}`;
 
   return (
       <section>
@@ -33,4 +33,4 @@ const AOC2024Day7 = ({ input }: AOC2024Day7Props): JSX.Element => {
   )
 }
 
-export default AOC2024Day7;
+export default AOC2024Day8;
