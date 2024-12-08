@@ -13,7 +13,7 @@ const AOCPage = async (props) => {
   console.log(year);
   console.log(day);
   // console.log(params);
-
+  
   const markdown = `
   markdown
   `

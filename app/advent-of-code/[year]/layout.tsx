@@ -7,7 +7,7 @@ import 'katex/dist/katex.min.css';
 import "@styles/aoc.module.scss";
 import * as navigation from "next/navigation";
 
-export const DAYS = Array.from({ length: 6 }, (_, i) => i + 1);
+export const DAYS = Array.from({ length: 7 }, (_, i) => i + 1);
 
 export default async function AOCPageLayout(props) {
   const { children } = props;
