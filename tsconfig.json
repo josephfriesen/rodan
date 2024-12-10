@@ -17,10 +17,10 @@
     "allowImportingTsExtensions": true,
     "baseUrl": "./",
     "paths": {
-      "@components/*": ["components/*"],
-      "@pages/*": ["pages-old/*"],
-      "@lib/*": ["lib/*"],
-      "@styles/*": ["styles/*"]
+      "@components/*": ["app/components/*"],
+      "@lib/*": ["app/lib/*"],
+      "@styles/*": ["styles/*"],
+      "@solutions/*": ["app/lib/aoc"]
     },
     "plugins": [
       {
@@ -37,9 +37,7 @@
     "next-env.d.ts",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"],
   "ts-node": {
     "compilerOptions": {
       "module": "commonjs"

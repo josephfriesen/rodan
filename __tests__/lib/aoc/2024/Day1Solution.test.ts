@@ -1,4 +1,4 @@
-import Day1Solution from "@lib/aoc/2024/Day1Solution";
+import Day1Solution from "@solutions/2024/Day1Solution";
 
 const input = `63721   98916
 83871   23584

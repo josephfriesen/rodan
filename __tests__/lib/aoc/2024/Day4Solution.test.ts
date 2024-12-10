@@ -1,4 +1,4 @@
-import Day4Solution from "@lib/aoc/2024/Day4Solution";
+import Day4Solution from "@solutions/2024/Day4Solution";
 
 const input = `MMMSXXMASM
 MSAMXMSMSA

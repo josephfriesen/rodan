@@ -3,17 +3,9 @@ import utilStyles from "@styles/utils.module.sass";
 import clsx from "clsx";
 
 const AOCPage = async (props) => {
-  console.log("AOCPage");
-
-  // const router = useRouter();
-  // console.log(router);
-  // console.log(props);
   const params = await props.params;
   const { year, day } = params;
-  console.log(year);
-  console.log(day);
-  // console.log(params);
-  
+
   const markdown = `
   markdown
   `

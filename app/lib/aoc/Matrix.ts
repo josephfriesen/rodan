@@ -159,6 +159,11 @@ export default class Matrix {
     return coordinateMap.get(direction)(i, j);
   }
 
+  inbounds(entry: EntryType): boolean {
+      const [a,b] = entry;
+      return (a >= 0 && a < this.height && b >= 0 && b < this.width);
+  }
+
   countOccurences(value: EntryType): number {
     return this.matrix.flat().filter((entry) => entry === value).length;
   }

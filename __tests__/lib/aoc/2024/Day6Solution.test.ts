@@ -1,5 +1,5 @@
-import Day6Solution from "@lib/aoc/2024/Day6Solution";
-import Matrix from "@lib/aoc/Matrix";
+import Day6Solution from "@solutions/2024/Day6Solution";
+import Matrix from "@solutions/Matrix";
 
 /**
  * @jest-environment jsdom
