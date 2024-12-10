@@ -95,6 +95,8 @@ const config: Config = {
     "^@/styles/(.*)$": "<rootDir>/styles/$1",
     "^@/lib/(.*)$": "<rootDir>/app/lib/$1",
     "^@/solutions/(.*)$": "<rootDir>/app/lib/aoc/$1",
+    "^@/actions/(.*)$": "<rootDir>/app/lib/actions/$1",
+    "^@/interfaces/(.*)$": "<rootDir>/app/lib/interfaces/$1",
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

@@ -20,7 +20,9 @@
       "@components/*": ["app/components/*"],
       "@lib/*": ["app/lib/*"],
       "@styles/*": ["styles/*"],
-      "@solutions/*": ["app/lib/aoc"]
+      "@solutions/*": ["app/lib/aoc"],
+      "@actions/*": ["app/lib/actions/*"],
+      "@interfaces/*": ["app/lib/interfaces/*"]
     },
     "plugins": [
       {

@@ -3,6 +3,7 @@ import { NextResponse, NextRequest } from "next/server";
 
 const prisma = new PrismaClient();
 
+// TODO: move this to /app/api/advent-of-code/puzzle/index.ts
 export async function GET(
   request: NextRequest,
   route: Promise<{ params: { year: string; day: string } }>
@@ -34,10 +35,7 @@ export async function GET(
   });
 }
 
-export async function POST(
-  req: Request,
-  _: Promise<{ params: { year: string } }>
-) {
+export async function POST(req: Request) {
   console.log(`POST ${req.url}`);
   const body = await req.json();
 
@@ -82,29 +80,65 @@ export async function POST(
   });
 }
 
-export async function DELETE(
-  req: NextRequest,
-  route: Promise<{ params: { year: string; day: string } }>
-): Promise<NextResponse> {
+export async function DELETE(req: NextRequest): Promise<NextResponse> {
   console.log(`DELETE ${req.url}`);
-  const { params } = await route;
-  const { day } = await params;
 
-  await prisma.aocPuzzle
-    .delete({ where: { id: Number(day) } })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((e) => {
-      console.error(e);
-      return NextResponse.json({
-        status: 500,
-        message: "Something went wrong",
-      });
+  const url = new URL(req.url);
+  const id = url.searchParams.get("id");
+  const day = url.searchParams.get("day");
+  const year = url.searchParams.get("year");
+
+  console.log(`[id]: ${id}, [day]: ${day}, [year]: ${year}`);
+  if ((!day || !year) && !id) {
+    return NextResponse.json({
+      status: 400,
+      message: "Missing required fields",
     });
+  }
 
-  return NextResponse.json({
-    status: 200,
-    message: "Day deleted",
-  });
+  if (id) {
+    const res: NextResponse = await prisma.aocPuzzle
+      .delete({
+        where: { id: Number(id) },
+      })
+      .then((res) => {
+        console.log(res);
+        return NextResponse.json({
+          status: 200,
+          message: "Puzzle deleted",
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+        return NextResponse.json({
+          status: 500,
+          message: "Something went wrong",
+        });
+      });
+    return res;
+  } else {
+    const res: NextResponse = await prisma.aocPuzzle
+      .deleteMany({
+        where: {
+          day: Number(day),
+          year: { year: Number(year) },
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        return NextResponse.json({
+          status: 200,
+          message: `Deleted ${res.count} puzzles`,
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+        return NextResponse.json({
+          status: 500,
+          message: "Something went wrong",
+        });
+      });
+
+    return res;
+  }
 }

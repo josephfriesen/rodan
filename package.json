@@ -4,6 +4,7 @@
     "build": "next build",
     "dev": "next dev",
     "dev_win": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "prisma": "npx prisma studio",
     "tsx": "tsx",
     "start": "next start",
     "test": "jest",
