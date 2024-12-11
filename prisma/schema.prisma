@@ -51,6 +51,7 @@ model AocSolution {
   isTestData      Boolean   @default(false)
   isAocData       Boolean   @default(false)
   explanation     String    @default("")
+  url             String    @default("/advent-of-code/")
 
   @@index([aocYearId])
   @@index([aocPuzzleId])

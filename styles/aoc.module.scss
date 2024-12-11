@@ -58,6 +58,16 @@
     font-size: 0.8rem;
     line-height: 1.2rem;
   }
+
+  .linkButton {
+    background-color: transparent;
+    cursor: pointer;
+    color: hotpink;
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    border: none;
+    padding: 0;
+  }
 }
 
 .code {

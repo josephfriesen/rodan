@@ -22,7 +22,7 @@
       "@styles/*": ["styles/*"],
       "@solutions/*": ["app/lib/aoc"],
       "@actions/*": ["app/lib/actions/*"],
-      "@interfaces/*": ["app/lib/interfaces/*"]
+      "@interfaces/*": ["app/interfaces/*"]
     },
     "plugins": [
       {

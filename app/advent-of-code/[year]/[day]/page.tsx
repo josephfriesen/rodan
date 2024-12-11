@@ -4,24 +4,25 @@ import clsx from "clsx";
 import { getPuzzleByDay } from "@lib/actions/puzzles";
 import { getTestDataSolutionByDay } from "@lib/actions/solutions";
 
-const AOCPage = async (props) => {
+export default async function AOCPage(props: { params: { year: string, day: string } }): Promise<JSX.Element | null> {
   const params = await props.params;
   const { year, day } = params;
+  console.log("here");
 
   const { puzzle, error: puzzleError } = await getPuzzleByDay(Number(day), Number(year));
   console.log(puzzle);
   console.log(puzzleError);
 
   if (puzzleError || !puzzle) {
+    console.error(puzzleError);
+    console.log(puzzle);
     return null;
   }
 
   const { solution, error: solutionError } = await getTestDataSolutionByDay(Number(day), Number(year));
-  console.log(solution);
-  console.log(solutionError);
 
   if (solutionError) {
-    return null;
+    console.log(solutionError);
   }
 
   const markdown = `
@@ -44,4 +45,3 @@ const AOCPage = async (props) => {
   );
 };
 
-export default AOCPage;
