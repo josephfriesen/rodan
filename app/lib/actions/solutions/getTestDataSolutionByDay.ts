@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { SolutionType, SELECT_SOLUTIONS } from "./types";
+import { PrismaClient } from '@prisma/client';
+import { SolutionType, SELECT_SOLUTIONS } from './types';
 
 /**
  * Finds a solution for a given day and year, but only if the solution has been
@@ -12,7 +12,7 @@ import { SolutionType, SELECT_SOLUTIONS } from "./types";
  */
 export async function getTestDataSolutionByDay(
   day: number,
-  year: number
+  year: number,
 ): Promise<{ solution: SolutionType } | { error: Error }> {
   try {
     const prisma = new PrismaClient();

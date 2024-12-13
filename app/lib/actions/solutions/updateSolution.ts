@@ -1,24 +1,23 @@
 import { PrismaClient } from '@prisma/client';
-import { SolutionType, SELECT_SOLUTIONS } from './types';
+import {
+  SolutionType,
+  UpdateSolutionPayloadType,
+  SELECT_SOLUTIONS,
+} from '@lib/actions/solutions/types';
 
-/**
- * Finds a solution by id.
- *
- * @param id the id of the solution
- * @returns a solution object with the id, puzzle id, year id, solved at, input,
- *   solution data, and explanation, or an object with an error
- */
-export async function getSolution(
+export async function updateSolution(
   id: number,
+  payload: UpdateSolutionPayloadType,
 ): Promise<{ solution: SolutionType } | { error: Error }> {
   try {
     const prisma = new PrismaClient();
 
-    const solution = await prisma.aocSolution
-      .findUnique({
+    const solution: SolutionType = await prisma.aocSolution
+      .update({
         where: {
           id,
         },
+        data: payload,
         select: SELECT_SOLUTIONS,
       })
       .catch((e) => {
@@ -32,6 +31,7 @@ export async function getSolution(
 
     return { solution };
   } catch (err) {
+    console.error(err);
     return { error: err };
   }
 }

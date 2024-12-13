@@ -1,5 +1,5 @@
-import { SolutionBuilder } from "../SolutionBuilder";
-import Matrix from "../Matrix";
+import { SolutionBuilder } from '../SolutionBuilder';
+import Matrix from '../Matrix';
 
 type CoordinatesType = [number, number] | null;
 
@@ -13,31 +13,31 @@ export default class Day4Solution extends SolutionBuilder {
 
   constructor(input: string) {
     super(4, input);
-    this.LETTERS = ["X", "M", "A", "S"];
+    this.LETTERS = ['X', 'M', 'A', 'S'];
     [this.X, this.M, this.A, this.S] = this.LETTERS;
     this.initializeMatrix();
   }
 
   private initializeMatrix(): void {
     const matrix = [];
-    const lines = this.input.split("\n");
+    const lines = this.input.split('\n');
     for (const line of lines) {
-      matrix.push(line.split(""));
+      matrix.push(line.split(''));
     }
     this.matrix = new Matrix(matrix);
   }
 
   entryToWord(coordinates: CoordinatesType, direction: string): string | null {
     if (!coordinates) {
-      throw new TypeError("invalid coordinates");
+      throw new TypeError('invalid coordinates');
     }
 
     if (!Matrix.DIRECTIONS[direction]) {
-      throw new TypeError("invalid direction");
+      throw new TypeError('invalid direction');
     }
 
     const LENGTH = 4;
-    let WORD = "";
+    let WORD = '';
     let currentCoordinates = coordinates;
     for (let iteration = 1; iteration <= LENGTH; iteration++) {
       if (currentCoordinates === null) return null;
@@ -58,7 +58,7 @@ export default class Day4Solution extends SolutionBuilder {
       for (let j = 0; j < this.matrix.width; j++) {
         for (const direction in Matrix.DIRECTIONS) {
           const word = this.entryToWord([i, j], direction);
-          if (word === "XMAS") count++;
+          if (word === 'XMAS') count++;
         }
       }
     }
@@ -67,9 +67,9 @@ export default class Day4Solution extends SolutionBuilder {
   }
 
   entryIsEx(i: number, j: number): boolean {
-    const nwse = `${this.matrix.entryNW(i, j) ?? ""}${this.matrix.entry(i, j)}${this.matrix.entrySE(i, j) ?? ""}`;
-    const nesw = `${this.matrix.entryNE(i, j) ?? ""}${this.matrix.entry(i, j)}${this.matrix.entrySW(i, j) ?? ""}`;
-    const MASSES = ["SAM", "MAS"];
+    const nwse = `${this.matrix.entryNW(i, j) ?? ''}${this.matrix.entry(i, j)}${this.matrix.entrySE(i, j) ?? ''}`;
+    const nesw = `${this.matrix.entryNE(i, j) ?? ''}${this.matrix.entry(i, j)}${this.matrix.entrySW(i, j) ?? ''}`;
+    const MASSES = ['SAM', 'MAS'];
     return MASSES.includes(nwse) && MASSES.includes(nesw);
   }
 

@@ -1,5 +1,5 @@
-import { SolutionBuilder } from "../SolutionBuilder";
-import DirectedAcyclicGraph from "../DirectedAcyclicGraph";
+import { SolutionBuilder } from '../SolutionBuilder';
+import DirectedAcyclicGraph from '../DirectedAcyclicGraph';
 
 export default class Day5Solution extends SolutionBuilder {
   graph: DirectedAcyclicGraph = new DirectedAcyclicGraph();
@@ -13,21 +13,21 @@ export default class Day5Solution extends SolutionBuilder {
 
   initializeGraph(): void {
     const edges: Array<RegExpMatchArray> = Array.from(
-      this.input.matchAll(/\d+\|\d+/g)
+      this.input.matchAll(/\d+\|\d+/g),
     );
     for (const edge of edges) {
-      const [from, to]: Array<string> = edge[0].split("|");
+      const [from, to]: Array<string> = edge[0].split('|');
       this.graph.addEdge(from, to);
     }
   }
 
   initializeUpdates(): void {
-    const input = this.input.split("\n");
+    const input = this.input.split('\n');
     for (const line of input) {
-      if (line.match(/\d+\|\d+/) || line === "") {
+      if (line.match(/\d+\|\d+/) || line === '') {
         continue;
       }
-      this.updates.push(line.split(","));
+      this.updates.push(line.split(','));
     }
   }
 
@@ -44,7 +44,7 @@ export default class Day5Solution extends SolutionBuilder {
   }
 
   correctUpdate(update: Array<string | number>): Array<string | number> {
-    let corrected: Array<string | number> = [...update];
+    const corrected: Array<string | number> = [...update];
     while (!this.isValidUpdate(corrected)) {
       for (let i = 0; i < corrected.length; i++) {
         for (let j = i + 1; j < corrected.length; j++) {

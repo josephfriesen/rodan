@@ -8,6 +8,7 @@ export type SolutionType = {
   isTestData: boolean;
   isAocData: boolean;
   solvedAt: Date | null;
+  url: string;
   puzzle: {
     id: number;
     day: number;
@@ -36,6 +37,7 @@ export const SELECT_SOLUTIONS = {
   isTestData: true,
   isAocData: true,
   solvedAt: true,
+  url: true,
   puzzle: {
     select: {
       id: true,
@@ -62,4 +64,15 @@ export type NewSolutionDataType = {
   id: number;
   url: string;
   puzzle: { day: number; year: { year: number } };
+};
+
+export type UpdateSolutionPayloadType = {
+  input?: string;
+  explanation?: string;
+  url?: string;
+  solutionData?: { [key: string]: string | number };
+  isSolutionValid?: boolean;
+  solvedAt?: Date | null;
+  isTestData?: boolean;
+  isAocData?: boolean;
 };

@@ -11,37 +11,37 @@ export class SolutionBuilder {
   }
 
   dayString(): string {
-    return this.DAY.toString().padStart(2, "0");
+    return this.DAY.toString().padStart(2, '0');
   }
 
   mapToString(map: Map<string, any>): string {
     const obj = {};
-    for (let [k, v] of map) obj[k] = v;
+    for (const [k, v] of map) obj[k] = v;
     return `Map(${JSON.stringify(obj)})`;
   }
 
   static hashCode(str: string): number {
     return [...str].reduce(
       (s, c) => (Math.imul(31, s) + c.charCodeAt(0)) | 0,
-      0
+      0,
     );
   }
 
   initCache(): void {
     if (!this.isCached) {
-      window.localStorage.setItem(this.hash, "{}");
+      window.localStorage.setItem(this.hash, '{}');
     }
   }
 
   cacheSolution(key: string, value: any): void {
     window.localStorage.setItem(
       this.hash,
-      JSON.stringify({ ...this.cachedSolution, [key]: value })
+      JSON.stringify({ ...this.cachedSolution, [key]: value }),
     );
   }
 
   get cachedSolution(): any {
-    return JSON.parse(window.localStorage.getItem(this.hash) || "{}");
+    return JSON.parse(window.localStorage.getItem(this.hash) || '{}');
   }
 
   clearCache(): void {

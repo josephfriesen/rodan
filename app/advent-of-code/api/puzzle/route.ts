@@ -1,12 +1,12 @@
-import { PrismaClient } from "@prisma/client";
-import { NextResponse, NextRequest } from "next/server";
+import { PrismaClient } from '@prisma/client';
+import { NextResponse, NextRequest } from 'next/server';
 
 const prisma = new PrismaClient();
 
 // TODO: move this to /app/api/advent-of-code/puzzle/index.ts
 export async function GET(
   request: NextRequest,
-  route: Promise<{ params: { year: string; day: string } }>
+  route: Promise<{ params: { year: string; day: string } }>,
 ): Promise<NextResponse> {
   console.log(`GET ${request.url}`);
 
@@ -22,13 +22,13 @@ export async function GET(
   if (!puzzle) {
     return NextResponse.json({
       status: 404,
-      message: "Puzzle not found",
+      message: 'Puzzle not found',
     });
   }
 
   return NextResponse.json({
     status: 200,
-    message: "Day found",
+    message: 'Day found',
     json: {
       day: puzzle,
     },
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
   if (!body.day || !body.year) {
     return NextResponse.json({
       status: 400,
-      message: "Missing required fields",
+      message: 'Missing required fields',
     });
   }
 
@@ -57,7 +57,7 @@ export async function POST(req: Request) {
   if (!yearRecord) {
     return NextResponse.json({
       status: 404,
-      message: "Year not found",
+      message: 'Year not found',
     });
   }
 
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
 
   return NextResponse.json({
     status: 200,
-    message: "New day created",
+    message: 'New day created',
     json: {
       body,
       day: puzzle,
@@ -84,15 +84,15 @@ export async function DELETE(req: NextRequest): Promise<NextResponse> {
   console.log(`DELETE ${req.url}`);
 
   const url = new URL(req.url);
-  const id = url.searchParams.get("id");
-  const day = url.searchParams.get("day");
-  const year = url.searchParams.get("year");
+  const id = url.searchParams.get('id');
+  const day = url.searchParams.get('day');
+  const year = url.searchParams.get('year');
 
   console.log(`[id]: ${id}, [day]: ${day}, [year]: ${year}`);
   if ((!day || !year) && !id) {
     return NextResponse.json({
       status: 400,
-      message: "Missing required fields",
+      message: 'Missing required fields',
     });
   }
 
@@ -105,14 +105,14 @@ export async function DELETE(req: NextRequest): Promise<NextResponse> {
         console.log(res);
         return NextResponse.json({
           status: 200,
-          message: "Puzzle deleted",
+          message: 'Puzzle deleted',
         });
       })
       .catch((e) => {
         console.error(e);
         return NextResponse.json({
           status: 500,
-          message: "Something went wrong",
+          message: 'Something went wrong',
         });
       });
     return res;
@@ -135,7 +135,7 @@ export async function DELETE(req: NextRequest): Promise<NextResponse> {
         console.error(e);
         return NextResponse.json({
           status: 500,
-          message: "Something went wrong",
+          message: 'Something went wrong',
         });
       });
 

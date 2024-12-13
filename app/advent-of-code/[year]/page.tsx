@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-export default function AOCYearPage({ children }: { children: React.ReactNode }): JSX.Element {
-  return (
-    <section>
-      {children}
-    </section>
-  )
+export default function AOCYearPage({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element {
+  return <section>{children}</section>;
 }

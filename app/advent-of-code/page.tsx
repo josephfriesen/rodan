@@ -1,8 +1,14 @@
-import Link from "next/link";
-import React from "react";
-import { getYears } from "@actions/years";
+import Link from 'next/link';
+import React from 'react';
+import { getYears } from '@actions/years';
 
-export default async function AdventOfCodePage({ params, children }: { children: React.ReactNode, params: { year: string } }) {
+export default async function AdventOfCodePage({
+  params,
+  children,
+}: {
+  children: React.ReactNode;
+  params: { year: string };
+}) {
   const { years, error } = await getYears();
 
   if (error || !years) {
@@ -10,7 +16,7 @@ export default async function AdventOfCodePage({ params, children }: { children:
     return null;
   }
 
-  console.log("here")
+  console.log('here');
 
   return (
     <section className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100 ">
@@ -20,9 +26,9 @@ export default async function AdventOfCodePage({ params, children }: { children:
             <li key={year.id}>
               <Link href={year.url}>Advent of Code {year.year}</Link>
             </li>
-          )
+          );
         })}
       </ul>
     </section>
-  )
+  );
 }

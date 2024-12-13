@@ -126,20 +126,20 @@ export default class Matrix {
   }
 
   static DIRECTIONS: { [key: string]: string } = {
-    W: "W",
-    E: "E",
-    N: "N",
-    S: "S",
-    NW: "NW",
-    NE: "NE",
-    SW: "SW",
-    SE: "SE",
+    W: 'W',
+    E: 'E',
+    N: 'N',
+    S: 'S',
+    NW: 'NW',
+    NE: 'NE',
+    SW: 'SW',
+    SE: 'SE',
   };
 
   traversal(coordinates: CoordinatesType, direction: string): CoordinatesType {
     if (!coordinates || !Matrix.DIRECTIONS[direction]) {
       throw new TypeError(
-        `invalid entry or direction. coordinates: ${coordinates}, direction: ${direction}, Matrix.DIRECTIONS[direction]: ${Matrix.DIRECTIONS[direction]}`
+        `invalid entry or direction. coordinates: ${coordinates}, direction: ${direction}, Matrix.DIRECTIONS[direction]: ${Matrix.DIRECTIONS[direction]}`,
       );
     }
 
@@ -160,8 +160,8 @@ export default class Matrix {
   }
 
   inbounds(entry: EntryType): boolean {
-      const [a,b] = entry;
-      return (a >= 0 && a < this.height && b >= 0 && b < this.width);
+    const [a, b] = entry;
+    return a >= 0 && a < this.height && b >= 0 && b < this.width;
   }
 
   countOccurences(value: EntryType): number {
@@ -180,6 +180,6 @@ export default class Matrix {
   }
 
   toString(): string {
-    return this.matrix.map((row) => row.join("")).join("\n");
+    return this.matrix.map((row) => row.join('')).join('\n');
   }
 }

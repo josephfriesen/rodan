@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import Layout from "@components/aoc2024_page_layout";
-import FormattedSolution from "@components/formatted_solution";
+import FormattedSolution from "app/ui/formatted_solution";
 import { getAOCInput } from "@lib/aoc/getAOCInput";
 import Day5Solution from "@lib/aoc/2024/Day5Solution";
 

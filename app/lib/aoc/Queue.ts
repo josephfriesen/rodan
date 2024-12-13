@@ -1,35 +1,33 @@
-
 type EntryType = any;
 
 export default class Queue {
-    list: Array<EntryType>
+  list: Array<EntryType>;
 
-    constructor() {
-        this.list = [];
+  constructor() {
+    this.list = [];
+  }
+
+  enqueue(entry: EntryType): void {
+    this.list.push(entry);
+  }
+
+  dequeue(): EntryType | null {
+    if (this.isEmpty()) {
+      return null;
     }
 
-    enqueue(entry: EntryType): void {
-        this.list.push(entry)
-    }
+    return this.list.shift();
+  }
 
-    dequeue(): EntryType | null {
-        if (this.isEmpty()) {
-            return null
-        }
+  size(): number {
+    return this.list.length;
+  }
 
-        return this.list.shift();
-    }
+  isEmpty(): boolean {
+    return this.size() === 0;
+  }
 
-
-    size(): number {
-        return this.list.length;
-    }
-
-    isEmpty(): boolean {
-        return this.size() === 0;
-    }
-
-    empty(): void {
-        this.list = [];
-    }
+  empty(): void {
+    this.list = [];
+  }
 }

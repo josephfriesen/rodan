@@ -1,5 +1,5 @@
-import { AOCYear } from "./AOCYear";
-import { AOCPuzzle } from "./AOCPuzzle";
+import { AOCYear } from './AOCYear';
+import { AOCPuzzle } from './AOCPuzzle';
 
 export interface AOCSolution {
   id: number;

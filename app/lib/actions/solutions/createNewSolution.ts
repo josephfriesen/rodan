@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { NewSolutionDataType } from "./types";
+import { PrismaClient } from '@prisma/client';
+import { NewSolutionDataType } from './types';
 
 /**
  * Creates a new solution for a given puzzle day and year.
@@ -16,7 +16,7 @@ import { NewSolutionDataType } from "./types";
  */
 export async function createNewSolution(
   day: number,
-  year: number
+  year: number,
 ): Promise<{ solution: NewSolutionDataType } | { error: Error }> {
   try {
     const prisma = new PrismaClient();
@@ -49,9 +49,9 @@ export async function createNewSolution(
         data: {
           puzzle: { connect: puzzle },
           year: { connect: { id: puzzle.year.id } },
-          input: "",
-          explanation: "",
-          solutionData: "{}",
+          input: '',
+          explanation: '',
+          solutionData: '{}',
           isSolutionValid: false,
         },
         select: {

@@ -2,7 +2,7 @@ import { GetServerSideProps } from "next";
 import Layout from "../../components/aoc2024_page_layout";
 import { getAOCInput } from "../../../../lib/aoc/getAOCInput";
 import Day2Solution from "../../../../lib/aoc/2024/Day2Solution";
-import FormattedSolution from "../../../../app/components/formatted_solution";
+import FormattedSolution from "../../../../app/ui/formatted_solution";
 
 const DAY = 2;
 

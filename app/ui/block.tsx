@@ -1,4 +1,4 @@
-import styles from "../styles/aoc.module.scss";
+import styles from '../styles/aoc.module.scss';
 
 interface BlockProps {
   children: string;

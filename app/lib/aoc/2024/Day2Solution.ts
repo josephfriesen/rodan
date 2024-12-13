@@ -1,4 +1,4 @@
-import { SolutionBuilder } from "../SolutionBuilder";
+import { SolutionBuilder } from '../SolutionBuilder';
 
 type SafetyReport = {
   report: Array<number>;
@@ -18,7 +18,7 @@ export class Day2Solution extends SolutionBuilder {
   }
 
   inputToSafetyReports(): void {
-    const chunked: Array<string> = this.input.split("\n");
+    const chunked: Array<string> = this.input.split('\n');
     for (const chunk of chunked) {
       const report: SafetyReport = this.parseStringToSafetyReport(chunk);
       this.safetyReports.push(report);
@@ -26,7 +26,7 @@ export class Day2Solution extends SolutionBuilder {
   }
 
   parseStringToSafetyReport(string: string): SafetyReport {
-    const report = string.split(" ").map(Number);
+    const report = string.split(' ').map(Number);
     const safetyReport = {
       report,
       isSafe: false,
@@ -82,7 +82,7 @@ export class Day2Solution extends SolutionBuilder {
         ...originalReport.slice(0, i),
         ...originalReport.slice(i + 1),
       ];
-      const newReport = this.parseStringToSafetyReport(removed.join(" "));
+      const newReport = this.parseStringToSafetyReport(removed.join(' '));
       if (newReport.isSafe) {
         return true;
       }
@@ -93,13 +93,13 @@ export class Day2Solution extends SolutionBuilder {
 
   get totalSafe(): number {
     return this.safetyReports.filter(
-      (safetyReport: SafetyReport) => safetyReport.isSafe
+      (safetyReport: SafetyReport) => safetyReport.isSafe,
     ).length;
   }
 
   get totalSafeWithFaultTolerance(): number {
     return this.safetyReports.filter(
-      (safetyReport: SafetyReport) => safetyReport.isSafeWithFaultTolerance
+      (safetyReport: SafetyReport) => safetyReport.isSafeWithFaultTolerance,
     ).length;
   }
 
@@ -118,23 +118,23 @@ export class Day2Solution extends SolutionBuilder {
     ];
 
     const TESTS_DAY2 = [
-      { report: "7 6 4 2 1", expected: true },
-      { report: "1 2 7 8 9", expected: false },
-      { report: "9 7 6 2 1", expected: false },
-      { report: "1 3 2 4 5", expected: true },
-      { report: "8 6 4 4 1", expected: true },
-      { report: "1 3 6 7 9", expected: true },
+      { report: '7 6 4 2 1', expected: true },
+      { report: '1 2 7 8 9', expected: false },
+      { report: '9 7 6 2 1', expected: false },
+      { report: '1 3 2 4 5', expected: true },
+      { report: '8 6 4 4 1', expected: true },
+      { report: '1 3 6 7 9', expected: true },
     ];
 
     console.log(`[part 1, this.totalSafe === 606]: ${this.totalSafe === 606}`);
 
     console.log(
-      `[part 2: this.totalSafeWithFaultTolerance]: ${this.totalSafeWithFaultTolerance}`
+      `[part 2: this.totalSafeWithFaultTolerance]: ${this.totalSafeWithFaultTolerance}`,
     );
 
     for (const TEST of TESTS_DAY2) {
       console.log(
-        `[report]: ${TEST.report}, [expected]: ${TEST.expected}, [actual]: ${this.determineSafeWithSingleFaultRemoval(this.parseStringToSafetyReport(TEST.report))}`
+        `[report]: ${TEST.report}, [expected]: ${TEST.expected}, [actual]: ${this.determineSafeWithSingleFaultRemoval(this.parseStringToSafetyReport(TEST.report))}`,
       );
     }
   }

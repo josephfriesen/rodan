@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { NewPuzzleDataType } from "./types";
+import { PrismaClient } from '@prisma/client';
+import { NewPuzzleDataType } from './types';
 
 /**
  * adds a new puzzle to a year
@@ -9,7 +9,7 @@ import { NewPuzzleDataType } from "./types";
  * @returns a stubbed puzzle data, with the id, day, url, and year, or an error
  */
 export async function addNewPuzzleToYear(
-  id: number
+  id: number,
 ): Promise<{ puzzle: NewPuzzleDataType } | { error: Error }> {
   try {
     if (!id) {

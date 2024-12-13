@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { PuzzleType, SELECT_PUZZLES } from "./types";
+import { PrismaClient } from '@prisma/client';
+import { PuzzleType, SELECT_PUZZLES } from './types';
 
 /**
  * Gets an array of puzzles for the given year.
@@ -8,7 +8,7 @@ import { PuzzleType, SELECT_PUZZLES } from "./types";
  * @returns An object containing an array of puzzles, or an object with an error.
  */
 export async function getPuzzlesByYear(
-  year: number
+  year: number,
 ): Promise<{ puzzles: PuzzleType[] } | { error: Error }> {
   try {
     const prisma = new PrismaClient();

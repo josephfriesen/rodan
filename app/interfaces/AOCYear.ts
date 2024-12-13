@@ -1,4 +1,4 @@
-import { AOCPuzzle } from "./AOCPuzzle";
+import { AOCPuzzle } from './AOCPuzzle';
 
 export interface AOCYear {
   id: number;
