@@ -1,14 +1,16 @@
 import React from "react";
 import Link from "next/link";
-import utilStyles from "@styles/utils.module.sass";
-import styles from "@styles/aoc.module.scss";
-import 'katex/dist/katex.min.css';
-import "@styles/aoc.module.scss";
-import { getYear } from "@actions/years";
-import { addNewPuzzleToYear } from "@actions/puzzles";
-import { revalidatePath, } from "next/cache";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { getYear } from "@actions/years";
+import { YearType } from "@actions/years/types";
+import { NewPuzzleDataType } from "@actions/puzzles/types";
+import { addNewPuzzleToYear } from "@actions/puzzles";
 import LinkButton from "@components/link_button";
+import styles from "@styles/aoc.module.scss";
+import utilStyles from "@styles/utils.module.sass";
+import "@styles/aoc.module.scss";
+import 'katex/dist/katex.min.css';
 
 export default async function AOCPageLayout(props: { children: React.ReactNode, params: { year: string } }) {
   const { children } = props;
@@ -16,24 +18,24 @@ export default async function AOCPageLayout(props: { children: React.ReactNode, 
   const { year } = await params;
   const SITE_TITLE = `Advent of Code ${year}`;
 
-  const { year: yearData, error } = await getYear(Number(year));
+  const yearResponse: { year: YearType } | { error: Error } = await getYear(Number(year));
 
-  if (error || !yearData) {
-    console.error(error);
+  if ("error" in yearResponse) {
+    console.error(yearResponse.error);
     return null;
   }
+
+  const { year: yearData } = yearResponse;
 
   const createNewDay = async (): Promise<void> => {
     "use server";
 
-    const res = await addNewPuzzleToYear(yearData.id);
+    const res: { puzzle: NewPuzzleDataType } | { error: Error } = await addNewPuzzleToYear(yearData.id);
 
-    if (res.error) {
+    if ("error" in res) {
       console.error(res.error);
-    }
-
-    if (res.puzzle) {
-      revalidatePath(res.puzzle.year.url);
+    } else {
+      revalidatePath(res.puzzle.url);
       redirect(res.puzzle.url);
     }
   }
@@ -47,7 +49,7 @@ export default async function AOCPageLayout(props: { children: React.ReactNode, 
 
         <footer className={styles.linksFooter}>
           <section className={styles.links}>
-            {!error && yearData.puzzles.map((p, idx) => {
+            {yearData.puzzles.map((p, idx) => {
               return (
                 <React.Fragment key={`solution - links - day - ${p.id}`}>
                   {idx !== 0 && (

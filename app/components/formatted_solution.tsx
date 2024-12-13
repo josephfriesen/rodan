@@ -12,8 +12,9 @@ export default function FormattedSolution({ markdown, ...rest }: FormattedSoluti
     <Markdown
       remarkPlugins={[remarkMath]}
       rehypePlugins={[rehypeKatex]}
-      children={markdown}
       {...rest}
-    />
+    >
+      {markdown}
+    </Markdown>
   );
 }

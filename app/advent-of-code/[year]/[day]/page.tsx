@@ -2,32 +2,31 @@ import FormattedSolution from "@components/formatted_solution";
 import utilStyles from "@styles/utils.module.sass";
 import clsx from "clsx";
 import { getPuzzleByDay } from "@lib/actions/puzzles";
+import { PuzzleType } from "@lib/actions/puzzles/types";
 import { getTestDataSolutionByDay } from "@lib/actions/solutions";
+import { SolutionType } from "@lib/actions/solutions/types";
 
 export default async function AOCPage(props: { params: { year: string, day: string } }): Promise<JSX.Element | null> {
   const params = await props.params;
   const { year, day } = params;
   console.log("here");
 
-  const { puzzle, error: puzzleError } = await getPuzzleByDay(Number(day), Number(year));
-  console.log(puzzle);
-  console.log(puzzleError);
-
-  if (puzzleError || !puzzle) {
-    console.error(puzzleError);
-    console.log(puzzle);
+  const puzzleResponse: { puzzle: PuzzleType } | { error: Error } = await getPuzzleByDay(Number(day), Number(year));
+  if ("error" in puzzleResponse) {
+    console.error(puzzleResponse.error);
     return null;
   }
+  const { puzzle } = puzzleResponse;
 
-  const { solution, error: solutionError } = await getTestDataSolutionByDay(Number(day), Number(year));
+  const solutionResponse: { solution: SolutionType } | { error: Error } = await getTestDataSolutionByDay(Number(day), Number(year));
 
-  if (solutionError) {
-    console.log(solutionError);
+  if ("error" in solutionResponse) {
+    console.error(solutionResponse.error);
+    return null;
   }
+  const { solution } = solutionResponse;
 
-  const markdown = `
-  markdown
-      `
+  const markdown = solution?.explanation ?? "";
 
   return (
     <div>
