@@ -33,11 +33,13 @@ class Stack {
     return this.top === 0;
   }
 
-  pop(): string {
+  pop(): string | null {
     if (this.isEmpty() === false) {
       this.top = this.top - 1;
       return this.data.pop();
     }
+
+    return null;
   }
 
   print(): void {
@@ -48,7 +50,7 @@ class Stack {
       top--;
     }
     stackString += "== (bottom)";
-    console.log(stackString);
+    console.log(stackString); // eslint-disable-line no-console
   }
 
   get toString(): string {
@@ -165,7 +167,7 @@ class Day5Solution extends SolutionBuilder {
     const queue = [...this.stacksInput].reverse();
     queue.splice(0, 1); // chop off the " 1  2  3  ..." line, don't need it
     const stackMaps: Map<string, string>[] = queue.map((line) =>
-      this.buildStackMaps(line),
+      this.buildStackMaps(line)
     );
     stackMaps.forEach((map) => {
       map.forEach((crate, identifier, _) => {
@@ -195,13 +197,10 @@ class Day5Solution extends SolutionBuilder {
       }
     });
     const crateMap = new Map(
-      [...characterMap].filter(([_, value]) => value.trim() !== ""),
+      [...characterMap].filter(([_, value]) => value.trim() !== "")
     );
     const trimmedCrateMap = new Map(
-      Array.from(crateMap, ([k, v]) => [
-        k,
-        v.replace("[", "").replace("]", ""),
-      ]),
+      Array.from(crateMap, ([k, v]) => [k, v.replace("[", "").replace("]", "")])
     );
     return trimmedCrateMap;
   }
@@ -221,7 +220,7 @@ class Day5Solution extends SolutionBuilder {
   get currentInstruction(): Instruction {
     return new Instruction(
       this.instructionsInput[this.currentExecutionStep - 1],
-      this.stackIdentifiers,
+      this.stackIdentifiers
     );
   }
 
@@ -301,22 +300,6 @@ class Day5Solution extends SolutionBuilder {
       }
     }
     return solution;
-  }
-
-  test() {
-    // console.log(this.stacksInput);
-    // console.log("Current stacks: ");
-    // this.printStacks();
-    // console.log(this.stackTops);
-    // console.log("Attempting to execute all instructions..... NOW!");
-    // this.executeAllInstructions();
-    // console.log("Stacks after all moves: ");
-    // this.printStacks();
-    // console.log(this.stackTops);
-    // console.log(`Solution: ${this.stackTops}`);
-    // console.log(this);
-    // console.log(this.stackIdentifiers);
-    // console.log(this.stacks);
   }
 }
 

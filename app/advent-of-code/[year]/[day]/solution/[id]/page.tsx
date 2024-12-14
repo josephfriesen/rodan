@@ -38,7 +38,6 @@ export default async function AOCSolutionPage({
   }
 
   const solution = solutionResponse.solution;
-  console.log(solution);
 
   return (
     <section>

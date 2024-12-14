@@ -25,7 +25,6 @@ export default async function AOCSolutionsListPage({
     redirect(`/advent-of-code/${year}/${day}`);
   }
   const { puzzle } = puzzleResponse;
-  console.log(puzzle);
 
   const handleNewSolutionClick = async (): Promise<void> => {
     "use server";

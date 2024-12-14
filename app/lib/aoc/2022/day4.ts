@@ -51,7 +51,7 @@ export class Day4Solution extends SolutionBuilder {
   }
 
   private elfPairsToSortedElfPairs(
-    pairs: Array<Array<Elf>>,
+    pairs: Array<Array<Elf>>
   ): Array<Array<Elf>> {
     return this.sortPairsList(pairs);
   }
@@ -73,7 +73,7 @@ export class Day4Solution extends SolutionBuilder {
     return list
       .map((pair) => this.sortPair(pair))
       .sort(
-        (a: Array<Elf>, b: Array<Elf>) => a[0].get("start") - b[0].get("start"),
+        (a: Array<Elf>, b: Array<Elf>) => a[0].get("start") - b[0].get("start")
       );
   }
 
@@ -163,7 +163,7 @@ export class Day4Solution extends SolutionBuilder {
     console.log(first);
     console.log(second);
     console.log(
-      this.compareElfPairForRedundancy(this.sortPair([first, second])),
+      this.compareElfPairForRedundancy(this.sortPair([first, second]))
     );
     console.log(this.compareElfPairForOverlap(this.sortPair([first, second])));
     console.log(this.overlapCount);

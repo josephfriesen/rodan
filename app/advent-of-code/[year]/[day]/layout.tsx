@@ -2,9 +2,7 @@ import clsx from "clsx";
 import styles from "@styles/layout.module.sass";
 import AOCHeader from "app/ui/aoc_header";
 
-export default function AdventOfCodeLayout(props: {
-  children: React.ReactNode;
-}) {
+export default function AOCDayLayout(props: { children: React.ReactNode }) {
   const { children } = props;
 
   return (

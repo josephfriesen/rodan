@@ -1,4 +1,6 @@
 import React from "react";
+import "@styles/global.css";
+import "tailwindcss/tailwind.css";
 
 export default function RootLayout({
   children,
@@ -7,7 +9,7 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="dark:bg-gray-900">{children}</body>
     </html>
   );
 }

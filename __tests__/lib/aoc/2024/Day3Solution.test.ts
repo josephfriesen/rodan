@@ -8,7 +8,6 @@ const conditionalSolution = new Day3Solution(conditionalInput);
 
 describe("Day 3 Solution", () => {
   it("should have DAY == 3", () => {
-    console.log("hey");
     expect(solution.DAY).toBe(3);
   });
 

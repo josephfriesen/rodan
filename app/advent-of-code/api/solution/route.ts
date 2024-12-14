@@ -75,9 +75,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         return res;
       })
       .catch((err) => {
-        console.log("wtf...");
         console.error(err);
-        debugger;
         return NextResponse.json({
           message: `something went wrong creating new solution: ${err}`,
           status: 500,

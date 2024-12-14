@@ -1,4 +1,5 @@
 import FormattedSolution from "app/ui/formatted_solution";
+import styles from "@styles/aoc.module.scss";
 import utilStyles from "@styles/utils.module.sass";
 import clsx from "clsx";
 import { getPuzzleByDay } from "@lib/actions/puzzles";
@@ -15,6 +16,7 @@ export default async function AOCPage(props: {
   const puzzleResponse: { puzzle: PuzzleType } | { error: Error } =
     await getPuzzleByDay(Number(day), Number(year));
   if ("error" in puzzleResponse) {
+    console.error(`page error: ${puzzleResponse.error}`);
     console.error(puzzleResponse.error);
     return null;
   }
@@ -32,13 +34,13 @@ export default async function AOCPage(props: {
   const markdown = solution?.explanation ?? "";
 
   return (
-    <div>
+    <main className={clsx(styles.page)}>
       <h2 className={clsx(utilStyles.headingMd, utilStyles.centered)}>
         <a target="_blank" href={puzzle.externalUrl} rel="noopener noreferrer">
           Day {day}
         </a>
       </h2>
       <FormattedSolution markdown={markdown} />
-    </div>
+    </main>
   );
 }

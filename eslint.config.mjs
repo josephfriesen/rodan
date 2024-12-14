@@ -19,7 +19,7 @@ const eslintConfig = [
       "prettier/prettier": [
         ERROR,
         {
-          trailingComma: "all",
+          trailingComma: "es5",
           semi: true,
           tabWidth: 2,
           singleQuote: false,
@@ -39,7 +39,7 @@ const eslintConfig = [
           "import/no-extraneous-dependencies": WARN,
           "no-param-reassign": ERROR,
           "consistent-return": ERROR,
-          "no-console": WARN,
+          "no-console": [WARN, { allow: ["warn", "error"] }],
           "no-debugger": ERROR,
           "@typescript-eslint/naming-convention": OFF,
           "@typescript-eslint/no-explicit-any": OFF,

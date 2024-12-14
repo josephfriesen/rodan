@@ -9,7 +9,7 @@ import { PuzzleType, SELECT_PUZZLES } from "./types";
  */
 export async function getPuzzleByDay(
   day: number,
-  year: number,
+  year: number
 ): Promise<{ puzzle: PuzzleType } | { error: Error }> {
   try {
     const prisma = new PrismaClient();
