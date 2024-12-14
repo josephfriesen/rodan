@@ -1,12 +1,12 @@
-import { SolutionBuilder } from '../SolutionBuilder';
-import Matrix from '@lib/aoc/Matrix';
+import { SolutionBuilder } from "../SolutionBuilder";
+import Matrix from "@lib/aoc/Matrix";
 
 export default class Day6Solution extends SolutionBuilder {
   initial: Matrix;
-  private STOP: string = '#';
-  private EMPTY: string = '.';
-  private MARKED: string = 'X';
-  private GUARDS: string[] = ['<', '^', '>', 'v'];
+  private STOP: string = "#";
+  private EMPTY: string = ".";
+  private MARKED: string = "X";
+  private GUARDS: string[] = ["<", "^", ">", "v"];
   private OBSTRUCTIONS: Array<[number, number]> = [];
   private GUARD_START: [number, number];
   private DIRECTIONS: string[] = [
@@ -23,7 +23,7 @@ export default class Day6Solution extends SolutionBuilder {
 
   initializeMatrix(): void {
     this.initial = new Matrix(
-      this.input.split('\n').map((line) => line.split('')),
+      this.input.split("\n").map((line) => line.split("")),
     );
 
     // replace the guard character with one of our direction traversal keys, easier that way.
@@ -45,7 +45,7 @@ export default class Day6Solution extends SolutionBuilder {
   get guardPosition(): [number, number] {
     if (!this.GUARD_START) {
       throw new Error(
-        'guard not found. was matrix initialized properly? is input valid?',
+        "guard not found. was matrix initialized properly? is input valid?",
       );
     }
 
@@ -92,7 +92,7 @@ export default class Day6Solution extends SolutionBuilder {
     }
 
     const solution: number = this.guardTraversal().countOccurences(this.MARKED);
-    this.cacheSolution('visitedCount', solution);
+    this.cacheSolution("visitedCount", solution);
     return solution;
   }
 
@@ -148,7 +148,7 @@ export default class Day6Solution extends SolutionBuilder {
     }
 
     const obstructionsToCheck: Array<[number, number]> =
-      this.initial.allOccurencePositions('.');
+      this.initial.allOccurencePositions(".");
     const solution: number = obstructionsToCheck.reduce((acc, obstruction) => {
       if (this.checkForGuardLoop(obstruction)) {
         return acc + 1;
@@ -157,7 +157,7 @@ export default class Day6Solution extends SolutionBuilder {
       }
     }, 0);
 
-    this.cacheSolution('countGuardLoops', solution);
+    this.cacheSolution("countGuardLoops", solution);
     return solution;
   }
 }

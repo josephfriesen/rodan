@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import React from 'react';
-import { getYears } from '@actions/years';
+import Link from "next/link";
+import React from "react";
+import { getYears } from "@actions/years";
 
 export default async function AdventOfCodePage({
   params,
@@ -16,7 +16,7 @@ export default async function AdventOfCodePage({
     return null;
   }
 
-  console.log('here');
+  console.log("here");
 
   return (
     <section className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100 ">

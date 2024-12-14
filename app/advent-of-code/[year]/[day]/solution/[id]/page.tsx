@@ -1,14 +1,14 @@
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
-import clsx from 'clsx';
-import LinkButton from 'app/ui/link_button';
-import { revalidatePath } from 'next/cache';
-import { getPuzzleByDay } from '@lib/actions/puzzles';
-import { PuzzleType } from '@lib/actions/puzzles/types';
-import { SolutionType } from '@lib/actions/solutions/types';
-import { getSolution } from '@lib/actions/solutions';
-import utilStyles from '@styles/utils.module.sass';
-import styles from '@styles/aoc.module.scss';
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import clsx from "clsx";
+import LinkButton from "app/ui/link_button";
+import { revalidatePath } from "next/cache";
+import { getPuzzleByDay } from "@lib/actions/puzzles";
+import { PuzzleType } from "@lib/actions/puzzles/types";
+import { SolutionType } from "@lib/actions/solutions/types";
+import { getSolution } from "@lib/actions/solutions";
+import utilStyles from "@styles/utils.module.sass";
+import styles from "@styles/aoc.module.scss";
 
 export default async function AOCSolutionPage({
   children,
@@ -22,7 +22,7 @@ export default async function AOCSolutionPage({
   const puzzleResponse: { puzzle: PuzzleType } | { error: Error } =
     await getPuzzleByDay(Number(day), Number(year));
 
-  if ('error' in puzzleResponse) {
+  if ("error" in puzzleResponse) {
     console.error(puzzleResponse.error);
     redirect(`/advent-of-code/${year}/${day}`);
   }
@@ -32,7 +32,7 @@ export default async function AOCSolutionPage({
   const solutionResponse: { solution: SolutionType } | { error: Error } =
     await getSolution(Number(id));
 
-  if ('error' in solutionResponse) {
+  if ("error" in solutionResponse) {
     console.error(solutionResponse.error);
     redirect(puzzle.url);
   }
@@ -52,10 +52,10 @@ export default async function AOCSolutionPage({
             <Link href={puzzle.externalUrl}>Advent of Code Puzzle</Link>
           </li>
           <li>
-            Solved?{' '}
+            Solved?{" "}
             {solution.isSolutionValid
               ? `Yes, ${solution.solvedAt?.toLocaleString()}`
-              : 'No'}
+              : "No"}
           </li>
           <li>
             <Link href={`${solution.url}/input`}>Input</Link>

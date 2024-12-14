@@ -11,7 +11,7 @@ export class SolutionBuilder {
   }
 
   dayString(): string {
-    return this.DAY.toString().padStart(2, '0');
+    return this.DAY.toString().padStart(2, "0");
   }
 
   mapToString(map: Map<string, any>): string {
@@ -29,7 +29,7 @@ export class SolutionBuilder {
 
   initCache(): void {
     if (!this.isCached) {
-      window.localStorage.setItem(this.hash, '{}');
+      window.localStorage.setItem(this.hash, "{}");
     }
   }
 
@@ -41,7 +41,7 @@ export class SolutionBuilder {
   }
 
   get cachedSolution(): any {
-    return JSON.parse(window.localStorage.getItem(this.hash) || '{}');
+    return JSON.parse(window.localStorage.getItem(this.hash) || "{}");
   }
 
   clearCache(): void {

@@ -1,4 +1,4 @@
-import { SolutionBuilder } from '../SolutionBuilder';
+import { SolutionBuilder } from "../SolutionBuilder";
 
 interface SplitInput {
   stackLines: Array<string>;
@@ -47,13 +47,13 @@ class Stack {
       stackString += `${this.data[top]} `;
       top--;
     }
-    stackString += '== (bottom)';
+    stackString += "== (bottom)";
     console.log(stackString);
   }
 
   get toString(): string {
     let top = this.top - 1;
-    let stackString = '';
+    let stackString = "";
     while (top >= 0) {
       stackString += this.data[top];
       top--;
@@ -73,7 +73,7 @@ export class Instruction {
     this.inputString = instructionString.trim();
     this.stackIdentifiers = stackIdentifiers;
 
-    const splitStrings = instructionString.split(' ');
+    const splitStrings = instructionString.split(" ");
     this.total = parseInt(splitStrings[1]);
     this.source = splitStrings[3].trim();
     this.destination = splitStrings[5].trim();
@@ -81,7 +81,7 @@ export class Instruction {
 
   get sourceValid(): boolean {
     if (!this.stackIdentifiers.includes(this.source)) {
-      console.error('invalid source given to instruction');
+      console.error("invalid source given to instruction");
       console.log(this);
       return false;
     }
@@ -91,7 +91,7 @@ export class Instruction {
 
   get destinationValid(): boolean {
     if (!this.stackIdentifiers.includes(this.destination)) {
-      console.error('invalid destination given to instruction');
+      console.error("invalid destination given to instruction");
       console.log(this);
       return false;
     }
@@ -101,7 +101,7 @@ export class Instruction {
 
   get totalValid(): boolean {
     if (!Number.isInteger(this.total) || this.total < 0) {
-      console.error('invalid count given to instruction');
+      console.error("invalid count given to instruction");
       console.log(this);
       return false;
     }
@@ -136,7 +136,7 @@ class Day5Solution extends SolutionBuilder {
   private splitInput(): SplitInput {
     // chop the input into arrays of lines in two parts, the initial state of the stacks and the
     // list of instructions to execute.
-    const lines = this.input.split('\n');
+    const lines = this.input.split("\n");
     return {
       stackLines: lines.slice(0, 9),
       instructionLines: lines.slice(10, lines.length),
@@ -149,7 +149,7 @@ class Day5Solution extends SolutionBuilder {
     // this.stacks: Map with keys from stackIdentifiers and values each an empty stack
     const queue = [...this.stacksInput].reverse();
     const stackIdentifiers = queue[0]
-      .split('')
+      .split("")
       .map((s) => s.trim())
       .filter((str) => str.length > 0);
     this.stacks = new Map(stackIdentifiers.map((id) => [id, new Stack(id)]));
@@ -180,27 +180,27 @@ class Day5Solution extends SolutionBuilder {
     // output: a map, with keys from the strings "1", "2", ... , "9"
     //   giving the stack to be added to, and values single letters giving
     //   the identifier for the crate located there.
-    const queue = line.split('');
+    const queue = line.split("");
     const characterMap = new Map();
     let position = 1;
-    let stringBuilder = '';
+    let stringBuilder = "";
     queue.forEach((char, idx) => {
       const done = idx % 4 === 3;
       if (done || idx === queue.length - 1) {
         characterMap.set(position.toString(), stringBuilder);
-        stringBuilder = '';
+        stringBuilder = "";
         position++;
       } else {
         stringBuilder += char;
       }
     });
     const crateMap = new Map(
-      [...characterMap].filter(([_, value]) => value.trim() !== ''),
+      [...characterMap].filter(([_, value]) => value.trim() !== ""),
     );
     const trimmedCrateMap = new Map(
       Array.from(crateMap, ([k, v]) => [
         k,
-        v.replace('[', '').replace(']', ''),
+        v.replace("[", "").replace("]", ""),
       ]),
     );
     return trimmedCrateMap;
@@ -276,7 +276,7 @@ class Day5Solution extends SolutionBuilder {
   }
 
   printInstruction(instruction: Instruction): void {
-    console.log('INSTRUCTION');
+    console.log("INSTRUCTION");
     console.log(`MOVE ${instruction.total} CRATES`);
     console.log(`  source: ${instruction.source}`);
     this.getStack(instruction.source).print();
@@ -292,7 +292,7 @@ class Day5Solution extends SolutionBuilder {
   }
 
   get stackTops(): string {
-    let solution = '';
+    let solution = "";
     for (const identifier of this.stackIdentifiers) {
       const stack = this.getStack(identifier);
       const char = stack.peek();

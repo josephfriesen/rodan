@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { YearType, SELECT_YEARS } from './types';
+import { PrismaClient } from "@prisma/client";
+import { YearType, SELECT_YEARS } from "./types";
 
 export async function getYear(
   year: number,

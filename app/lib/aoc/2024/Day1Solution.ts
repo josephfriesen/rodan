@@ -1,4 +1,4 @@
-import { SolutionBuilder } from '../SolutionBuilder';
+import { SolutionBuilder } from "../SolutionBuilder";
 
 export class Day1Solution extends SolutionBuilder {
   sortedListLeft: Array<number>;
@@ -14,9 +14,9 @@ export class Day1Solution extends SolutionBuilder {
   }
 
   private inputToSortedLists(): void {
-    const lines: Array<string> = this.input.split('\n');
+    const lines: Array<string> = this.input.split("\n");
     for (const line of lines) {
-      const ids: Array<string> = line.split('   ');
+      const ids: Array<string> = line.split("   ");
       if (ids.length !== 2 || Number.isNaN(ids[0]) || Number.isNaN(ids[1])) {
         continue;
       }

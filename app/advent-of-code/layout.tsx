@@ -1,5 +1,5 @@
-import styles from '@styles/layout.module.sass';
-import '@styles/global.css';
+import styles from "@styles/layout.module.sass";
+import "@styles/global.css";
 
 export default function AdventOfCodeLayout({
   children,

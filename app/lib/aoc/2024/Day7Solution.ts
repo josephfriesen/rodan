@@ -1,5 +1,5 @@
-import { SolutionBuilder } from '@lib/aoc/SolutionBuilder';
-import Queue from '@lib/aoc/Queue';
+import { SolutionBuilder } from "@lib/aoc/SolutionBuilder";
+import Queue from "@lib/aoc/Queue";
 
 type BinaryOperation = (m: number, n: number) => number;
 type Calibration = { goal: number; inputs: Array<number>; operations: number };
@@ -13,11 +13,11 @@ class Day7Solution extends SolutionBuilder {
   }
 
   private inputToCalibrations(): void {
-    const lines: Array<string> = this.input.split('\n').filter(Boolean);
+    const lines: Array<string> = this.input.split("\n").filter(Boolean);
     for (const line of lines) {
-      const [goalString, inputsString] = line.split(': ');
+      const [goalString, inputsString] = line.split(": ");
       const goal = Number(goalString);
-      const inputs = inputsString.split(' ').map((s) => Number(s));
+      const inputs = inputsString.split(" ").map((s) => Number(s));
       const operations = inputs.length - 1;
       const calibration: Calibration = { goal, inputs, operations };
       this.calibrations.push(calibration);
@@ -41,7 +41,7 @@ class Day7Solution extends SolutionBuilder {
   binaryOperations(s: string): Array<BinaryOperation> {
     const OP = [Day7Solution.ADD, Day7Solution.MULT, Day7Solution.CONCAT];
 
-    return s.split('').map((bit: string) => {
+    return s.split("").map((bit: string) => {
       return OP[Number(bit)];
     });
   }
@@ -49,18 +49,18 @@ class Day7Solution extends SolutionBuilder {
   binaryStrings(n: number): Array<string> {
     if (n < 0) {
       throw new TypeError(
-        'Expected non-negative integer n, how can you have a negative-length string come on bozo.',
+        "Expected non-negative integer n, how can you have a negative-length string come on bozo.",
       );
     }
 
     const strings: Array<string> = [];
 
-    const generate = (string: string = ''): void => {
+    const generate = (string: string = ""): void => {
       if (string.length === n) {
         strings.push(string);
       } else {
-        generate(string + '0');
-        generate(string + '1');
+        generate(string + "0");
+        generate(string + "1");
       }
     };
     generate();
@@ -70,18 +70,18 @@ class Day7Solution extends SolutionBuilder {
 
   ternaryStrings(n: number): Array<string> {
     if (n < 0) {
-      throw new TypeError('negative length strings not allowed, bozo.');
+      throw new TypeError("negative length strings not allowed, bozo.");
     }
 
     const strings: Array<string> = [];
 
-    const generate = (string: string = ''): void => {
+    const generate = (string: string = ""): void => {
       if (string.length === n) {
         strings.push(string);
       } else {
-        generate(string + '0');
-        generate(string + '1');
-        generate(string + '2');
+        generate(string + "0");
+        generate(string + "1");
+        generate(string + "2");
       }
     };
     generate();

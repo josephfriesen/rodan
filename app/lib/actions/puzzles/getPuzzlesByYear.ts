@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { PuzzleType, SELECT_PUZZLES } from './types';
+import { PrismaClient } from "@prisma/client";
+import { PuzzleType, SELECT_PUZZLES } from "./types";
 
 /**
  * Gets an array of puzzles for the given year.

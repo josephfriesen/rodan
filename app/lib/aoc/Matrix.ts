@@ -126,14 +126,14 @@ export default class Matrix {
   }
 
   static DIRECTIONS: { [key: string]: string } = {
-    W: 'W',
-    E: 'E',
-    N: 'N',
-    S: 'S',
-    NW: 'NW',
-    NE: 'NE',
-    SW: 'SW',
-    SE: 'SE',
+    W: "W",
+    E: "E",
+    N: "N",
+    S: "S",
+    NW: "NW",
+    NE: "NE",
+    SW: "SW",
+    SE: "SE",
   };
 
   traversal(coordinates: CoordinatesType, direction: string): CoordinatesType {
@@ -180,6 +180,6 @@ export default class Matrix {
   }
 
   toString(): string {
-    return this.matrix.map((row) => row.join('')).join('\n');
+    return this.matrix.map((row) => row.join("")).join("\n");
   }
 }

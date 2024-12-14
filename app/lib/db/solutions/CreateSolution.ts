@@ -1,16 +1,16 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 
 const prisma: typeof PrismaClient = new PrismaClient();
 
 async function createSolution(
   puzzleId: number,
-  explanation: string = '',
-  input: string = '',
+  explanation: string = "",
+  input: string = "",
 ): Promise<void | null> {
   try {
     const puzzle = await getPuzzle(puzzleId);
     if (!puzzle) {
-      console.error('no puzzle found');
+      console.error("no puzzle found");
       return null;
     }
 
@@ -49,7 +49,7 @@ async function createSolution(
       },
     });
 
-    console.log('///////// prisma create record success ////////');
+    console.log("///////// prisma create record success ////////");
     console.log(solution);
   } catch (err) {
     console.error(err);

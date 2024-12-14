@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import styles from '@styles/aoc.module.scss';
+import styles from "@styles/aoc.module.scss";
 
 export default function LinkButton({
   children,

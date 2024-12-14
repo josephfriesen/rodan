@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import utilStyles from '@styles/utils.module.sass';
-import styles from '@styles/layout.module.sass';
-import '@styles/global.css';
+import Link from "next/link";
+import utilStyles from "@styles/utils.module.sass";
+import styles from "@styles/layout.module.sass";
+import "@styles/global.css";
 
-export const SITE_TITLE = 'RODAN';
+export const SITE_TITLE = "RODAN";
 
 export default function RootPage({ children }: { children: React.ReactNode }) {
   return (

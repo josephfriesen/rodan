@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { PuzzleType, SELECT_PUZZLES } from './types';
+import { PrismaClient } from "@prisma/client";
+import { PuzzleType, SELECT_PUZZLES } from "./types";
 
 /**
  * Finds a puzzle by day and year

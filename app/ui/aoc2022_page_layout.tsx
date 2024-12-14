@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
-import utilStyles from '../styles/utils.module.sass';
-import styles from '../styles/aoc.module.scss';
+import React, { useMemo } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import utilStyles from "../styles/utils.module.sass";
+import styles from "../styles/aoc.module.scss";
 
-export const SITE_TITLE = 'Advent of Code 2022';
-export const BASE_PATH = '/advent-of-code-2022/';
+export const SITE_TITLE = "Advent of Code 2022";
+export const BASE_PATH = "/advent-of-code-2022/";
 export const DAYS = Array.from({ length: 5 }, (_, i) => i + 1);
 
 export default function AdventOfCode2022PageLayout({
@@ -30,8 +30,8 @@ export default function AdventOfCode2022PageLayout({
         <meta name="description" content="RODAN" />
         <meta name="og:title" content={SITE_TITLE} />
         <title>{`${SITE_TITLE} | ${
-          home ? 'Advent of Code 2022 Solutions' : ''
-        }${day ? `Day ${day}` : ''}`}</title>
+          home ? "Advent of Code 2022 Solutions" : ""
+        }${day ? `Day ${day}` : ""}`}</title>
       </Head>
       <header className={styles.header}>
         <h1 className={utilStyles.heading2Xl}>{SITE_TITLE}</h1>
@@ -61,7 +61,7 @@ export default function AdventOfCode2022PageLayout({
                 )}
                 <Link
                   className={styles.link}
-                  href={`${BASE_PATH}day${d.toString().padStart(2, '0')}`}
+                  href={`${BASE_PATH}day${d.toString().padStart(2, "0")}`}
                 >
                   Day {d}
                 </Link>

@@ -1,6 +1,6 @@
-import { SolutionBuilder } from '../SolutionBuilder';
-import Matrix from '../Matrix';
-import Queue from '../Queue';
+import { SolutionBuilder } from "../SolutionBuilder";
+import Matrix from "../Matrix";
+import Queue from "../Queue";
 
 export default class Day8Solution extends SolutionBuilder {
   matrix: Matrix;
@@ -22,16 +22,16 @@ export default class Day8Solution extends SolutionBuilder {
   private initializeMatrix(): void {
     this.matrix = new Matrix(
       this.input
-        .split('\n')
+        .split("\n")
         .filter(Boolean)
-        .map((line) => line.split('')),
+        .map((line) => line.split("")),
     );
   }
 
   private initializeNodeMap(): void {
     for (const row of this.matrix.matrix) {
       for (const entry of row) {
-        if (entry !== '.' && !this.nodeMap.has(entry)) {
+        if (entry !== "." && !this.nodeMap.has(entry)) {
           this.nodeMap.set(entry, this.matrix.allOccurencePositions(entry));
         }
       }

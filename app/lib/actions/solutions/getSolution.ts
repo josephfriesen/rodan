@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { SolutionType, SELECT_SOLUTIONS } from './types';
+import { PrismaClient } from "@prisma/client";
+import { SolutionType, SELECT_SOLUTIONS } from "./types";
 
 /**
  * Finds a solution by id.

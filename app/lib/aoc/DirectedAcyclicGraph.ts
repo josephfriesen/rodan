@@ -1,4 +1,4 @@
-import DirectedGraph from './DirectedGraph';
+import DirectedGraph from "./DirectedGraph";
 
 export default class DirectedAcyclicGraph extends DirectedGraph {
   pathExists(from: string | number, to: string | number): boolean {

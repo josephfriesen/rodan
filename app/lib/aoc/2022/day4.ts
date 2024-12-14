@@ -1,8 +1,8 @@
-import { SolutionBuilder } from '../SolutionBuilder';
+import { SolutionBuilder } from "../SolutionBuilder";
 
 export interface Elf extends Map<string, number> {
-  get(key: 'start'): number | undefined;
-  get(key: 'end'): number | undefined;
+  get(key: "start"): number | undefined;
+  get(key: "end"): number | undefined;
 }
 
 interface OverlapResult {
@@ -30,12 +30,12 @@ export class Day4Solution extends SolutionBuilder {
 
   private stringToElfPair(s: string): Array<Elf> {
     // s: string of format "(number)-(number),(number)-(number)"
-    const stringPairs: Array<string> = s.split(',');
+    const stringPairs: Array<string> = s.split(",");
     const elves = stringPairs.map((elf: string): Elf => {
-      const coordinates = elf.split('-');
+      const coordinates = elf.split("-");
       return new Map([
-        ['start', parseInt(coordinates[0])],
-        ['end', parseInt(coordinates[1])],
+        ["start", parseInt(coordinates[0])],
+        ["end", parseInt(coordinates[1])],
       ]);
     });
     return elves;
@@ -43,7 +43,7 @@ export class Day4Solution extends SolutionBuilder {
 
   private inputToElfPairs(): Array<Array<Elf>> {
     const lines: Array<string> = this.input
-      .split('\n')
+      .split("\n")
       .map((line) => line.trim());
     return lines.map((l: string) => {
       return this.stringToElfPair(l);
@@ -61,11 +61,11 @@ export class Day4Solution extends SolutionBuilder {
       // must ensure pairs are sorted first by start.
       // then, if starts are equal, must sort the elf with the larger end first
       // to ensure comparison methods work correctly, otherwise will undercount redundancies
-      if (elf1.get('start') === elf2.get('start')) {
-        return elf2.get('end') - elf1.get('end');
+      if (elf1.get("start") === elf2.get("start")) {
+        return elf2.get("end") - elf1.get("end");
       }
 
-      return elf1.get('start') - elf2.get('start');
+      return elf1.get("start") - elf2.get("start");
     });
   }
 
@@ -73,7 +73,7 @@ export class Day4Solution extends SolutionBuilder {
     return list
       .map((pair) => this.sortPair(pair))
       .sort(
-        (a: Array<Elf>, b: Array<Elf>) => a[0].get('start') - b[0].get('start'),
+        (a: Array<Elf>, b: Array<Elf>) => a[0].get("start") - b[0].get("start"),
       );
   }
 
@@ -83,7 +83,7 @@ export class Day4Solution extends SolutionBuilder {
     const [e, f] = elfPair;
 
     // the elves are sorted such that e.start is <= f.start. therefore, they are redundant if and only if e.end >= f.end
-    return e.get('end') >= f.get('end');
+    return e.get("end") >= f.get("end");
   }
 
   compareElfPairForOverlap(elfPair: Array<Elf>): boolean {
@@ -96,9 +96,9 @@ export class Day4Solution extends SolutionBuilder {
     // case 2: x1 = x2
     //   E1 and E2 always overlap at minimum in section x1.
     const [E1, E2] = elfPair;
-    const x1 = E1.get('start');
-    const y1 = E1.get('end');
-    const x2 = E2.get('start');
+    const x1 = E1.get("start");
+    const y1 = E1.get("end");
+    const x2 = E2.get("start");
     // const y2 = E2.get("end");
     return x1 === x2 || y1 >= x2;
   }
@@ -129,11 +129,11 @@ export class Day4Solution extends SolutionBuilder {
   }
 
   elfPairsDemo(elfPairs: Array<Array<Elf>>): string {
-    let stringRepresentation = '';
+    let stringRepresentation = "";
     for (const pair of elfPairs) {
-      stringRepresentation += '[ ';
+      stringRepresentation += "[ ";
       stringRepresentation += this.mapToString(pair[0]);
-      stringRepresentation += ', ';
+      stringRepresentation += ", ";
       stringRepresentation += this.mapToString(pair[1]);
       stringRepresentation += ` ],
 `;
@@ -151,13 +151,13 @@ export class Day4Solution extends SolutionBuilder {
 
   test(): void {
     const first = new Map([
-      ['start', 55],
-      ['end', 55],
+      ["start", 55],
+      ["end", 55],
     ]);
 
     const second = new Map([
-      ['start', 55],
-      ['end', 54],
+      ["start", 55],
+      ["end", 54],
     ]);
 
     console.log(first);

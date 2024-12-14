@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { SolutionType, SELECT_SOLUTIONS } from './types';
+import { PrismaClient } from "@prisma/client";
+import { SolutionType, SELECT_SOLUTIONS } from "./types";
 
 /**
  * Finds an array of solutions for the given day and year

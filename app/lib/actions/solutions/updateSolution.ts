@@ -1,9 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 import {
   SolutionType,
   UpdateSolutionPayloadType,
   SELECT_SOLUTIONS,
-} from '@lib/actions/solutions/types';
+} from "@lib/actions/solutions/types";
 
 export async function updateSolution(
   id: number,

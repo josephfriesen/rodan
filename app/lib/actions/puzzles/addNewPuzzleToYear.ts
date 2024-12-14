@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { NewPuzzleDataType } from './types';
+import { PrismaClient } from "@prisma/client";
+import { NewPuzzleDataType } from "./types";
 
 /**
  * adds a new puzzle to a year

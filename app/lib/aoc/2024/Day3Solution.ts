@@ -1,4 +1,4 @@
-import { SolutionBuilder } from '../SolutionBuilder';
+import { SolutionBuilder } from "../SolutionBuilder";
 
 export class Day3Solution extends SolutionBuilder {
   products: Array<Array<number>>;
@@ -33,16 +33,16 @@ export class Day3Solution extends SolutionBuilder {
 
   private mulToNumbers(s: string): Array<number> {
     return s
-      .replace('mul(', '')
-      .replace(')', '')
-      .split(',')
+      .replace("mul(", "")
+      .replace(")", "")
+      .split(",")
       .map((p) => Number(p));
   }
 
   private instructionsToInstructedProducts(): void {
     let go = true;
     for (const instruction of this.instructions) {
-      if (instruction === 'do()') {
+      if (instruction === "do()") {
         go = true;
         continue;
       }

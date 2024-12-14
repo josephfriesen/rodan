@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import { NextRequest, NextResponse } from 'next/server';
+import { PrismaClient } from "@prisma/client";
+import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     if (!puzzleRecord) {
       return NextResponse.json({
-        message: 'puzzle not found',
+        message: "puzzle not found",
         status: 404,
       });
     }
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       year: { connect: { id: puzzleRecord.aocYearId } },
       explanation: String(explanation),
       input: String(input),
-      solutionData: solutionData ? JSON.stringify(solutionData) : '{}',
+      solutionData: solutionData ? JSON.stringify(solutionData) : "{}",
       isSolutionValid: isSolutionValid ? Boolean(isSolutionValid) : false,
       isTestData: isTestData ? Boolean(isTestData) : false,
       isAocData: isAocData ? Boolean(isAocData) : false,
@@ -70,12 +70,12 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         },
       })
       .then((res) => {
-        console.log('///////// prisma create record success ////////');
+        console.log("///////// prisma create record success ////////");
         console.log(res);
         return res;
       })
       .catch((err) => {
-        console.log('wtf...');
+        console.log("wtf...");
         console.error(err);
         debugger;
         return NextResponse.json({
@@ -85,7 +85,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       });
 
     return NextResponse.json({
-      message: 'success',
+      message: "success",
       status: 200,
       json: {
         solution,

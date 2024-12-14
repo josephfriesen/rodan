@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { GetServerSideProps } from 'next';
-import FormattedSolution from 'app/ui/formatted_solution';
-import { getAOCInput } from '@lib/aoc/getAOCInput';
-import Day8Solution from '@lib/aoc/2024/Day8Solution';
+import * as React from "react";
+import { GetServerSideProps } from "next";
+import FormattedSolution from "app/ui/formatted_solution";
+import { getAOCInput } from "@lib/aoc/getAOCInput";
+import Day8Solution from "@lib/aoc/2024/Day8Solution";
 
 const DAY = 8;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { fileContents } = await getAOCInput(DAY, '2024');
+  const { fileContents } = await getAOCInput(DAY, "2024");
 
   return {
     props: {
