@@ -1,3 +1,4 @@
+import React from "react";
 import { getPuzzleByDay } from "@actions/puzzles";
 import { PuzzleType } from "@actions/puzzles/types";
 import { getSolution } from "@actions/solutions";
@@ -14,6 +15,9 @@ import Breadcrumbs from "./breadcrumbs";
  * TODO: because this is a server component, we get stale values for year/day/solution,
  * and the info provided to the breadcrumbs may be incorrect for the current path.
  */
+
+export const dynamicParams = true;
+
 export default async function AOCHeader(props: {
   children?: React.ReactNode;
 }): Promise<JSX.Element | null> {
@@ -22,8 +26,8 @@ export default async function AOCHeader(props: {
   const pathname = headersList.get("x-current-path");
   const yearString = pathname?.split("/")[2];
   const dayString = pathname?.split("/")[3];
-  const solutionId = pathname?.split("/")[4];
-  const page = pathname?.split("/")[5] || null;
+  const solutionId = pathname?.split("/")[5];
+  const page = pathname?.split("/")[6] || null;
 
   let year: YearType | null = null;
   const yearResponse: { year: YearType } | { error: Error } | null = yearString

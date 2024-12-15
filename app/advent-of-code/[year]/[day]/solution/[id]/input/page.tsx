@@ -6,6 +6,8 @@ import { getSolution } from "@lib/actions/solutions";
 import { updateSolution } from "@lib/actions/solutions";
 import { SolutionType } from "@lib/actions/solutions/types";
 import EditSolutionInput from "@components/edit_solution_input";
+import clsx from "clsx";
+import styles from "@styles/aoc.module.scss";
 
 export default async function AOCSolutionInputPage({
   params,
@@ -43,14 +45,18 @@ export default async function AOCSolutionInputPage({
   };
 
   return (
-    <div>
-      <h2>
-        Day {day} Solution | id: {solution.id} | Input
-      </h2>
-      <EditSolutionInput
-        inputValue={solution.input}
-        handleSubmit={handleUpdateInput}
-      />
-    </div>
+    <main className={clsx(styles.page)}>
+      <section
+        className={clsx(styles.pageBody, styles.viewableWidth, "bg-white")}
+      >
+        <h2>
+          Day {day} Solution | id: {solution.id} | Input
+        </h2>
+        <EditSolutionInput
+          inputValue={solution.input}
+          handleSubmit={handleUpdateInput}
+        />
+      </section>
+    </main>
   );
 }
