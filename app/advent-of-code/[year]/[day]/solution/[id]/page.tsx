@@ -4,7 +4,6 @@ import { getPuzzleByDay } from "@lib/actions/puzzles";
 import { PuzzleType } from "@lib/actions/puzzles/types";
 import { SolutionType } from "@lib/actions/solutions/types";
 import { getSolution } from "@lib/actions/solutions";
-import utilStyles from "@styles/utils.module.sass";
 import FormattedSolution from "@components/formatted_solution";
 import SolutionDetails from "@components/solution_details";
 import styles from "@styles/aoc.module.scss";
@@ -47,15 +46,6 @@ export default async function AOCSolutionPage({
           "bg-white"
         )}
       >
-        <h2 className={clsx(utilStyles.headingMd, utilStyles.centered)}>
-          <a
-            target="_blank"
-            href={puzzle.externalUrl}
-            rel="noopener noreferrer"
-          >
-            Day {day} Solution
-          </a>
-        </h2>
         <SolutionDetails solution={solution} />
         <div className={styles.solution}>
           {solution.explanation && (

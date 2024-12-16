@@ -1,8 +1,78 @@
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+import { SolutionType } from "@lib/actions/solutions/types";
+import { getSolution } from "@lib/actions/solutions";
+import { updateSolution } from "@lib/actions/solutions";
 
 const prisma = new PrismaClient();
 
+export async function GET(req: NextRequest): Promise<NextResponse> {
+  try {
+    console.log(`GET ${req.url}`);
+
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({
+        message: "no id provided",
+        status: 400,
+      });
+    }
+
+    const actionResponse: { solution: SolutionType } | { error: Error } =
+      await getSolution(Number(id));
+
+    if ("error" in actionResponse) {
+      console.error(actionResponse.error);
+      throw new Error(actionResponse.error.message);
+    }
+
+    return NextResponse.json({
+      message: "success",
+      status: 200,
+      json: actionResponse.solution,
+    });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({
+      message: err.message,
+      status: 500,
+    });
+  }
+}
+
+export async function PATCH(req: NextRequest): Promise<NextResponse> {
+  try {
+    console.log(`PATCH ${req.url}`);
+
+    const { id, payload } = await req.json();
+
+    const actionResponse: { solution: SolutionType } | { error: Error } =
+      await updateSolution(Number(id), payload);
+
+    if ("error" in actionResponse) {
+      console.error(actionResponse.error);
+      throw new Error(actionResponse.error.message);
+    }
+
+    return NextResponse.json({
+      message: "success",
+      status: 200,
+      json: actionResponse.solution,
+    });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({
+      message: err.message,
+      status: 500,
+    });
+  }
+}
+
+/**
+ * TODO: redo this to use the createSolution action
+ */
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     console.log(`POST ${req.url}`);

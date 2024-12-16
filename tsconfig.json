@@ -21,8 +21,7 @@
       "@lib/*": ["app/lib/*"],
       "@styles/*": ["styles/*"],
       "@solutions/*": ["app/lib/aoc"],
-      "@actions/*": ["app/lib/actions/*"],
-      "@interfaces/*": ["app/interfaces/*"]
+      "@actions/*": ["app/lib/actions/*"]
     },
     "plugins": [
       {

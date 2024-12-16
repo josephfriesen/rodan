@@ -1,13 +1,10 @@
 "use client";
 
 import React from "react";
-import LinkButton from "app/ui/link_button";
 import styles from "@styles/aoc.module.scss";
 import Editor from "@monaco-editor/react";
+import clsx from "clsx";
 
-/**
- * TODO: replace textarea with codemirror editor with line numbers
- */
 export default function EditSolutionInput({
   inputValue,
   handleSubmit,
@@ -20,30 +17,48 @@ export default function EditSolutionInput({
     React.Dispatch<React.SetStateAction<string>>,
   ] = React.useState(inputValue);
 
+  const submitNewInput = async (): Promise<void> => {
+    handleSubmit(solutionInputFormValue);
+  };
+
   return (
-    <div className={styles.solutionInputForm}>
-      <div className={styles.editorContainer}>
-        <Editor
-          height="50vh"
-          defaultLanguage="plaintext"
-          defaultValue={inputValue}
-          className={styles.editor}
-          theme="vs-dark"
-          options={{
-            fontSize: 14,
-            fontFamily:
-              "Inconsolata Nerd Font, SF Mono, Segoe UI Mono, Roboto Mono, Menlo, Courier, monospace",
-          }}
-          onChange={(value, _) => {
-            setSolutionInputFormValue(value || "");
-          }}
-        />
+    <section className={styles.solutionInput}>
+      <div className={styles.solutionInputForm}>
+        <div className={styles.editorContainer}>
+          <div className={styles.wrapper}>
+            <Editor
+              height="50vh"
+              defaultLanguage="plaintext"
+              defaultValue={inputValue}
+              value={solutionInputFormValue}
+              className={styles.editor}
+              theme="vs-dark"
+              options={{
+                minimap: { enabled: false },
+                automaticLayout: true,
+                wordWrap: "on",
+                scrollBeyondLastLine: false,
+                folding: false,
+                fontSize: 14,
+                fontFamily:
+                  "Inconsolata Nerd Font, SF Mono, Segoe UI Mono, Roboto Mono, Menlo, Courier, monospace",
+              }}
+              onChange={(value, _) => {
+                setSolutionInputFormValue(value || "");
+              }}
+            />
+          </div>
+        </div>
+        <div className={styles.formActions}>
+          <button
+            className={clsx("btn-primary", styles.actionButton)}
+            type="button"
+            onClick={submitNewInput}
+          >
+            Update Input
+          </button>
+        </div>
       </div>
-      <div className={styles.formActions}>
-        <LinkButton clickCallback={() => handleSubmit(solutionInputFormValue)}>
-          Update Input
-        </LinkButton>
-      </div>
-    </div>
+    </section>
   );
 }

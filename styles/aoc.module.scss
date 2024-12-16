@@ -6,13 +6,30 @@
 .hotpink {
   @include hotpink;
 }
+
 // ==============
+// ok you can use these
+// ==============
+
+// ================
+// mixins
+// ================
 
 @mixin code {
   font-family: "Inconsolata Nerd Font", "SF Mono", "Segoe UI Mono",
     "Roboto Mono", Menlo, Courier, monospace;
   font-size: 0.9rem;
 }
+
+@mixin lilshadow {
+  box-shadow: 1px 1px 2px #000000;
+}
+
+// ================
+// variables
+// ================
+
+$primary-color: #28388a;
 
 .container {
   max-width: 42rem;
@@ -170,7 +187,7 @@ main.page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 8px 0;
+  margin-bottom: 8px;
 
   ul {
     margin-top: 8px;
@@ -192,10 +209,44 @@ main.page {
   }
 }
 
+.solutionSolvedAnchor {
+  //
+}
+
+@mixin solutionPopoverStyles {
+  background-color: white;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 6px;
+  @include lilshadow;
+}
+
+.solutionSolvedPopover {
+  @include solutionPopoverStyles;
+}
+
+section.solutionInput {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .solutionInputForm {
-  .monaco-editor {
-    font-family: "Inconsolata Nerd Font", "SF Mono", "Segoe UI Mono", monospace;
-    font-size: 32px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 768px;
+  width: 100%;
+
+  .editorContainer {
+    width: 100%;
+    .wrapper {
+      width: 100%;
+    }
   }
 
   .formActions {
@@ -203,5 +254,109 @@ main.page {
     margin-top: 8px;
     display: flex;
     justify-content: flex-end;
+  }
+}
+
+.solutionDataPopover {
+  @include solutionPopoverStyles;
+}
+
+// ================
+// UI
+// ================
+
+button.actionButton {
+  @include lilshadow;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  padding: 4px 16px;
+  border: 1px solid #242424;
+  border-radius: 6px;
+  transition:
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: rgb(17, 24, 59);
+    color: #f5f5f5;
+  }
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  input ~ span {
+    background-color: #ccc;
+  }
+
+  &:hover input ~ span {
+    background-color: darken(#ccc, 10%);
+  }
+
+  input:checked ~ span {
+    background-color: $primary-color;
+  }
+
+  &:hover input:checked ~ span {
+    background-color: darken($primary-color, 10%);
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    transition: all 0.2s ease-in-out;
+  }
+
+  span::after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  input:checked ~ span::after {
+    display: block;
+  }
+
+  & span::after {
+    left: 9px;
+    top: 4px;
+    width: 8px;
+    height: 14px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    border-radius: 20%;
+    transform: rotate(0) scale(0.2);
+    transition: all 0.2s ease-in-out;
+  }
+
+  input:checked ~ span::after {
+    transform: rotate(45deg) scale(1);
+  }
+
+  label {
+    font-size: 0.8rem;
   }
 }
