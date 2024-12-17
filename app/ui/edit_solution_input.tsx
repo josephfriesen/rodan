@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "@styles/aoc.module.scss";
 import Editor from "@monaco-editor/react";
-import clsx from "clsx";
+import { Button } from "@components/ui/button";
 
 export default function EditSolutionInput({
   inputValue,
@@ -28,6 +28,7 @@ export default function EditSolutionInput({
           <div className={styles.wrapper}>
             <Editor
               height="50vh"
+              width="60vw"
               defaultLanguage="plaintext"
               defaultValue={inputValue}
               value={solutionInputFormValue}
@@ -50,13 +51,9 @@ export default function EditSolutionInput({
           </div>
         </div>
         <div className={styles.formActions}>
-          <button
-            className={clsx("btn-primary", styles.actionButton)}
-            type="button"
-            onClick={submitNewInput}
-          >
+          <Button variant="outline" onClick={submitNewInput}>
             Update Input
-          </button>
+          </Button>
         </div>
       </div>
     </section>

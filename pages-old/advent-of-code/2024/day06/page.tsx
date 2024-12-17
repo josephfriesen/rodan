@@ -1,6 +1,6 @@
 import * as React from "react";
 import { GetServerSideProps } from "next";
-import Layout from "@components/aoc2024_page_layout";
+import Layout from "@ui/aoc2024_page_layout";
 import FormattedSolution from "app/ui/formatted_solution";
 import { getAOCInput } from "@lib/aoc/getAOCInput";
 import Day6Solution from "@lib/aoc/2024/Day6Solution";
@@ -13,17 +13,19 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       input: fileContents,
-    }
-  }
-}
+    },
+  };
+};
 
 interface AOC2024Day6Props {
-  input: string
+  input: string;
 }
 
 const AOC2024Day6 = ({ input }: AOC2024Day6Props): JSX.Element => {
-
-  const [solutionText, setSolutionText] = React.useState<{ visitedCount, countGuardLoops } | null>(null);
+  const [solutionText, setSolutionText] = React.useState<{
+    visitedCount;
+    countGuardLoops;
+  } | null>(null);
   const solution: Day6Solution = new Day6Solution(input);
 
   const markdown: string = `
@@ -72,7 +74,7 @@ const AOC2024Day6 = ({ input }: AOC2024Day6Props): JSX.Element => {
         - Else, add \`d\` to \`visited[(i', j')]\` and update \`d\` as before. 
   - We count all the empty positions in $M$ that would result in an infinite guard loop and return that count. Give our input, we find
     a total of ${solutionText?.countGuardLoops ?? "..."} such positions.
-  `
+  `;
 
   React.useEffect(() => {
     const solution = new Day6Solution(input);
@@ -83,8 +85,8 @@ const AOC2024Day6 = ({ input }: AOC2024Day6Props): JSX.Element => {
 
     setSolutionText({
       visitedCount: solution.visitedCount,
-      countGuardLoops: solution.countGuardLoops
-    })
+      countGuardLoops: solution.countGuardLoops,
+    });
   }, []);
 
   return (
@@ -93,7 +95,7 @@ const AOC2024Day6 = ({ input }: AOC2024Day6Props): JSX.Element => {
         <FormattedSolution markdown={markdown} />
       </section>
     </Layout>
-  )
-}
+  );
+};
 
 export default AOC2024Day6;

@@ -1,14 +1,14 @@
 import React from "react";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-// import { headers } from "next/headers";
-import SolutionDetails from "@components/solution_details";
+import SolutionDetails from "@ui/solution_details";
+import EditSolutionInput from "@ui/edit_solution_input";
 import { getSolution } from "@lib/actions/solutions";
 import { updateSolution } from "@lib/actions/solutions";
 import { SolutionType } from "@lib/actions/solutions/types";
-import EditSolutionInput from "@components/edit_solution_input";
 import clsx from "clsx";
 import styles from "@styles/aoc.module.scss";
+import { Card, CardContent } from "@components/ui/card";
 
 export default async function AOCSolutionInputPage({
   params,
@@ -45,15 +45,15 @@ export default async function AOCSolutionInputPage({
 
   return (
     <main className={clsx(styles.page)}>
-      <section
-        className={clsx(styles.pageBody, styles.readableWidth, "bg-white")}
-      >
-        <SolutionDetails solution={solution} />
-        <EditSolutionInput
-          inputValue={solution.input}
-          handleSubmit={handleUpdateInput}
-        />
-      </section>
+      <Card>
+        <CardContent className={clsx("w-fit-content p-4 pl-8 pr-8")}>
+          <SolutionDetails solution={solution} />
+          <EditSolutionInput
+            inputValue={solution.input}
+            handleSubmit={handleUpdateInput}
+          />
+        </CardContent>
+      </Card>
     </main>
   );
 }

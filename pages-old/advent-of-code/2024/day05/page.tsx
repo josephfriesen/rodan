@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import Layout from "@components/aoc2024_page_layout";
+import Layout from "@ui/aoc2024_page_layout";
 import FormattedSolution from "app/ui/formatted_solution";
 import { getAOCInput } from "@lib/aoc/getAOCInput";
 import Day5Solution from "@lib/aoc/2024/Day5Solution";
@@ -12,16 +12,15 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       input: fileContents,
-    }
-  }
-}
+    },
+  };
+};
 
 interface AOC2024Day5Props {
-  input: string
+  input: string;
 }
 
 const AOC2024Day5 = ({ input }: AOC2024Day5Props): JSX.Element => {
-
   const solution: Day5Solution = new Day5Solution(input);
 
   const markdown: string = `
@@ -69,8 +68,7 @@ const AOC2024Day5 = ({ input }: AOC2024Day5Props): JSX.Element => {
     - Let \`sum <- sum + V_i[\`$\\lfloor \\frac{n}{2} \\rfloor$\`]\`.
     - Return \`sum\`.
   - Given our input, our sum of the middle entries of corrected invalid updates is ${solution.sumOfCorrectedUpdatesPages}. 
-  `
-
+  `;
 
   return (
     <Layout day={DAY}>
@@ -78,7 +76,7 @@ const AOC2024Day5 = ({ input }: AOC2024Day5Props): JSX.Element => {
         <FormattedSolution markdown={markdown} />
       </section>
     </Layout>
-  )
-}
+  );
+};
 
 export default AOC2024Day5;

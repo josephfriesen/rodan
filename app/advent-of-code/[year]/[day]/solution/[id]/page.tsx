@@ -4,9 +4,10 @@ import { getPuzzleByDay } from "@lib/actions/puzzles";
 import { PuzzleType } from "@lib/actions/puzzles/types";
 import { SolutionType } from "@lib/actions/solutions/types";
 import { getSolution } from "@lib/actions/solutions";
-import FormattedSolution from "@components/formatted_solution";
-import SolutionDetails from "@components/solution_details";
+import FormattedSolution from "@ui/formatted_solution";
+import SolutionDetails from "@ui/solution_details";
 import styles from "@styles/aoc.module.scss";
+import { Card, CardContent } from "@components/ui/card";
 
 export default async function AOCSolutionPage({
   params,
@@ -38,21 +39,20 @@ export default async function AOCSolutionPage({
 
   return (
     <main className={clsx(styles.page)}>
-      <section
-        className={clsx(
-          styles.pageBody,
-          styles.solutionBody,
-          styles.readableWidth,
-          "bg-white"
-        )}
-      >
-        <SolutionDetails solution={solution} />
-        <div className={styles.solution}>
-          {solution.explanation && (
-            <FormattedSolution markdown={solution.explanation} />
-          )}
-        </div>
-      </section>
+      <Card className={clsx("p-4")}>
+        <CardContent>
+          <SolutionDetails solution={solution} />
+          <Card className={clsx("w-full", "p-4")}>
+            <CardContent>
+              <div className={styles.solution}>
+                {solution.explanation && (
+                  <FormattedSolution markdown={solution.explanation} />
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </CardContent>
+      </Card>
     </main>
   );
 }

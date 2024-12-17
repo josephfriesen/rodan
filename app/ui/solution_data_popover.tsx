@@ -3,8 +3,12 @@
 import React from "react";
 import { SolutionType } from "@lib/actions/solutions/types";
 import clsx from "clsx";
-import styles from "@styles/aoc.module.scss";
-import ClickablePopover from "./clickable_popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@components/ui/popover";
+import { Checkbox } from "@components/ui/checkbox";
 
 export default function SolutionDataPopover({
   solution,
@@ -41,24 +45,23 @@ export default function SolutionDataPopover({
   };
 
   return (
-    <React.Fragment>
-      <ClickablePopover
-        anchorClassName={clsx(
-          "italic inline-block cursor-pointer",
-          styles.solutionDataAnchor
-        )}
-        popoverClassName={styles.solutionDataPopover}
-      >
-        <div>
+    <Popover>
+      <PopoverTrigger>
+        <div
+          className={clsx(
+            "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground p-2",
+            "flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium",
+            "transition-colors cursor-pointer text-primary"
+          )}
+        >
           {isAocChecked && !isTestChecked && "Uses live data"}
           {isTestChecked && !isAocChecked && "Uses test data"}
           {!isAocChecked && !isTestChecked && "No data"}
           {isAocChecked && isTestChecked && "Uses BOTH?!"}
         </div>
-        <div>
+        <PopoverContent className={clsx("w-auto")}>
           <button
-            type="button"
-            className={clsx("mb-4", styles.checkboxContainer)}
+            className={clsx("mb-4 gap-2 flex flex-row")}
             onClick={() =>
               handleMarkData({
                 isAocData: !isAocChecked,
@@ -66,18 +69,17 @@ export default function SolutionDataPopover({
               })
             }
           >
-            <input
-              type="checkbox"
-              className={styles.checkbox}
-              checked={isAocChecked}
-              readOnly
-            />
-            <span className={styles.betterCheckbox} />
-            <label className={clsx("")}>Uses live data</label>
+            <Checkbox id="isAocData" checked={isAocChecked} />
+            <label
+              htmlFor="isAocData"
+              className={clsx("text-sm font-medium leading-none")}
+            >
+              Uses live data
+            </label>
           </button>
           <button
             type="button"
-            className={styles.checkboxContainer}
+            className={clsx("flex flex-row gap-2")}
             onClick={() =>
               handleMarkData({
                 isAocData: isAocChecked,
@@ -85,17 +87,16 @@ export default function SolutionDataPopover({
               })
             }
           >
-            <input
-              type="checkbox"
-              className={styles.checkbox}
-              checked={isTestChecked}
-              readOnly
-            />
-            <span className={styles.betterCheckbox} />
-            <label className={clsx("")}>Uses test data</label>
+            <Checkbox id="isTestData" checked={isTestChecked} />
+            <label
+              htmlFor="isTestData"
+              className={clsx("text-sm font-medium leading-none")}
+            >
+              Uses test data
+            </label>
           </button>
-        </div>
-      </ClickablePopover>
-    </React.Fragment>
+        </PopoverContent>
+      </PopoverTrigger>
+    </Popover>
   );
 }

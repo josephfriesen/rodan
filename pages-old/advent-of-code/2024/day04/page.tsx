@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import Layout from "@components/aoc2024_page_layout";
+import Layout from "@ui/aoc2024_page_layout";
 import FormattedSolution from "app/ui/formatted_solution";
 import { getAOCInput } from "@lib/aoc/getAOCInput";
 import Day4Solution from "@lib/aoc/2024/Day4Solution";
@@ -12,12 +12,12 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       input: fileContents,
-    }
-  }
-}
+    },
+  };
+};
 
 interface AOC2024Day4Props {
-  input: string
+  input: string;
 }
 
 const AOC2024Day4 = ({ input }: AOC2024Day4Props) => {
@@ -51,7 +51,7 @@ const AOC2024Day4 = ({ input }: AOC2024Day4Props) => {
       - NW to SE: \`m(i-1, j-1) + m(i, j) + m(i+1, j+1)\`
     - If both strings are equal to "MAS" or "SAM", increment \`count\`.
   - Return \`count\`. Given our input, we end up with a count of ${solution.countXmasExes}.
-  `
+  `;
 
   return (
     <Layout day={DAY}>
@@ -59,7 +59,7 @@ const AOC2024Day4 = ({ input }: AOC2024Day4Props) => {
         <FormattedSolution markdown={markdown} />
       </section>
     </Layout>
-  )
-}
+  );
+};
 
-export default AOC2024Day4
+export default AOC2024Day4;

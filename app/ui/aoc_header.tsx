@@ -9,12 +9,13 @@ import styles from "@styles/aoc.module.scss";
 import clsx from "clsx";
 import { headers } from "next/headers";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import Breadcrumbs from "./breadcrumbs";
 
-/**
- * TODO: because this is a server component, we get stale values for year/day/solution,
- * and the info provided to the breadcrumbs may be incorrect for the current path.
- */
+// import ThemeToggle from "@ui/theme_toggle";
+const DynamicThemeToggle = dynamic(() => import("./theme_toggle"), {
+  loading: () => null,
+});
 
 export const dynamicParams = true;
 
@@ -63,11 +64,20 @@ export default async function AOCHeader(props: {
 
   return (
     <header className={clsx(styles.header, "bg-gray-600")}>
-      <Link href="/advent-of-code" className={clsx(styles.headerTitle)}>
-        Advent of Code
-      </Link>
-      <Breadcrumbs year={year} day={day} solution={solution} page={page} />
-      {children}
+      <section className={clsx(styles.headerBody)}>
+        <Link href="/advent-of-code" className={clsx(styles.headerTitle)}>
+          Advent of Code
+        </Link>
+        <Breadcrumbs year={year} day={day} solution={solution} page={page} />
+        {children}
+        <div
+          className={clsx(
+            "absolute right-16 top-0 bottom-0 h-full flex items-center"
+          )}
+        >
+          <DynamicThemeToggle />
+        </div>
+      </section>
     </header>
   );
 }
