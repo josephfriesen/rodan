@@ -33,18 +33,23 @@
 }
 
 .explanationPreview code {
+  padding: 2px 4px;
+  font-size: 0.8rem;
   font-family: "Inconsolata Nerd Font", "SF Mono", "Segoe UI Mono",
     "Roboto Mono", Menlo, Courier, monospace;
-  font-size: 0.8rem;
-  padding: 2px 4px;
-  background-color: rgb(30, 30, 30);
+  background-color: hsl(var(--foreground));
+  color: hsl(var(--background));
   border-radius: 6px;
 }
 
 .explanationPreview pre {
   margin: 8px;
   padding: 8px;
-  background-color: rgb(30, 30, 30);
+  font-size: 0.8rem;
+  font-family: "Inconsolata Nerd Font", "SF Mono", "Segoe UI Mono",
+    "Roboto Mono", Menlo, Courier, monospace;
+  background-color: hsl(var(--foreground));
+  color: hsl(var(--background));
   border-radius: 6px;
 }
 

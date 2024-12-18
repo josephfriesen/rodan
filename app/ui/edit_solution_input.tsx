@@ -4,6 +4,7 @@ import React from "react";
 import styles from "@styles/aoc.module.scss";
 import Editor from "@monaco-editor/react";
 import { Button } from "@components/ui/button";
+import { useTheme } from "next-themes";
 
 export default function EditSolutionInput({
   inputValue,
@@ -21,6 +22,15 @@ export default function EditSolutionInput({
     handleSubmit(solutionInputFormValue);
   };
 
+  const { theme } = useTheme();
+
+  const editorTheme = React.useMemo(() => {
+    if (theme === "dark") {
+      return "vs-dark";
+    }
+    return "light";
+  }, [theme]);
+
   return (
     <section className={styles.solutionInput}>
       <div className={styles.solutionInputForm}>
@@ -33,7 +43,7 @@ export default function EditSolutionInput({
               defaultValue={inputValue}
               value={solutionInputFormValue}
               className={styles.editor}
-              theme="vs-dark"
+              theme={editorTheme}
               options={{
                 minimap: { enabled: false },
                 automaticLayout: true,

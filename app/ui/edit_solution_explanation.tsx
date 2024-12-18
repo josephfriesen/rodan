@@ -5,6 +5,7 @@ import styles from "@styles/aoc.module.scss";
 import Editor from "@monaco-editor/react";
 import { Button } from "@components/ui/button";
 import FormattedSolution from "./formatted_solution";
+import { useTheme } from "next-themes";
 
 export default function EditSolutionExplanation({
   explanation,
@@ -17,6 +18,15 @@ export default function EditSolutionExplanation({
     string,
     React.Dispatch<React.SetStateAction<string>>,
   ] = React.useState(explanation);
+
+  const { theme } = useTheme();
+
+  const editorTheme = React.useMemo(() => {
+    if (theme === "dark") {
+      return "vs-dark";
+    }
+    return "light";
+  }, [theme]);
 
   const submitNewExplanation = async (): Promise<void> => {
     handleSubmit(solutionExplanationFormValue);
@@ -37,7 +47,7 @@ export default function EditSolutionExplanation({
               defaultValue={explanation}
               value={solutionExplanationFormValue}
               className={styles.editor}
-              theme="vs-dark"
+              theme={editorTheme}
               options={{
                 minimap: { enabled: false },
                 automaticLayout: true,
