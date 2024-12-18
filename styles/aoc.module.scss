@@ -262,6 +262,53 @@ section.solutionInput {
   @include solutionPopoverStyles;
 }
 
+section.solutionEditExplanation {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h3.explanationTitle {
+    margin-bottom: 16px;
+  }
+
+  .solutionExplanationForm {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .editorContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    @mixin editorStyles {
+      width: 768px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrapper {
+      @include editorStyles;
+    }
+
+    .preview {
+      @include editorStyles;
+      padding-left: 16px;
+    }
+  }
+
+  .formActions {
+    width: 100%;
+    margin-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
 // ================
 // UI
 // ================

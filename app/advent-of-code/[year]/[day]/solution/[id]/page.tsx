@@ -7,7 +7,7 @@ import { getSolution } from "@lib/actions/solutions";
 import FormattedSolution from "@ui/formatted_solution";
 import SolutionDetails from "@ui/solution_details";
 import styles from "@styles/aoc.module.scss";
-import { Card, CardContent } from "@components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 
 export default async function AOCSolutionPage({
   params,
@@ -39,10 +39,15 @@ export default async function AOCSolutionPage({
 
   return (
     <main className={clsx(styles.page)}>
-      <Card className={clsx("p-4")}>
+      <Card className={clsx("p-4", styles.readableWidth)}>
         <CardContent>
           <SolutionDetails solution={solution} />
-          <Card className={clsx("w-full", "p-4")}>
+          <Card className={clsx("p-4")}>
+            <CardHeader className={clsx("mb-4")}>
+              <CardTitle className={clsx("text-xl text-center")}>
+                Solution Explanation
+              </CardTitle>
+            </CardHeader>
             <CardContent>
               <div className={styles.solution}>
                 {solution.explanation && (

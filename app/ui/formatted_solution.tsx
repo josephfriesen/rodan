@@ -2,6 +2,9 @@ import Markdown from "react-markdown";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 
+import "katex/dist/katex.min.css";
+import "@styles/markdown.css";
+
 interface FormattedSolutionProps {
   markdown: string;
   markdownProps?: object;
@@ -12,12 +15,14 @@ export default function FormattedSolution({
   ...rest
 }: FormattedSolutionProps) {
   return (
-    <Markdown
-      remarkPlugins={[remarkMath]}
-      rehypePlugins={[rehypeKatex]}
-      {...rest}
-    >
-      {markdown}
-    </Markdown>
+    <div className="explanationPreview">
+      <Markdown
+        remarkPlugins={[remarkMath]}
+        rehypePlugins={[rehypeKatex]}
+        {...rest}
+      >
+        {markdown}
+      </Markdown>
+    </div>
   );
 }

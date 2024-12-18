@@ -14,6 +14,13 @@ export default function SolutionDetails({
 }) {
   const { puzzle } = solution;
 
+  const buttonStyles = [
+    "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground p-2",
+    "flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium",
+    "transition-colors cursor-pointer",
+    "text-primary text-sm not-italic font-medium hover:no-underline",
+  ];
+
   return (
     <Card
       className={clsx(styles.solutionDetails, "w-full", "mb-16", "border-none")}
@@ -31,15 +38,16 @@ export default function SolutionDetails({
             <SolutionSolvedPopover solution={solution} />
             <SolutionDataPopover solution={solution} />
             <Link
-              className={clsx(
-                "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground p-2",
-                "flex items-center justify-center gap-2 whitespace-nowrap rounded-r-md text-sm font-medium",
-                "transition-colors cursor-pointer",
-                "text-primary text-sm not-italic font-medium hover:no-underline"
-              )}
+              className={clsx(...buttonStyles)}
               href={`${solution.url}/input`}
             >
               Input
+            </Link>
+            <Link
+              className={clsx(...buttonStyles, "rounded-r-md")}
+              href={`${solution.url}/explanation`}
+            >
+              Explanation
             </Link>
           </li>
         </ul>

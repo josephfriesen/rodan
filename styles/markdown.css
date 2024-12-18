@@ -1,0 +1,55 @@
+.explanationPreview {
+  font-size: 0.8rem;
+}
+
+.explanationPreview h1 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.explanationPreview h2 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+.explanationPreview h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.explanationPreview h4 {
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+}
+
+.explanationPreview ul {
+  margin-bottom: 32px;
+}
+
+.explanationPreview ul li {
+  margin-bottom: 4px;
+  margin-left: 16px;
+}
+
+.explanationPreview code {
+  font-family: "Inconsolata Nerd Font", "SF Mono", "Segoe UI Mono",
+    "Roboto Mono", Menlo, Courier, monospace;
+  font-size: 0.8rem;
+  padding: 2px 4px;
+  background-color: rgb(30, 30, 30);
+  border-radius: 6px;
+}
+
+.explanationPreview pre {
+  margin: 8px;
+  padding: 8px;
+  background-color: rgb(30, 30, 30);
+  border-radius: 6px;
+}
+
+.explanationPreview pre code {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
