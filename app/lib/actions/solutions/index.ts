@@ -4,6 +4,7 @@ import { getSolutionsByDay } from "./getSolutionsByDay";
 import { getTestDataSolutionByDay } from "./getTestDataSolutionByDay";
 import { getAocDataSolutionByDay } from "./getAocDataSolutionByDay";
 import { updateSolution } from "./updateSolution";
+import { updateSolutionData } from "./updateSolutionData";
 
 export {
   getSolution,
@@ -12,4 +13,5 @@ export {
   getTestDataSolutionByDay,
   getAocDataSolutionByDay,
   updateSolution,
+  updateSolutionData,
 };

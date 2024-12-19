@@ -8,7 +8,7 @@ import { updateSolution } from "@lib/actions/solutions";
 import { SolutionType } from "@lib/actions/solutions/types";
 import clsx from "clsx";
 import styles from "@styles/aoc.module.scss";
-import { Card, CardContent } from "@components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
 
 export default async function AOCSolutionExplanationPage({
   params,
@@ -50,10 +50,19 @@ export default async function AOCSolutionExplanationPage({
       <Card>
         <CardContent className={clsx("w-fit-content p-2 pl-8 pr-8")}>
           <SolutionDetails solution={solution} />
-          <EditSolutionExplanation
-            explanation={solution.explanation}
-            handleSubmit={handleUpdateExplanation}
-          />
+          <Card>
+            <CardHeader>
+              <CardTitle className={clsx("text-2xl text-center")}>
+                Expanation
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <EditSolutionExplanation
+                explanation={solution.explanation}
+                handleSubmit={handleUpdateExplanation}
+              />
+            </CardContent>
+          </Card>
         </CardContent>
       </Card>
     </main>

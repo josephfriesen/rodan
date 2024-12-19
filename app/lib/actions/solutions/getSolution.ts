@@ -9,7 +9,7 @@ import { SolutionType, SELECT_SOLUTIONS } from "./types";
  *   solution data, and explanation, or an object with an error
  */
 export async function getSolution(
-  id: number,
+  id: number
 ): Promise<{ solution: SolutionType } | { error: Error }> {
   try {
     const prisma = new PrismaClient();
