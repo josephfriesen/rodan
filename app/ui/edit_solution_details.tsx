@@ -87,42 +87,44 @@ const EditSolutionDetails = ({
         <form onSubmit={form.handleSubmit(submitUpdatedSolutionData)}>
           <CardContent>
             <div className={clsx("flex flex-col gap-2 mb-2")}>
-              {fields.map((field, idx) => (
-                <React.Fragment key={`${idx}`}>
-                  <FormLabel>Soluation Data Field {idx + 1}</FormLabel>
-                  <div className={clsx("flex flex-row items-end gap-2")}>
-                    <FormField
-                      control={form.control}
-                      name={`solutionData.${idx}`}
-                      render={() => (
-                        <FormItem className={clsx("w-full")}>
-                          <FormControl>
-                            <Input
-                              placeholder="key"
-                              {...form.register(`solutionData.${idx}.key`)}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Input
-                      placeholder="value"
-                      disabled
-                      // value={parsedSolutionData[key] || ""}
-                      value=""
-                    />
-                    <Button
-                      variant="destructive"
-                      className={clsx("w-40")}
-                      size="icon"
-                      onClick={() => handleDeleteDataField("", idx)}
-                    >
-                      <SquareX />
-                    </Button>
-                  </div>
-                </React.Fragment>
-              ))}
+              {fields.map((field, idx) => {
+                return (
+                  <React.Fragment key={`${idx}`}>
+                    <FormLabel>Soluation Data Field {idx + 1}</FormLabel>
+                    <div className={clsx("flex flex-row items-end gap-2")}>
+                      <FormField
+                        control={form.control}
+                        name={`solutionData.${idx}`}
+                        render={() => (
+                          <FormItem className={clsx("w-full")}>
+                            <FormControl>
+                              <Input
+                                placeholder="key"
+                                {...form.register(`solutionData.${idx}.key`)}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <Input
+                        className={clsx("w-20")}
+                        placeholder="value"
+                        disabled
+                        value={parsedSolutionData?.[field.key] || ""}
+                      />
+                      <Button
+                        variant="destructive"
+                        className={clsx("w-20")}
+                        size="icon"
+                        onClick={() => handleDeleteDataField("", idx)}
+                      >
+                        <SquareX />
+                      </Button>
+                    </div>
+                  </React.Fragment>
+                );
+              })}
             </div>
             {fields.length === 0 && (
               <p className={clsx("italic text-sm text-muted-foreground mb-2")}>

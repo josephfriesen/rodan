@@ -60,7 +60,7 @@ export default function SolutionDataPopover({
           {isAocChecked && isTestChecked && "Uses BOTH?!"}
         </div>
         <PopoverContent className={clsx("w-auto")}>
-          <button
+          <div
             className={clsx("mb-4 gap-2 flex flex-row")}
             onClick={() =>
               handleMarkData({
@@ -76,9 +76,8 @@ export default function SolutionDataPopover({
             >
               Uses live data
             </label>
-          </button>
-          <button
-            type="button"
+          </div>
+          <div
             className={clsx("flex flex-row gap-2")}
             onClick={() =>
               handleMarkData({
@@ -94,7 +93,7 @@ export default function SolutionDataPopover({
             >
               Uses test data
             </label>
-          </button>
+          </div>
         </PopoverContent>
       </PopoverTrigger>
     </Popover>

@@ -299,6 +299,11 @@ section.solutionEditExplanation {
     .preview {
       @include editorStyles;
       padding-left: 16px;
+
+      .explanation {
+        height: 60vh;
+        overflow-y: auto;
+      }
     }
   }
 

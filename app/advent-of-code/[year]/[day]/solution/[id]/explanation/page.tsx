@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import SolutionDetails from "@ui/solution_details";
 import EditSolutionExplanation from "@ui/edit_solution_explanation";
+import EditSolutionData from "@ui/edit_solution_data";
 import { getSolution } from "@lib/actions/solutions";
 import { updateSolution } from "@lib/actions/solutions";
 import { SolutionType } from "@lib/actions/solutions/types";
@@ -50,10 +51,10 @@ export default async function AOCSolutionExplanationPage({
       <Card>
         <CardContent className={clsx("w-fit-content p-2 pl-8 pr-8")}>
           <SolutionDetails solution={solution} />
-          <Card>
+          <Card className={clsx("p-4")}>
             <CardHeader>
               <CardTitle className={clsx("text-2xl text-center")}>
-                Expanation
+                Explanation
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -63,6 +64,7 @@ export default async function AOCSolutionExplanationPage({
               />
             </CardContent>
           </Card>
+          <EditSolutionData solution={solution} />
         </CardContent>
       </Card>
     </main>

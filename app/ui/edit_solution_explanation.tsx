@@ -4,8 +4,10 @@ import React from "react";
 import styles from "@styles/aoc.module.scss";
 import Editor from "@monaco-editor/react";
 import { Button } from "@components/ui/button";
+import { Card } from "@components/ui/card";
 import FormattedSolution from "./formatted_solution";
 import { useTheme } from "next-themes";
+import clsx from "clsx";
 
 export default function EditSolutionExplanation({
   explanation,
@@ -66,7 +68,9 @@ export default function EditSolutionExplanation({
           <div className={styles.preview}>
             <h3 className={styles.explanationTitle}>Preview</h3>
             {solutionExplanationFormValue && (
-              <FormattedSolution markdown={solutionExplanationFormValue} />
+              <Card className={clsx("p-4", styles.explanation)}>
+                <FormattedSolution markdown={solutionExplanationFormValue} />
+              </Card>
             )}
           </div>
         </div>

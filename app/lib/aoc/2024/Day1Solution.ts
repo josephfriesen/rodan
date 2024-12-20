@@ -11,6 +11,7 @@ export class Day1Solution extends SolutionBuilder {
     this.sortedListRight = [];
     this.distances = [];
     this.inputToSortedLists();
+    this.setSolutions();
   }
 
   private inputToSortedLists(): void {
@@ -50,13 +51,15 @@ export class Day1Solution extends SolutionBuilder {
   get totalSimilarity(): number {
     return this.sortedListLeft.reduce(
       (acc, curr) => acc + this.calculateSimilarity(curr, this.sortedListRight),
-      0,
+      0
     );
   }
 
-  test(): void {
-    console.log(`== [this.totalDistance] ==: ${this.totalDistance}`);
-    console.log(`== [this.totelSimilarity] ==: ${this.totalSimilarity}`);
+  setSolutions(): void {
+    this.solutions = {
+      totalDistance: this.totalDistance,
+      totalSimilarity: this.totalSimilarity,
+    };
   }
 }
 
