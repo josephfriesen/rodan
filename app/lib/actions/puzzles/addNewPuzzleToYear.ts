@@ -9,7 +9,7 @@ import { NewPuzzleDataType } from "./types";
  * @returns a stubbed puzzle data, with the id, day, url, and year, or an error
  */
 export async function addNewPuzzleToYear(
-  id: number,
+  id: number
 ): Promise<{ puzzle: NewPuzzleDataType } | { error: Error }> {
   try {
     if (!id) {
