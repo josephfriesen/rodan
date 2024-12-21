@@ -41,6 +41,7 @@ span.code {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
+    --foreground-accent: 222.2 95% 9.5%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
@@ -68,6 +69,7 @@ span.code {
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
+    --foreground-accent: 322 0% 90%;
     --card: 222.2 83% 10.1%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;

@@ -1,5 +1,5 @@
-type EntryType = string | number;
-type CoordinatesType = [number, number] | null;
+export type EntryType = string | number;
+export type CoordinatesType = [number, number] | null;
 
 export default class Matrix {
   matrix: Array<Array<EntryType>>;
@@ -21,6 +21,9 @@ export default class Matrix {
   }
 
   insertEntry(coordinates: CoordinatesType, entry: EntryType): void {
+    if (!coordinates) {
+      return;
+    }
     const [i, j] = coordinates;
     this.matrix[i][j] = entry;
   }
@@ -139,7 +142,7 @@ export default class Matrix {
   traversal(coordinates: CoordinatesType, direction: string): CoordinatesType {
     if (!coordinates || !Matrix.DIRECTIONS[direction]) {
       throw new TypeError(
-        `invalid entry or direction. coordinates: ${coordinates}, direction: ${direction}, Matrix.DIRECTIONS[direction]: ${Matrix.DIRECTIONS[direction]}`,
+        `invalid entry or direction. coordinates: ${coordinates}, direction: ${direction}, Matrix.DIRECTIONS[direction]: ${Matrix.DIRECTIONS[direction]}`
       );
     }
 
@@ -156,11 +159,14 @@ export default class Matrix {
       [SE, (i: number, j: number) => this.coordinatesSE(i, j)],
     ]);
 
-    return coordinateMap.get(direction)(i, j);
+    return coordinateMap.get(direction)?.(i, j) ?? null;
   }
 
-  inbounds(entry: EntryType): boolean {
-    const [a, b] = entry;
+  inbounds(coordinates: CoordinatesType): boolean {
+    if (!coordinates) {
+      return false;
+    }
+    const [a, b] = coordinates;
     return a >= 0 && a < this.height && b >= 0 && b < this.width;
   }
 
@@ -172,7 +178,10 @@ export default class Matrix {
     return this.matrix
       .map((row, i) => row.map((entry, j) => [i, j] as CoordinatesType))
       .flat()
-      .filter((coordinates) => this.entry(...coordinates) === value);
+      .filter(
+        (coord: CoordinatesType) =>
+          coord !== null && this.entry(...coord) === value
+      );
   }
 
   clone(): Matrix {

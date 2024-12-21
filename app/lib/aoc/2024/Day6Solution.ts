@@ -23,7 +23,7 @@ export default class Day6Solution extends SolutionBuilder {
 
   initializeMatrix(): void {
     this.initial = new Matrix(
-      this.input.split("\n").map((line) => line.split("")),
+      this.input.split("\n").map((line) => line.split(""))
     );
 
     // replace the guard character with one of our direction traversal keys, easier that way.
@@ -32,7 +32,7 @@ export default class Day6Solution extends SolutionBuilder {
         if (this.GUARDS.includes(this.initial.entry(i, j))) {
           this.initial.insertEntry(
             [i, j],
-            this.DIRECTIONS[this.GUARDS.indexOf(this.initial.entry(i, j))],
+            this.DIRECTIONS[this.GUARDS.indexOf(this.initial.entry(i, j))]
           );
           this.GUARD_START = [i, j];
         } else if (this.initial.entry(i, j) === this.STOP) {
@@ -45,7 +45,7 @@ export default class Day6Solution extends SolutionBuilder {
   get guardPosition(): [number, number] {
     if (!this.GUARD_START) {
       throw new Error(
-        "guard not found. was matrix initialized properly? is input valid?",
+        "guard not found. was matrix initialized properly? is input valid?"
       );
     }
 
@@ -87,12 +87,7 @@ export default class Day6Solution extends SolutionBuilder {
   }
 
   get visitedCount(): number {
-    if (this.isCached && this.cachedSolution.visitedCount) {
-      return this.cachedSolution.visitedCount;
-    }
-
     const solution: number = this.guardTraversal().countOccurences(this.MARKED);
-    this.cacheSolution("visitedCount", solution);
     return solution;
   }
 
@@ -143,10 +138,6 @@ export default class Day6Solution extends SolutionBuilder {
   }
 
   get countGuardLoops(): number {
-    if (this.isCached && this.cachedSolution.countGuardLoops) {
-      return this.cachedSolution.countGuardLoops;
-    }
-
     const obstructionsToCheck: Array<[number, number]> =
       this.initial.allOccurencePositions(".");
     const solution: number = obstructionsToCheck.reduce((acc, obstruction) => {
@@ -157,7 +148,6 @@ export default class Day6Solution extends SolutionBuilder {
       }
     }, 0);
 
-    this.cacheSolution("countGuardLoops", solution);
     return solution;
   }
 }

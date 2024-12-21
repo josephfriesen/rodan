@@ -17,12 +17,13 @@ export function RunSolution({
   ] = React.useState(false);
   const letsGetSolution = async (): Promise<void> => {
     setLoading(true);
-    const response = await handleRunSolution().finally(() => setLoading(false));
-    console.log(response); // eslint-disable-line no-console
+    handleRunSolution().finally(() => {
+      setLoading(false);
+    });
   };
 
   return (
-    <Card className={clsx("p-6")}>
+    <Card className={clsx("p-6 h-full")}>
       <Button
         variant="outline"
         onClick={() => {

@@ -3,7 +3,9 @@ import { SolutionType } from "./types";
 import { getSolution } from "./getSolution";
 import { updateSolutionDataTemplate } from "./updateSolutionDataTemplate";
 
-export async function runSolution(id: number) {
+export async function runSolution(
+  id: number
+): Promise<{ solution: SolutionType; pathToClass: string } | { error: Error }> {
   try {
     const prisma = new PrismaClient();
 

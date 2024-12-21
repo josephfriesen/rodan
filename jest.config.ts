@@ -201,6 +201,8 @@ const config: Config = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+
+  testTimeout: 5000,
 };
 
 export default createJestConfig(config);

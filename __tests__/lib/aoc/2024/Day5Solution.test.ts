@@ -1,5 +1,5 @@
-import Day5Solution from "@solutions/2024/Day5Solution";
-import DirectedGraph from "@solutions/DirectedGraph";
+import Day5Solution from "@lib/aoc/2024/Day5Solution";
+import DirectedGraph from "@lib/aoc/DirectedGraph";
 
 const input = `47|53
 97|13

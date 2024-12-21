@@ -1,5 +1,6 @@
 .explanationPreview {
   font-size: 0.8rem;
+  padding-bottom: 50vh;
 }
 
 .explanationPreview h1 {
@@ -15,7 +16,7 @@
 
 .explanationPreview h3 {
   font-size: 1rem;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .explanationPreview h4 {
@@ -24,11 +25,11 @@
 }
 
 .explanationPreview ul {
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
 .explanationPreview ul li {
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   margin-left: 16px;
 }
 
@@ -37,18 +38,19 @@
   font-size: 0.8rem;
   font-family: "Inconsolata Nerd Font", "SF Mono", "Segoe UI Mono",
     "Roboto Mono", Menlo, Courier, monospace;
-  background-color: hsl(var(--foreground));
+  background-color: hsl(var(--foreground-accent));
   color: hsl(var(--background));
   border-radius: 6px;
 }
 
 .explanationPreview pre {
-  margin: 8px;
+  margin: 16px 32px;
+  margin-right: 32px;
   padding: 8px;
   font-size: 0.8rem;
   font-family: "Inconsolata Nerd Font", "SF Mono", "Segoe UI Mono",
     "Roboto Mono", Menlo, Courier, monospace;
-  background-color: hsl(var(--foreground));
+  background-color: hsl(var(--foreground-accent));
   color: hsl(var(--background));
   border-radius: 6px;
 }
@@ -57,4 +59,12 @@
   margin: 0;
   padding: 0;
   background-color: transparent;
+}
+
+.explanationPreview p {
+  margin-bottom: 4px;
+}
+
+.explanationPreview hr {
+  margin: 32px 0;
 }

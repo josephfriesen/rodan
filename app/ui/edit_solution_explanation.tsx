@@ -54,7 +54,7 @@ export default function EditSolutionExplanation({
                 minimap: { enabled: false },
                 automaticLayout: true,
                 wordWrap: "on",
-                scrollBeyondLastLine: false,
+                scrollBeyondLastLine: true,
                 folding: false,
                 fontSize: 14,
                 fontFamily:

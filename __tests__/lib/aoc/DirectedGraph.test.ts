@@ -1,4 +1,4 @@
-import DirectedGraph from "@solutions/DirectedGraph";
+import DirectedGraph from "@lib/aoc/DirectedGraph";
 
 describe("DirectedGraph", () => {
   let graph: DirectedGraph;

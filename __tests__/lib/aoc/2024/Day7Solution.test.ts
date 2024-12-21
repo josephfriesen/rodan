@@ -1,4 +1,4 @@
-import Day7Solution from "@solutions2024/Day7Solution";
+import Day7Solution from "@lib/aoc/2024/Day7Solution";
 
 describe("Day 7 Solution", () => {
   let solution: Day7Solution;

@@ -1,5 +1,5 @@
-import Day8Solution from "@solutions/2024/Day8Solution";
-import Matrix from "@solutions/Matrix";
+import Day8Solution from "@lib/aoc/2024/Day8Solution";
+import Matrix from "@lib/aoc/Matrix";
 
 const input = `............
 ........0...

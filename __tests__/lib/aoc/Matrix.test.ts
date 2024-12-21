@@ -1,4 +1,4 @@
-import Matrix from "@solutions/Matrix";
+import Matrix from "@lib/aoc/Matrix";
 
 const input = `MMMSXXMASM
 MSAMXMSMSA
