@@ -51,7 +51,7 @@ export default async function AOCSolutionExplanationPage({
       <Card>
         <CardContent className={clsx("w-fit-content p-2 pl-8 pr-8")}>
           <SolutionDetails solution={solution} />
-          <Card className={clsx("p-4")}>
+          <Card className={clsx("p-4", styles.cardInnerBg)}>
             <CardHeader>
               <CardTitle className={clsx("text-2xl text-center")}>
                 Explanation

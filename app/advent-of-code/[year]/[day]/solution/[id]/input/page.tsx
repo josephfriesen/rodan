@@ -1,6 +1,5 @@
 import React from "react";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 import SolutionDetails from "@ui/solution_details";
 import EditSolutionInput from "@ui/edit_solution_input";
 import EditSolutionData from "@ui/edit_solution_data";
@@ -9,6 +8,7 @@ import { SolutionType } from "@lib/actions/solutions/types";
 import clsx from "clsx";
 import styles from "@styles/aoc.module.scss";
 import { Card, CardContent, CardHeader, CardTitle } from "@components/ui/card";
+import handleRefresh from "@lib/handleRefresh";
 
 export default async function AOCSolutionInputPage({
   params,
@@ -35,9 +35,7 @@ export default async function AOCSolutionInputPage({
     });
 
     if ("solution" in response) {
-      const updatedSolution = response.solution;
-      revalidatePath(updatedSolution.url);
-      redirect(updatedSolution.url);
+      handleRefresh();
     } else {
       console.error(response.error);
     }
@@ -48,7 +46,7 @@ export default async function AOCSolutionInputPage({
       <Card className={clsx("mb-16")}>
         <CardContent className={clsx("w-fit-content p-4 pl-8 pr-8")}>
           <SolutionDetails solution={solution} />
-          <Card className={clsx("p-4")}>
+          <Card className={clsx("p-4", styles.cardInnerBg)}>
             <CardHeader>
               <CardTitle className={clsx("text-2xl text-center")}>
                 Input

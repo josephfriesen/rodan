@@ -49,7 +49,7 @@ class Day7Solution extends SolutionBuilder {
   binaryStrings(n: number): Array<string> {
     if (n < 0) {
       throw new TypeError(
-        "Expected non-negative integer n, how can you have a negative-length string come on bozo.",
+        "Expected non-negative integer n, how can you have a negative-length string come on bozo."
       );
     }
 
@@ -99,9 +99,9 @@ class Day7Solution extends SolutionBuilder {
 
   checkCalibrationValidity(
     c: Calibration,
-    stringBuilder: (n: number) => Array<string> = this.binaryStrings,
+    stringBuilder: (n: number) => Array<string> = this.binaryStrings
   ): boolean {
-    const { goal, inputs, operations } = c;
+    const { goal, operations } = c;
 
     const strings: Array<string> = stringBuilder(operations);
 
@@ -109,7 +109,7 @@ class Day7Solution extends SolutionBuilder {
       const inputQueue: Queue = this.generateQueue(c.inputs);
       let total: number = inputQueue.dequeue();
       const operationQueue: Queue = this.generateQueue(
-        this.binaryOperations(string),
+        this.binaryOperations(string)
       );
 
       while (!inputQueue.isEmpty()) {

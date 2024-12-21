@@ -12,7 +12,7 @@ import { SolutionType, SELECT_SOLUTIONS } from "./types";
  */
 export async function getAocDataSolutionByDay(
   day: number,
-  year: number,
+  year: number
 ): Promise<{ solution: SolutionType } | { error: Error }> {
   try {
     const prisma = new PrismaClient();
@@ -43,7 +43,7 @@ export async function getAocDataSolutionByDay(
 
     if (puzzle.solutions.length === 0) {
       throw new Error(
-        `no solution with AOC input found for day ${day} and year ${year}`,
+        `no solution with AOC input found for day ${day} and year ${year}`
       );
     }
 

@@ -13,7 +13,7 @@ export default class Day5Solution extends SolutionBuilder {
 
   initializeGraph(): void {
     const edges: Array<RegExpMatchArray> = Array.from(
-      this.input.matchAll(/\d+\|\d+/g),
+      this.input.matchAll(/\d+\|\d+/g)
     );
     for (const edge of edges) {
       const [from, to]: Array<string> = edge[0].split("|");

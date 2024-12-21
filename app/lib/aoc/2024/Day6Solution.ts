@@ -135,6 +135,8 @@ export default class Day6Solution extends SolutionBuilder {
         position = nextPosition;
       }
     }
+
+    return false;
   }
 
   get countGuardLoops(): number {

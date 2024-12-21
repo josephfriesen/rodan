@@ -418,3 +418,7 @@ button.actionButton {
     font-size: 0.8rem;
   }
 }
+
+.cardInnerBg {
+  background-color: hsl(var(--card-inner-background));
+}

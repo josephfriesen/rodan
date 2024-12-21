@@ -7,7 +7,7 @@ interface AOCInput {
 
 export const getAOCInput = async (
   day: number,
-  year: string = "2022",
+  year: string = "2022"
 ): Promise<AOCInput> => {
   const inputDirectory = path.join(process.cwd(), `inputs/aoc${year}`);
   const inputFileName = `day${day.toString().padStart(2, "0")}.txt`;

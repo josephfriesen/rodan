@@ -5,21 +5,37 @@ import { Card } from "@components/ui/card";
 import { Button } from "@components/ui/button";
 import clsx from "clsx";
 import { Loader2 } from "lucide-react";
+import { SolutionType } from "@lib/actions/solutions/types";
 
 export function RunSolution({
-  handleRunSolution,
+  handleRefresh,
+  solution,
 }: {
-  handleRunSolution: () => Promise<void>;
+  handleRefresh: () => Promise<void>;
+  solution: SolutionType;
 }): JSX.Element {
   const [loading, setLoading]: [
     boolean,
     React.Dispatch<React.SetStateAction<boolean>>,
   ] = React.useState(false);
+
   const letsGetSolution = async (): Promise<void> => {
     setLoading(true);
-    handleRunSolution().finally(() => {
-      setLoading(false);
-    });
+    await fetch("/advent-of-code/api/solution/run", {
+      method: "PATCH",
+      body: JSON.stringify({ id: solution.id }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        return res.json;
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setLoading(false);
+        handleRefresh();
+      });
   };
 
   return (

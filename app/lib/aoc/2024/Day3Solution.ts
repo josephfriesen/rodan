@@ -67,14 +67,14 @@ export class Day3Solution extends SolutionBuilder {
   get sumOfProducts(): number {
     return this.products.reduce(
       (acc, curr) => acc + this.calculateProduct(curr),
-      0,
+      0
     );
   }
 
   get sumOfInstructedProducts(): number {
     return this.instructedProducts.reduce(
       (acc, curr) => acc + this.calculateProduct(curr),
-      0,
+      0
     );
   }
 }

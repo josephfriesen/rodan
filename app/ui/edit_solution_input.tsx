@@ -4,6 +4,7 @@ import React from "react";
 import styles from "@styles/aoc.module.scss";
 import Editor from "@monaco-editor/react";
 import { Button } from "@components/ui/button";
+import { Loader2 } from "lucide-react";
 import { useTheme } from "next-themes";
 
 export default function EditSolutionInput({
@@ -17,9 +18,16 @@ export default function EditSolutionInput({
     string,
     React.Dispatch<React.SetStateAction<string>>,
   ] = React.useState(inputValue);
+  const [loading, setLoading]: [
+    boolean,
+    React.Dispatch<React.SetStateAction<boolean>>,
+  ] = React.useState(false);
 
   const submitNewInput = async (): Promise<void> => {
-    handleSubmit(solutionInputFormValue);
+    setLoading(true);
+
+    await handleSubmit(solutionInputFormValue);
+    setLoading(false);
   };
 
   const { theme } = useTheme();
@@ -63,6 +71,13 @@ export default function EditSolutionInput({
         <div className={styles.formActions}>
           <Button variant="outline" onClick={submitNewInput}>
             Update Input
+            {loading && (
+              <Loader2
+                className="animate-spin ml-2"
+                size={16}
+                strokeWidth={2}
+              />
+            )}
           </Button>
         </div>
       </div>

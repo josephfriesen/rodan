@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { YearType, SELECT_YEARS } from "./types";
 
 export async function getYear(
-  year: number,
+  year: number
 ): Promise<{ year: YearType } | { error: Error }> {
   try {
     const prisma = new PrismaClient();

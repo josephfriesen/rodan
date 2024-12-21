@@ -32,6 +32,16 @@ const formSchema = z.object({
   ),
 });
 
+/*
+ * OK, so we built this dynamic form to show an input row for each key in solution.solutionData. Great!
+ * Except when we run solution, this data gets set automatically from the underlying solution instance.
+ * So if you make any manual changes, they just get overwritten with what that solution class says
+ * solutionData should be. So this shouldn't really be a form at all, we should just show what the
+ * solutionData is. Going to leave this for now, just because I like how we managed to wrangle react-hook-form
+ * to do what we needed it to do (we had a bear of a time with re-renders on input change pulling focus from
+ * the input element) and as an example if we need to build a form in this manner in the future, but really
+ * we should get rid of this.
+ */
 const EditSolutionDetails = ({
   solutionData,
   handleSubmit,

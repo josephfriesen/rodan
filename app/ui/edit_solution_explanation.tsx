@@ -8,6 +8,7 @@ import { Card } from "@components/ui/card";
 import FormattedSolution from "./formatted_solution";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
+import { Loader2 } from "lucide-react";
 
 export default function EditSolutionExplanation({
   explanation,
@@ -20,6 +21,10 @@ export default function EditSolutionExplanation({
     string,
     React.Dispatch<React.SetStateAction<string>>,
   ] = React.useState(explanation);
+  const [loading, setLoading]: [
+    boolean,
+    React.Dispatch<React.SetStateAction<boolean>>,
+  ] = React.useState(false);
 
   const { theme } = useTheme();
 
@@ -31,7 +36,9 @@ export default function EditSolutionExplanation({
   }, [theme]);
 
   const submitNewExplanation = async (): Promise<void> => {
+    setLoading(true);
     handleSubmit(solutionExplanationFormValue);
+    setLoading(false);
   };
 
   return (
@@ -78,6 +85,9 @@ export default function EditSolutionExplanation({
       <div className={styles.formActions}>
         <Button variant="outline" onClick={submitNewExplanation}>
           Update Explanation
+          {loading && (
+            <Loader2 className="animate-spin ml-2" size={16} strokeWidth={2} />
+          )}
         </Button>
       </div>
     </section>

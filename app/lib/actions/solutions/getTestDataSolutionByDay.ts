@@ -12,7 +12,7 @@ import { SolutionType, SELECT_SOLUTIONS } from "./types";
  */
 export async function getTestDataSolutionByDay(
   day: number,
-  year: number,
+  year: number
 ): Promise<{ solution: SolutionType } | { error: Error }> {
   try {
     const prisma = new PrismaClient();

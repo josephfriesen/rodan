@@ -16,7 +16,7 @@ import { NewSolutionDataType } from "./types";
  */
 export async function createNewSolution(
   day: number,
-  year: number,
+  year: number
 ): Promise<{ solution: NewSolutionDataType } | { error: Error }> {
   try {
     const prisma = new PrismaClient();

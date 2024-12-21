@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
-    console.log(`GET ${req.url}`);
+    console.log(`GET ${req.url}`); // eslint-disable-line no-console
 
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
@@ -24,7 +24,6 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       await getSolution(Number(id));
 
     if ("error" in actionResponse) {
-      console.error(actionResponse.error);
       throw new Error(actionResponse.error.message);
     }
 
@@ -44,7 +43,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
 export async function PATCH(req: NextRequest): Promise<NextResponse> {
   try {
-    console.log(`PATCH ${req.url}`);
+    console.log(`PATCH ${req.url}`); // eslint-disable-line no-console
 
     const { id, payload } = await req.json();
 
@@ -75,7 +74,7 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
  */
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
-    console.log(`POST ${req.url}`);
+    console.log(`POST ${req.url}`); // eslint-disable-line no-console
 
     const { puzzleId, data } = await req.json();
 
@@ -140,8 +139,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         },
       })
       .then((res) => {
-        console.log("///////// prisma create record success ////////");
-        console.log(res);
+        console.log("///////// prisma create record success ////////"); // eslint-disable-line no-console
+        console.log(res); // eslint-disable-line no-console
         return res;
       })
       .catch((err) => {

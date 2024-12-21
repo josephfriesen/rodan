@@ -17,6 +17,7 @@
     "allowImportingTsExtensions": true,
     "baseUrl": "./",
     "paths": {
+      "@app/*": ["app/*"],
       "@ui/*": ["app/ui/*"],
       "@components/*": ["app/ui/components/*"],
       "@lib/*": ["app/lib/*"],
