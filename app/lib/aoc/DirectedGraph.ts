@@ -40,7 +40,7 @@ export default class DirectedGraph {
   }
 
   getDegree(node: string | number): number {
-    return this.inDegrees.get(node) || 0;
+    return (this.inDegrees.get(node) || 0) as number;
   }
 
   nodeExists(from: string | number): boolean {
@@ -48,7 +48,7 @@ export default class DirectedGraph {
   }
 
   edgeExists(from: string | number, to: string | number): boolean {
-    return this.nodeExists(from) && this.nodes.get(from)?.has(to);
+    return !!this.nodeExists(from) && !!this.nodes.get(from)?.has(to);
   }
 
   pathExists(from: string | number, to: string | number): boolean {
@@ -56,23 +56,28 @@ export default class DirectedGraph {
     const queue = [from];
     while (queue.length > 0) {
       const node = queue.shift();
-      if (node === to) {
-        return true;
+      if (node !== undefined) {
+        if (node === to) {
+          return true;
+        }
+        this.nodes.get(node)?.forEach((n) => {
+          queue.push(n);
+        });
       }
-      this.nodes.get(node)?.forEach((n) => {
-        queue.push(n);
-      });
     }
     return false;
   }
 
-  DFS(node, visited, stack) {
-      visited[node] = true;
-      for (const neighbor of this.getNode(node)) {
-          if (!visited[neighbor]) {
-              this.DFS(neighbor, visited, stack);
-          }
+  DFS(node: string | number, visited = {}, stack: Array<string | number> = []) {
+    visited[node] = true;
+    const neighborhood = this.getNode(node);
+    if (neighborhood) {
+      for (const neighbor of neighborhood) {
+        if (!visited[neighbor]) {
+          this.DFS(neighbor, visited, stack);
+        }
       }
-      stack.push(node);
+    }
+    stack.push(node);
   }
 }

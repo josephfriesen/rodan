@@ -7,6 +7,9 @@ solving with object-oriented programming, Node.js and Typescript, with vaguely m
 ###### Installation
 
 (1) Clone repo
+
 (2) `npm i`
+
 (3) `npm run dev`
+
 (4) This repo uses Prisma ORM with a sqlite db. To instantiate a database, run migrations and seed with a teeny tiny bit of data, run `npm run prisma:init`.

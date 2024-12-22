@@ -50,4 +50,54 @@ describe("DirectedGraph", () => {
     expect(graph.getOutDegrees().get("B")).toBe(0);
     expect(graph.getOutDegrees().get("C")).toBe(0);
   });
+
+  describe("DFS", () => {
+    it("should visit all nodes in a connected graph", () => {
+      const graph = new DirectedGraph();
+      graph.addEdge("A", "B");
+      graph.addEdge("B", "C");
+
+      const stack = [];
+      const visited = {};
+      graph.DFS("A", visited, stack);
+
+      expect(visited).toEqual({ A: true, B: true, C: true });
+    });
+
+    it("should not visit nodes that are not reachable", () => {
+      const graph = new DirectedGraph();
+      graph.addEdge("A", "B");
+
+      const stack = [];
+      const visited = {};
+      graph.DFS("A", visited, stack);
+
+      expect(visited).toEqual({ A: true, B: true });
+    });
+
+    it("should handle cycles in the graph", () => {
+      const graph = new DirectedGraph();
+      graph.addEdge("A", "B");
+      graph.addEdge("B", "C");
+      graph.addEdge("C", "A");
+
+      const stack = [];
+      const visited = {};
+      graph.DFS("A", visited, stack);
+
+      expect(visited).toEqual({ A: true, B: true, C: true });
+    });
+
+    it("should handle multiple connected components", () => {
+      const graph = new DirectedGraph();
+      graph.addEdge("A", "B");
+      graph.addEdge("C", "D");
+
+      const stack = [];
+      const visited = {};
+      graph.DFS("A", visited, stack);
+
+      expect(visited).toEqual({ A: true, B: true });
+    });
+  });
 });

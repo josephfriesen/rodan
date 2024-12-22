@@ -1,35 +1,41 @@
 import DirectedGraph from "./DirectedGraph";
 
 export default class DirectedAcyclicGraph extends DirectedGraph {
-  pathExists(from: string | number, to: string | number): boolean {
-    // return super.pathExists(from, to) && this.getDegree(from) === 1;
-    return super.pathExists(from, to);
-  }
-
-
-  DFS(node, visited, stack) {
-      visited[node] = true;
-      for (const neighbor of this.getNode(node)) {
-          if (!visited[neighbor]) {
-              this.DFS(neighbor, visited, stack);
-          }
-      }
-      stack.push(node);
-  }
-
   topologicalSort(): Array<string | number> {
-      let stack = [];
-      let visited = {};
-      for (const [node, adj] of this.getNodes()) {
-          visited[node] = false;
-      }
+    const stack = [];
+    const visited = {};
+    for (const [node] of this.getNodes()) {
+      visited[node] = false;
+    }
 
-      for (const [node, adj] of this.getNodes()) {
-          if (!visited[node]) {
-              this.DFS(node, visited, stack);
+    for (const [node] of this.getNodes()) {
+      if (!visited[node]) {
+        this.DFS(node, visited, stack);
+      }
+    }
+
+    return stack.reverse();
+  }
+
+  countPaths(source: string | number, dest: string | number) {
+    let sum = 0;
+
+    /* DFS on acyclic graph. graph must be acyclic, otherwise since this is
+     * not keeping track of visited nodes, will eventually lead to infinite loop.
+     */
+    const search = (v: string | number): void => {
+      const neighborhood: Set<string | number> | undefined = this.getNode(v);
+      if (neighborhood) {
+        for (const neighbor of neighborhood) {
+          if (neighbor === dest) {
+            sum++;
           }
+          search(String(neighbor));
+        }
       }
+    };
 
-      return stack.reverse();
+    search(source);
+    return sum;
   }
 }
