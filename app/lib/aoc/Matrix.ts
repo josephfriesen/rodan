@@ -80,6 +80,10 @@ export default class Matrix {
     return this.entry(i + 1, j + 1);
   }
 
+  neighborhoodCardinal(i: number, j: number): CoordinatesType[] {
+      return [this.coordinatesN(i, j), this.coordinatesE(i, j), this.coordinatesS(i, j), this.coordinatesW(i, j)].filter(Boolean);
+  }
+
   coordinatesW(i: number, j: number): CoordinatesType {
     if (j - 1 < 0) return null;
 

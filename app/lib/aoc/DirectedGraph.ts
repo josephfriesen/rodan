@@ -65,4 +65,14 @@ export default class DirectedGraph {
     }
     return false;
   }
+
+  DFS(node, visited, stack) {
+      visited[node] = true;
+      for (const neighbor of this.getNode(node)) {
+          if (!visited[neighbor]) {
+              this.DFS(neighbor, visited, stack);
+          }
+      }
+      stack.push(node);
+  }
 }

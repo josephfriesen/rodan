@@ -1,5 +1,5 @@
-import DirectedAcyclicGraph from "./DirectedAcyclicGraph"; 
-import Matrix from "./Matrix";
+import DirectedAcyclicGraph from "../DirectedAcyclicGraph"; 
+import Matrix from "../Matrix";
 
 console.log("\n\n ================== \n");
 /*
@@ -176,8 +176,9 @@ const paths = (source, dest) => {
     return sum;
 }
 
+const destinations = map.allOccurencePositions(9).map((pos) => JSON.stringify(pos));
+
 const pathRating = (source) => {
-    const destinations = map.allOccurencePositions(9).map((pos) => JSON.stringify(pos));
     let sum = 0;
     for (const dest of destinations) {
         const pathCount = paths(source, dest);
@@ -194,5 +195,4 @@ let ratingsSum = 0;
 for (const source of sources) {
     ratingsSum += pathRating(source);
 }
-console.log(ratingsSum);
-
+console.log(`part 2 solution: `, ratingsSum);

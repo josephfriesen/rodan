@@ -2,33 +2,34 @@ import DirectedGraph from "./DirectedGraph";
 
 export default class DirectedAcyclicGraph extends DirectedGraph {
   pathExists(from: string | number, to: string | number): boolean {
-    return super.pathExists(from, to) && this.getDegree(from) === 1;
+    // return super.pathExists(from, to) && this.getDegree(from) === 1;
+    return super.pathExists(from, to);
+  }
+
+
+  DFS(node, visited, stack) {
+      visited[node] = true;
+      for (const neighbor of this.getNode(node)) {
+          if (!visited[neighbor]) {
+              this.DFS(neighbor, visited, stack);
+          }
+      }
+      stack.push(node);
   }
 
   topologicalSort(): Array<string | number> {
-    const sorted: Array<string | number> = [];
-    const visited: Set<string | number> = new Set();
-    const stack: Array<string | number> = [];
-
-    for (const node of this.getNodes().keys()) {
-      if (!visited.has(node)) {
-        stack.push(node);
+      let stack = [];
+      let visited = {};
+      for (const [node, adj] of this.getNodes()) {
+          visited[node] = false;
       }
-    }
 
-    while (stack.length > 0) {
-      const node = stack.pop();
-      if (node) {
-        sorted.push(node);
-        visited.add(node);
-        this.getNode(node)?.forEach((n) => {
-          if (!visited.has(n)) {
-            stack.push(n);
+      for (const [node, adj] of this.getNodes()) {
+          if (!visited[node]) {
+              this.DFS(node, visited, stack);
           }
-        });
       }
-    }
 
-    return sorted;
+      return stack.reverse();
   }
 }
