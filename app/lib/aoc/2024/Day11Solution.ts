@@ -71,6 +71,26 @@ export default class Day11Solution extends SolutionBuilder {
   }
 
   memoizedCountAfterBlinks(numbers: number[], times: number) {
+    /*
+     *
+    the brute force method of blinking the entire array 75 times or
+    even blinking 75 times with the improvement of calulating zeroPath
+    will take forever (and run out of memory well before finishing).
+    but since it doesn't matter what order the numbers are in, we can
+    instead just keep track of how many occurences of each number
+    are in the array at a given step. then, on the next step, blink
+    that number once, and set the number of occurrences of the blink
+    number(s) for the subsequence step.
+    e.g. numbers at step 0: [125, 17]
+    the occurrence map at step 0 is Map({ 125: 1, 17: 1 })
+    we apply blink to the keys of map at step 1 and copy the value over
+    to build map at step 1: Map({ 253000: 1, 1: 1, 17: 1 })
+    as we iterate, we can have two keys in our prev. step map blink
+    to the same number, so we need to either set a new entry in the map
+    or add to an existing entry
+    *
+    */
+
     let blinkMap: Map<number, number> = new Map();
 
     for (const num of numbers) {
@@ -79,9 +99,10 @@ export default class Day11Solution extends SolutionBuilder {
 
     for (let i = 1; i <= times; i++) {
       const newMap: Map<number, number> = new Map();
-      const update = (num, blinked) => {
+      const update = (num: number, blinked: number) => {
         const startTotal = newMap.get(blinked) ?? 0;
-        newMap.set(blinked, startTotal + blinkMap.get(num));
+        const newTotal = blinkMap.get(num) ?? 0;
+        newMap.set(blinked, startTotal + newTotal);
       };
 
       for (const num of blinkMap.keys()) {
@@ -112,5 +133,6 @@ export default class Day11Solution extends SolutionBuilder {
 
   setSolution(): void {
     this.solutions["totalAfterBlinks"] = this.totalAfterBlinks;
+    this.solutions["totalAfterLotsOfBlinks"] = this.totalAfterBlinks;
   }
 }
