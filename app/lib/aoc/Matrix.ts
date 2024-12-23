@@ -81,7 +81,12 @@ export default class Matrix {
   }
 
   neighborhoodCardinal(i: number, j: number): CoordinatesType[] {
-      return [this.coordinatesN(i, j), this.coordinatesE(i, j), this.coordinatesS(i, j), this.coordinatesW(i, j)].filter(Boolean);
+    return [
+      this.coordinatesN(i, j),
+      this.coordinatesE(i, j),
+      this.coordinatesS(i, j),
+      this.coordinatesW(i, j),
+    ].filter(Boolean);
   }
 
   coordinatesW(i: number, j: number): CoordinatesType {
