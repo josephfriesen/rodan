@@ -13,4 +13,12 @@ export class SolutionBuilder {
   dayString(): string {
     return this.DAY.toString().padStart(2, "0");
   }
+
+  mod(n: number, modulo: number) {
+    return ((n % modulo) + modulo) % modulo;
+  }
+
+  c(...args: any[]) {
+    console.log(...args); // eslint-disable-line no-console
+  }
 }

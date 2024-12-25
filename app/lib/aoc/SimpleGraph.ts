@@ -19,11 +19,14 @@ export default class SimpleGraph {
   }
 
   vertex(v: VertexType): VertexType | null {
-    const vertex = this.vertices.find((u) => u === v);
-    if (!vertex) {
+    if (!this.vertexExists(v)) {
       return null;
     }
-    return vertex;
+    return this.vertices.find((u) => u === v);
+  }
+
+  vertexExists(v: VertexType): boolean {
+    return this.vertices.includes(v);
   }
 
   neighborhood(v: VertexType): NeighborhoodType {
@@ -32,15 +35,6 @@ export default class SimpleGraph {
       throw new Error(`Neighborhood not found for vertex ${v}`);
     }
     return neighborhood;
-  }
-
-  degree(v: VertexType): number | null {
-    const vertex = this.vertex(v);
-    if (!vertex) {
-      return null;
-    }
-    const length = this.neighborhood(vertex)?.length;
-    return length !== undefined ? length : null;
   }
 
   edgeExists(u: VertexType, v: VertexType): boolean {
@@ -71,6 +65,23 @@ export default class SimpleGraph {
 
   get order(): number {
     return this.vertices.length;
+  }
+
+  degree(v: VertexType): number | null {
+    const vertex = this.vertex(v);
+    if (!vertex) {
+      return null;
+    }
+    const length = this.neighborhood(vertex)?.length;
+    return length !== undefined ? length : null;
+  }
+
+  degreeSum(): number {
+    let sum = 0;
+    for (const vertex of this.vertices) {
+      sum += this.degree(vertex) as number;
+    }
+    return sum;
   }
 
   BFS(v: VertexType, cb: (u: VertexType) => any): void {
@@ -151,15 +162,18 @@ export default class SimpleGraph {
     );
   }
 
-  printGraph(): void {
-    const vertices = this.getVertices();
+  printGraph(): string {
+    const vertices: VertexType[] = this.getVertices();
+    let outputString: string = "";
     for (const v of vertices) {
       const neighborhood = this.neighborhood(v);
-      let neighborsString = "";
+      let neighborsString: string = "";
       for (const u of neighborhood.values()) {
         neighborsString += `${u} `;
       }
-      console.log(`vertex (${v}) => [${neighborsString.trim()}]`); // eslint-disable-line no-console
+      // console.log(`vertex (${v}) => [${neighborsString.trim()}]`); // eslint-disable-line no-console
+      outputString += `vertex (${v}) => [${neighborsString.trim()}]\n`;
     }
+    return outputString;
   }
 }

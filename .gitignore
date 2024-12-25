@@ -38,3 +38,5 @@ yarn-error.log*
 /.swc
 
 */dev.db
+
+/tmp

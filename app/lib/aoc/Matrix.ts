@@ -89,6 +89,22 @@ export default class Matrix {
     ].filter(Boolean);
   }
 
+  neighborhoodOrdinal(i: number, j: number): CoordinatesType[] {
+    return [
+      this.coordinatesNE(i, j),
+      this.coordinatesNW(i, j),
+      this.coordinatesSE(i, j),
+      this.coordinatesSW(i, j),
+    ].filter(Boolean);
+  }
+
+  neighborhoodAll(i: number, j: number): CoordinatesType[] {
+    return [
+      ...this.neighborhoodCardinal(i, j),
+      ...this.neighborhoodOrdinal(i, j),
+    ];
+  }
+
   coordinatesW(i: number, j: number): CoordinatesType {
     if (j - 1 < 0) return null;
 

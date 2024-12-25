@@ -1,9 +1,6 @@
 import { SolutionBuilder } from "@lib/aoc/SolutionBuilder";
 import Matrix, { CoordinatesType, EntryType } from "@lib/aoc/Matrix";
-import SimpleGraph, {
-  VertexType,
-  NeighborhoodType,
-} from "@lib/aoc/SimpleGraph";
+import SimpleGraph, { VertexType } from "@lib/aoc/SimpleGraph";
 
 export default class Day12Solution extends SolutionBuilder {
   map: Matrix;
@@ -151,7 +148,7 @@ export default class Day12Solution extends SolutionBuilder {
       (accumulator: number, currentValue: VertexType) =>
         accumulator + this.corners(currentValue),
       0
-    );
+    ) as number;
   }
 
   regionBulkFencingCost(region: VertexType[]): number {
