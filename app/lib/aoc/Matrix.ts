@@ -28,6 +28,26 @@ export default class Matrix {
     this.matrix[i][j] = entry;
   }
 
+  transpose(a: CoordinatesType, b: CoordinatesType): void {
+    if (
+      !a ||
+      !b ||
+      !Array.isArray(a) ||
+      !Array.isArray(b) ||
+      !this.inbounds(a) ||
+      !this.inbounds(b)
+    ) {
+      throw new TypeError(
+        "transpose requires two arguments of type [number, number] each of which is a valid matrix coordinate pair"
+      );
+    }
+
+    const entryA: EntryType = this.entry(a[0], a[1]);
+    const entryB: EntryType = this.entry(b[0], b[1]);
+    this.insertEntry(a, entryB);
+    this.insertEntry(b, entryA);
+  }
+
   entry(i: number, j: number): EntryType {
     return this.matrix[i][j];
   }

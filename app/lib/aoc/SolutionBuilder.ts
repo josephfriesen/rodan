@@ -1,3 +1,5 @@
+import { log } from "node:console";
+
 export class SolutionBuilder {
   DAY: number;
   input: string;
@@ -18,7 +20,7 @@ export class SolutionBuilder {
     return ((n % modulo) + modulo) % modulo;
   }
 
-  c(...args: any[]) {
-    console.log(...args); // eslint-disable-line no-console
+  log(...args: any[]) {
+    log(...args);
   }
 }

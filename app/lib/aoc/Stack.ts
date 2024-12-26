@@ -1,22 +1,25 @@
 type EntryType = any;
 
-export default class Queue {
+export default class Stack {
   list: Array<EntryType>;
 
   constructor() {
     this.list = [];
   }
 
-  enqueue(entry: EntryType): void {
-    this.list.push(entry);
+  push(item: EntryType): void {
+    this.list.push(item);
   }
 
-  dequeue(): EntryType | null {
+  pop(): EntryType {
     if (this.isEmpty()) {
-      return null;
+      throw new Error("stack is empty");
     }
+    return this.list.pop();
+  }
 
-    return this.list.shift();
+  peek(): EntryType {
+    return this.list[this.size() - 1];
   }
 
   size(): number {
@@ -25,10 +28,6 @@ export default class Queue {
 
   isEmpty(): boolean {
     return this.size() === 0;
-  }
-
-  empty(): void {
-    this.list = [];
   }
 
   toString(): string {
