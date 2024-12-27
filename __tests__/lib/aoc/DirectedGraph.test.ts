@@ -100,4 +100,36 @@ describe("DirectedGraph", () => {
       expect(visited).toEqual({ A: true, B: true });
     });
   });
+
+  describe("Dijkstra", () => {
+    it("should implement Dijkstra's algorithm", () => {
+      const graph = new DirectedGraph();
+
+      const [A, B, C, D, E, F] = ["A", "B", "C", "D", "E", "F"];
+      graph.addEdge(A, B, 3);
+      graph.addEdge(A, C, 2);
+      graph.addEdge(A, D, 4);
+      graph.addEdge(B, D, 2);
+      graph.addEdge(C, D, 1);
+      graph.addEdge(C, E, 4);
+      graph.addEdge(D, A, 2);
+      graph.addEdge(E, D, 2);
+      graph.addEdge(F, B, 4);
+
+      const { distances, previous } = graph.Dijkstra("A");
+
+      expect(distances[A]).toBe(0);
+      expect(distances[B]).toBe(3);
+      expect(distances[C]).toBe(2);
+      expect(distances[D]).toBe(3);
+      expect(distances[E]).toBe(6);
+      expect(distances[F]).toBe(Infinity);
+      expect(previous[A]).toBe(undefined);
+      expect(previous[B]).toBe(A);
+      expect(previous[C]).toBe(A);
+      expect(previous[D]).toBe(C);
+      expect(previous[E]).toBe(C);
+      expect(previous[F]).toBe(undefined);
+    });
+  });
 });

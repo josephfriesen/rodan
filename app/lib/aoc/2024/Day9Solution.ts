@@ -130,11 +130,9 @@ export default class Day9Solution extends SolutionBuilder {
           visited[out[fileId]] = true;
           while (filePositions.length > 0) {
             const nextFilePos = filePositions.shift();
+            out[nextFilePos] = ".";
             const nextEmptyPos = emptyPositions.shift();
-            if (nextFilePos && nextEmptyPos) {
-              out[nextFilePos] = ".";
-              out[nextEmptyPos] = fileId;
-            }
+            out[nextEmptyPos] = fileId;
           }
           break;
         }

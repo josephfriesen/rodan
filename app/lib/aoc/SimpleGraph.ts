@@ -2,11 +2,11 @@ import Queue from "@lib/aoc/Queue";
 import Matrix from "@lib/aoc/Matrix";
 
 export type VertexType = string | number;
-export type NeighborhoodType = Array<string | number>;
+export type NeighborhoodType = Array<VertexType>;
 
 export default class SimpleGraph {
-  private vertices: VertexType[];
-  private neighborhoods: Map<VertexType, NeighborhoodType>;
+  vertices: VertexType[];
+  neighborhoods: Map<VertexType, NeighborhoodType>;
 
   constructor() {
     this.vertices = [];
@@ -14,6 +14,9 @@ export default class SimpleGraph {
   }
 
   addVertex(v: VertexType): void {
+    if (this.vertexExists(v)) {
+      throw new Error(`vertex ${v} already exists on graph`);
+    }
     this.vertices.push(v);
     this.neighborhoods.set(v, []);
   }
@@ -22,7 +25,7 @@ export default class SimpleGraph {
     if (!this.vertexExists(v)) {
       return null;
     }
-    return this.vertices.find((u) => u === v);
+    return this.vertices.find((u) => u === v) || null;
   }
 
   vertexExists(v: VertexType): boolean {
@@ -42,10 +45,10 @@ export default class SimpleGraph {
   }
 
   addEdge(u: VertexType, v: VertexType): void {
-    if (!this.vertices.includes(u)) {
+    if (!this.vertexExists(u)) {
       this.addVertex(u);
     }
-    if (!this.vertices.includes(v)) {
+    if (!this.vertexExists(v)) {
       this.addVertex(v);
     }
     if (this.edgeExists(u, v)) {

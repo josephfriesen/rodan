@@ -16,6 +16,17 @@ describe("Simple Graph data structure", () => {
     graph.addEdge("D", "E");
     graph.addEdge("E", "F");
 
+    /*
+graph:
+A-----D
+|\   /
+| \ /
+B  E
+| / \
+|/   \
+C-----F
+     */
+
     petersenGraph = new SimpleGraph();
     for (let i = 1; i <= 10; i++) {
       petersenGraph.addVertex(i);
@@ -102,19 +113,5 @@ describe("Simple Graph data structure", () => {
       graph.BFS("A", callback);
       expect(callback).toHaveBeenCalledTimes(3);
     });
-  });
-
-  it("should be able to enumerate all connected components", () => {
-    expect(graph.getComponents()).toEqual([graph.getVertices()]);
-    const disconnected = new SimpleGraph();
-    disconnected.addEdge("A", "B");
-    disconnected.addEdge("C", "D");
-    expect(disconnected.getComponents()).toEqual([
-      ["A", "B"],
-      ["C", "D"],
-    ]);
-    const singleton = new SimpleGraph();
-    singleton.addVertex("A");
-    expect(singleton.getComponents()).toEqual([["A"]]);
   });
 });

@@ -207,6 +207,19 @@ export default class Matrix {
     return coordinateMap.get(direction)?.(i, j) ?? null;
   }
 
+  traverseEntry(
+    coordinates: CoordinatesType,
+    direction: string
+  ): EntryType | null {
+    if (!coordinates || !Matrix.DIRECTIONS[direction]) {
+      throw new TypeError(
+        `invalid entry or direction. coordinates: ${coordinates}, direction: ${direction}, Matrix.DIRECTIONS[direction]: ${Matrix.DIRECTIONS[direction]}`
+      );
+    }
+    const nextCoordinates = this.traversal(coordinates, direction);
+    return nextCoordinates ? this.entry(...nextCoordinates) : null;
+  }
+
   inbounds(coordinates: CoordinatesType): boolean {
     if (!coordinates) {
       return false;
@@ -224,6 +237,16 @@ export default class Matrix {
       .map((row, i) => row.map((entry, j) => [i, j] as CoordinatesType))
       .flat()
       .filter(
+        (coord: CoordinatesType) =>
+          coord !== null && this.entry(...coord) === value
+      );
+  }
+
+  find(value: EntryType): CoordinatesType | undefined {
+    return this.matrix
+      .map((row, i) => row.map((entry, j) => [i, j] as CoordinatesType))
+      .flat()
+      .find(
         (coord: CoordinatesType) =>
           coord !== null && this.entry(...coord) === value
       );

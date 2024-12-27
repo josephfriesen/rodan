@@ -1,20 +1,33 @@
-export default class DirectedGraph {
-  private nodes: Map<string | number, Set<string | number>> = new Map();
-  private inDegrees: Map<string | number, number> = new Map();
-  private outDegrees: Map<string | number, number> = new Map();
+export type Node = string | number;
 
-  addEdge(from: string | number, to: string | number): void {
+export default class DirectedGraph {
+  nodes: Map<string | number, Set<string | number>> = new Map();
+  inDegrees: Map<string | number, number> = new Map();
+  outDegrees: Map<string | number, number> = new Map();
+  weights: Map<string | number, Map<string | number, number>> = new Map();
+
+  addVertex(v: string | number): void {
+    this.nodes.set(v, new Set());
+    this.inDegrees.set(v, 0);
+    this.outDegrees.set(v, 0);
+    this.weights.set(v, new Map());
+  }
+
+  addEdge(
+    from: string | number,
+    to: string | number,
+    weight: number = 1
+  ): void {
     if (!this.nodes.has(from)) {
-      this.nodes.set(from, new Set());
-      this.inDegrees.set(from, 0);
+      this.addVertex(from);
     }
     if (!this.nodes.has(to)) {
-      this.nodes.set(to, new Set());
-      this.outDegrees.set(to, 0);
+      this.addVertex(to);
     }
     this.nodes.get(from)?.add(to);
     this.outDegrees.set(from, (this.outDegrees.get(from) || 0) + 1);
     this.inDegrees.set(to, (this.inDegrees.get(to) || 0) + 1);
+    this.weights.get(from)?.set(to, weight);
   }
 
   removeEdge(from: string | number, to: string | number): void {
@@ -41,6 +54,16 @@ export default class DirectedGraph {
 
   getDegree(node: string | number): number {
     return (this.inDegrees.get(node) || 0) as number;
+  }
+
+  getWeights(node: string | number): Map<string | number, number> {
+    const weights = this.weights.get(node);
+    if (!weights) {
+      throw new Error(
+        `graph is ill-defined, weights for node ${node} does not exist`
+      );
+    }
+    return weights;
   }
 
   nodeExists(from: string | number): boolean {
@@ -79,5 +102,59 @@ export default class DirectedGraph {
       }
     }
     stack.push(node);
+  }
+
+  Dijkstra(u: string | number): {
+    distances: { [key: string | number]: number };
+    previous: { [key: string | number]: string | number };
+  } {
+    let queue: Array<string | number> = [];
+    const distances = {};
+    const previous = {};
+    for (const vertex of this.nodes.keys()) {
+      queue.push(vertex);
+      distances[vertex] = Infinity;
+    }
+    distances[u] = 0;
+
+    while (queue.length > 0) {
+      queue = queue.sort((x, y) => {
+        return distances[x] - distances[y];
+      });
+
+      const current: string | number = queue.shift() as string | number;
+      const neighbors: Set<string | number> | undefined = this.getNode(current);
+      if (!neighbors) {
+        continue;
+      }
+      for (const neighbor of neighbors) {
+        const newDistance =
+          distances[current] + this.weights.get(current)?.get(neighbor);
+        if (newDistance < distances[neighbor]) {
+          distances[neighbor] = newDistance;
+          previous[neighbor] = current;
+        }
+      }
+    }
+
+    return { distances, previous };
+  }
+
+  minWeightPath(
+    u: string | number,
+    v: string | number
+  ): Array<string | number> {
+    const dijkstra = this.Dijkstra(u);
+    const { previous, distances } = dijkstra;
+    if (!distances[v] || distances[v] === Infinity) {
+      return [];
+    }
+    let current = v;
+    const path: Array<string | number> = [v];
+    while (current !== u) {
+      current = previous[current];
+      path.unshift(current);
+    }
+    return path;
   }
 }
