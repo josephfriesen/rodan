@@ -1,4 +1,5 @@
 import Day16Solution from "@lib/aoc/2024/Day16Solution";
+import DirectedGraph from "@lib/aoc/DirectedGraph";
 
 const input = `###############
 #.......#....E#
@@ -92,5 +93,33 @@ describe("Day 16 Solution", () => {
     // l.log(d);
     // l.log(l.minWeight("S")); // 126548
     // l.log(l.minWeight("W")); // 115500, winner.
+  });
+
+  it("should have a graph H in which all edges of G are reversed", () => {
+    expect(s.H).toBeInstanceOf(DirectedGraph);
+    const test: string = "(7,3,N)";
+    expect(s.G.getNode(test)?.values()).toBeDefined();
+    for (const node of s.G.getNode(test)?.values()) {
+      expect(s.H.getNode(test)?.has(node)).toBe(false);
+      expect(s.H.getNode(node)?.has(test)).toBe(true);
+    }
+
+    const randomNode = [...s.G.getNodes().keys()][
+      Math.floor(Math.random() * s.G.getNodes().size)
+    ];
+    expect(s.G.getNode(randomNode)?.values()).toBeDefined();
+    for (const node of s.G.getNode(randomNode)?.values()) {
+      expect(s.H.getNode(randomNode)?.has(node)).toBe(false);
+      expect(s.H.getNode(node)?.has(randomNode)).toBe(true);
+    }
+  });
+
+  it("should build a set of optimal seats, vertices of G that lie on a minimal-weight path from start to end", () => {
+    const optimalSeats: Set<string> = s.optimalSeats();
+    // s.printOptimalSeats();
+    expect(optimalSeats.size).toEqual(45);
+
+    // const l: Day16Solution = new Day16Solution(liveInput);
+    // l.printOptimalSeats("W"); // 679, winner
   });
 });

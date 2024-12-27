@@ -34,6 +34,16 @@ export default class DirectedGraph {
     this.nodes.get(from)?.delete(to);
     this.outDegrees.set(from, (this.outDegrees.get(from) || 0) - 1);
     this.inDegrees.set(to, (this.inDegrees.get(to) || 0) - 1);
+    this.weights.get(from)?.delete(to);
+  }
+
+  reverseEdge(from: string | number, to: string | number): void {
+    if (!this.edgeExists(from, to)) {
+      throw new Error("edge does not exist, cannot reverse.");
+    }
+    const weight: number = this.getWeight(from, to) || 1;
+    this.removeEdge(from, to);
+    this.addEdge(to, from, weight);
   }
 
   getNodes(): Map<string | number, Set<string | number>> {
@@ -64,6 +74,10 @@ export default class DirectedGraph {
       );
     }
     return weights;
+  }
+
+  getWeight(from: string | number, to: string | number): number | undefined {
+    return this.weights.get(from)?.get(to);
   }
 
   nodeExists(from: string | number): boolean {
@@ -156,5 +170,28 @@ export default class DirectedGraph {
       path.unshift(current);
     }
     return path;
+  }
+
+  clone(): DirectedGraph {
+    const graph = new DirectedGraph();
+    graph.nodes = new Map(
+      [...this.nodes].map(([key, value]) => [key, new Set(value)])
+    );
+    graph.inDegrees = new Map(this.inDegrees);
+    graph.outDegrees = new Map(this.outDegrees);
+    graph.weights = new Map(
+      [...this.weights].map(([key, value]) => [key, new Map(value)])
+    );
+    return graph;
+  }
+
+  cloneReversed(): DirectedGraph {
+    const graph = this.clone();
+    for (const [from, tos] of this.nodes) {
+      for (const to of tos) {
+        graph.reverseEdge(from, to);
+      }
+    }
+    return graph;
   }
 }
