@@ -87,7 +87,7 @@ export default class SimpleGraph {
     return sum;
   }
 
-  BFS(v: VertexType, cb: (u: VertexType) => any): void {
+  BFS(v: VertexType, cb: (u: VertexType) => any = () => null): void {
     if (!this.vertex(v)) {
       return;
     }
@@ -132,6 +132,49 @@ export default class SimpleGraph {
 
     const visited: { [key: VertexType]: boolean } = {};
     search(v, visited);
+  }
+
+  shortestPath(u: VertexType, v: VertexType): VertexType[] | null {
+    if (!this.vertexExists(u) || !this.vertexExists(v)) {
+      return null;
+    }
+
+    let queue: VertexType[] = [];
+    const distances = {};
+    const previous = {};
+    for (const vertex of this.vertices) {
+      queue.push(vertex);
+      distances[vertex] = Infinity;
+    }
+    distances[u] = 0;
+
+    while (queue.length > 0) {
+      queue = queue.sort((x, y) => {
+        return distances[x] - distances[y];
+      });
+      const current: VertexType = queue.shift() as VertexType;
+      const neighbors: NeighborhoodType = this.neighborhood(current);
+      for (const neighbor of neighbors) {
+        const newDistance = distances[current] + 1;
+        if (newDistance < distances[neighbor]) {
+          distances[neighbor] = newDistance;
+          previous[neighbor] = current;
+        }
+      }
+    }
+
+    if (distances[v] === Infinity) {
+      return null;
+    }
+
+    const path: VertexType[] = [];
+    let current: VertexType = v;
+    while (current !== u) {
+      path.unshift(current);
+      current = previous[current];
+    }
+
+    return path;
   }
 
   getComponents(): Array<Array<VertexType>> {
