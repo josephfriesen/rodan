@@ -1,7 +1,6 @@
 import { SolutionBuilder } from "@lib/aoc/SolutionBuilder";
 import Matrix, { CoordinatesType } from "@lib/aoc/Matrix";
 import SimpleGraph, { VertexType } from "@lib/aoc/SimpleGraph";
-import { split } from "lodash";
 
 export default class Day18Solution extends SolutionBuilder {
   dim: number;
