@@ -217,9 +217,17 @@ export default class SimpleGraph {
       for (const u of neighborhood.values()) {
         neighborsString += `${u} `;
       }
-      // console.log(`vertex (${v}) => [${neighborsString.trim()}]`); // eslint-disable-line no-console
       outputString += `vertex (${v}) => [${neighborsString.trim()}]\n`;
     }
     return outputString;
+  }
+
+  clone(): SimpleGraph {
+    const G: SimpleGraph = new SimpleGraph();
+    G.vertices = [...this.getVertices()];
+    for (const v of this.getVertices()) {
+      G.neighborhoods.set(v, [...this.neighborhood(v)]);
+    }
+    return G;
   }
 }

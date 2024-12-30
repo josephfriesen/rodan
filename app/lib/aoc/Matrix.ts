@@ -252,6 +252,13 @@ export default class Matrix {
       );
   }
 
+  manhattanDistance(a: CoordinatesType, b: CoordinatesType): number {
+    if (a === null || b === null) {
+      throw new TypeError("coordinate pairs are ill-defined");
+    }
+    return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+  }
+
   clone(): Matrix {
     return new Matrix(this.matrix.map((row) => [...row]));
   }
